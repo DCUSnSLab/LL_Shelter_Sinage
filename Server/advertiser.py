@@ -1,6 +1,9 @@
 import asyncio
 import json
 import random
+import pymysql
+
+conn = pymysql.connect(host="localhost", user="main1", password="main1", db="main_server01", charset="utf8")
 
 class Advertiser:
     def __init__(self):
@@ -25,17 +28,29 @@ class Advertiser:
     async def runAdvertiser(self):
         cnt = 0
 
-        # advlist = [
-        #     "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg",
-        #     "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg",
-        #     "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_960_720.jpg"
-        # ]
+        cur = conn.cursor()
 
-        advlist = [
-            "http://ocean.cu.ac.kr/files/W_CONTENTS/1620/20220930170044(1).jpg",
-            "http://ocean.cu.ac.kr/files/W_CONTENTS/1300/thumb_20190522135811.jpg",
-            "http://ocean.cu.ac.kr/files/W_CONTENTS/1512/thumb_20211221105853(3).jpg"
-        ]
+        sql = "SELECT * FROM Management_advertisement_media"
+
+        cur.execute(sql)
+
+        advlist = []
+
+        for rst in cur:
+            #print(rst)
+            #print(rst[1])
+            advlist.append(rst[1])
+
+        #advlist = [
+        #    "http://ocean.cu.ac.kr/files/W_CONTENTS/1620/20220930170044(1).jpg",
+        #    "http://ocean.cu.ac.kr/files/W_CONTENTS/1300/thumb_20190522135811.jpg",
+        #    "http://ocean.cu.ac.kr/files/W_CONTENTS/1512/thumb_20211221105853(3).jpg"
+        #]
+
+        print("advlist")
+        print(type(advlist))
+        print("cur")
+        print(type(cur))
 
 
         four_icon = [

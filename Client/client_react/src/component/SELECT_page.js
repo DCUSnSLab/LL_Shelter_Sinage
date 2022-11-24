@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
+
 import Counter from "./counter";
 
 const SELECT_page = () => {
 
     return(
         <div>
+
             <Counter/>
-            <p>작품선택</p>
+            <h1>작품선택</h1>
         </div>
     );
 }

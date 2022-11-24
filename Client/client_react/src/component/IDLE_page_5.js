@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../style/IDLE_page_5.css";
 import BOARD_page from "./BOARD_page";
 import SELECT_page from "./SELECT_page";
+import {Link} from "react-router-dom";
 
 function IDLE_page_5() {
     const addr = "ws://localhost:5000";
@@ -100,6 +101,11 @@ function IDLE_page_5() {
                 <p></p>
                 <div onClick={BOARD_page}>게시판</div>
             </diav>
+            <div className="buttonDiv">
+                <div><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>작품 선택</Link></div>
+                <p></p>
+                <div><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>게시판</Link></div>
+            </div>
 
         </div>
     );

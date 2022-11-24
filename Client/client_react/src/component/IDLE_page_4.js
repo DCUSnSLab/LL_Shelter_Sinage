@@ -4,6 +4,8 @@ import '../style/IDLE_page_4.css';
 import {useEffect, useRef, useState} from "react";
 import BOARD_page from "./BOARD_page";
 import SELECT_page from "./SELECT_page";
+import React, {useEffect, useRef, useState} from "react";
+import {Link, Route, Routes} from "react-router-dom";
 
 function IDLE_page_4() {
     const addr = "ws://localhost:5000";
@@ -89,6 +91,8 @@ function IDLE_page_4() {
             <footer>
                 <button onClick={SELECT_page} className="btn_a">작품 보러가기</button>
                 <button onClick={BOARD_page} className="btn_b">커뮤니티</button>
+            <button className="btn_a"><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>작품 보러가기</Link></button>
+                <button className="btn_b"><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>커뮤니티</Link></button>
             </footer>
         </div>
     );

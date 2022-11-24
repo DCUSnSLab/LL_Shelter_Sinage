@@ -37,8 +37,6 @@ class Advertiser:
         advlist = []
 
         for rst in cur:
-            #print(rst)
-            #print(rst[1])
             advlist.append(rst[1])
 
         #advlist = [
@@ -46,12 +44,6 @@ class Advertiser:
         #    "http://ocean.cu.ac.kr/files/W_CONTENTS/1300/thumb_20190522135811.jpg",
         #    "http://ocean.cu.ac.kr/files/W_CONTENTS/1512/thumb_20211221105853(3).jpg"
         #]
-
-        print("advlist")
-        print(type(advlist))
-        print("cur")
-        print(type(cur))
-
 
         four_icon = [
             "https://cdn-icons-png.flaticon.com/512/636/636047.png",
@@ -74,4 +66,5 @@ class Advertiser:
             cnt += 1
             print()
             #1초 주기로 데이터 변경됨 -> 주기 변경 가능
+            
             await asyncio.sleep(10)

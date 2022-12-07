@@ -2,8 +2,16 @@ import asyncio
 import json
 import random
 import pymysql
+import psycopg2
 
-conn = pymysql.connect(host="localhost", user="main1", password="main1", db="main_server01", charset="utf8")
+#conn = pymysql.connect(host="localhost", user="main1", password="main1", db="main_server01", charset="utf8")
+conn = psycopg2.connect(
+        host="172.18.0.3",
+        port="5433",
+        user="shelter",
+        password="20121208",
+        dbname="cms_shelter_server"
+        )
 
 class Advertiser:
     def __init__(self):

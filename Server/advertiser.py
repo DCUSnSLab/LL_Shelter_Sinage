@@ -38,7 +38,7 @@ class Advertiser:
 
         cur = conn.cursor()
 
-        sql = "SELECT * FROM Management_advertisement_media"
+        sql = 'SELECT * FROM "Updator_advertisement_media"'
 
         cur.execute(sql)
 

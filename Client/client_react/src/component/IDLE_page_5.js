@@ -5,8 +5,7 @@ import React, {useEffect, useRef, useState} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../style/IDLE_page_5.css";
-import BOARD_page from "./BOARD_page";
-import SELECT_page from "./SELECT_page";
+import {Link} from "react-router-dom";
 
 function IDLE_page_5() {
     const addr = "ws://localhost:5000";
@@ -96,9 +95,9 @@ function IDLE_page_5() {
                 <img src={setImg[2]}/>
             </Slider>
             <div className="buttonDiv">
-                <div onClick={SELECT_page}>작품 선택</div>
+                <div><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>작품 선택</Link></div>
                 <p></p>
-                <div onClick={BOARD_page}>게시판</div>
+                <div><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>게시판</Link></div>
             </div>
 
         </div>

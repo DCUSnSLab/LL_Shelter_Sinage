@@ -4,8 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../style/IDLE_page_3.css';
 import Header from "./header";
-import BOARD_page from "./BOARD_page";
-import SELECT_page from "./SELECT_page";
+import {Link, Route, Routes} from "react-router-dom";
 
 function IDLE_page_3() {
     const addr = "ws://localhost:5000";
@@ -84,10 +83,10 @@ function IDLE_page_3() {
             </Slider>
             <div className="social">
                 <p>작품선택<br/>
-                    <button onClick={SELECT_page}>GO</button>
+                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
                 <p className="line">게시판<br/>
-                    <button onClick={BOARD_page}>GO</button>
+                    <button><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
             </div>
         </div>

@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'MinSans-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.my_center {
+    padding-top: 80px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+.detail-contents {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: auto;
+    height: auto;
+    border: 0.1rem solid #e0e0e0;
+    padding: 2rem;
+    box-sizing: border-box;
+    border-radius: 1.2rem;
+}
+a, p, div {
+    font-size: 30px;
+    font-family: 'MinSans-Medium';
+}
+.my_right {
+    float: right;
+}
+.one {
+    float: left;
+    width: 70%;
+    margin-top: 12px;
+}
+.first {
+    float: left;
+    width: 75%;
+}
+.my_area {
+    height: 1000px;
+}
+.wrapper {
+    display: grid;
+    /*grid: '. . . . .';*/
+    row-gap: 30px;
+}
+.my_color_white {
+    color: White;
+}
+.my_color_black {
+    color: Black;
+}
+table, th, td {
+    padding: 10px;
+    font-size: 30px;
+    border-bottom: 1px solid #DDD;
+}
+.my_blue_btn {
+    background-color:#000088;
+    border-color:#000088;
+}
+.my_blue_txt {
+    color:#000088;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.pagination a, li {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active, li.active {
+    background-color: #b4b4b4;
+    color: white;
+}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+.my_center_txt {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}

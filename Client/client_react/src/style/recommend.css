@@ -1,0 +1,14 @@
+/*웹폰트 적용 */
+@font-face {
+    font-family: 'EliceDigitalBaeum_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/EliceDigitalBaeum_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.Recommand{
+            margin-left: 30px;
+            margin-bottom: 10px;
+
+            font-family: 'EliceDigitalBaeum_Bold' !important;
+        }

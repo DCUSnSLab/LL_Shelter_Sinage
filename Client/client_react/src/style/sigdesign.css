@@ -1,0 +1,263 @@
+@charset "utf-8";
+/*웹폰트 적용 */
+@font-face {
+    font-family: 'EliceDigitalBaeum_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/EliceDigitalBaeum_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+        .imgText,h3{
+            margin-left: 30px;
+            margin-bottom: 10px;
+            font-family: 'EliceDigitalBaeum_Bold' !important;
+        }
+
+ /*네비게이션바 사이즈 및 색상 및 그림자 효과*/
+            /*#headerArea{*/
+            /*    height:60px;*/
+            /*    background-color:#FFFFFF;*/
+            /*    !*box-shadow: 0 4px 4px -4px black;*!*/
+            /*}*/
+
+            /*네비게이션 바 아래 공백*/
+            .nav_blank{
+                padding: 30px;
+            }
+
+            .nav_blank2{
+                padding: 170px;
+            }
+            /*매직 그리드 세부 설정*/
+            .container div {
+                /*이미지 폭 결정*/
+                width: 320px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /*height: 200px;*/
+                /*border-radius: 1rem;*/
+            }
+            .gradi_img_box{
+                width: 320px;
+                height: 50px;
+                background-color: #0a58ca;
+                position: absolute;
+                bottom: 35px;
+                right: 90px;
+                z-index: 1;
+                color:white;
+                /*font-size: 18px;*/
+                /*width:120px;*/
+                /*font-weight: bold;*/
+
+            }
+
+            /*미디어 섹션 */
+            .section2{
+                height: 1000px;
+                background-color: #FA9B72 ;
+                overflow-y:hidden;
+                overflow-x:hidden;
+            }
+
+            .container img {
+               width: 100%;
+            }
+
+            /*요소 꽉채우기 및 스크롤바 없애기*/
+            body{
+                margin:0;
+                padding:0;
+                overflow-y:hidden;
+                overflow-x:hidden;
+                height: 100%;
+            }
+
+
+            /*스크롤바 없애기*/
+            body::-webkit-scrollbar{
+                display:none;
+            }
+             button, button::after {
+              -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+              -o-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+
+            button {
+              background: none;
+              border: 1px solid #FFFFFF;
+              border-radius: 30px;
+              color: #000000;
+              display: block;
+              position: relative;
+              /*text-transform: uppercase;*/
+              font-size: 19px;
+              font-weight: bold;
+              /*margin: 1em auto;*/
+              padding: 0.5em 1em;
+            }
+
+             .imText2 {
+                 position: absolute;
+                 bottom: 35px;
+                 right: 90px;
+                 z-index: 1;
+                 color:white;
+                 width : 200px;
+                 margin-left: -225px;
+                 margin-bottom: 90px;
+                 font-size: 18px;
+                 /*width:120px;*/
+                 font-weight: bold;
+            }
+
+
+
+             .imText {
+                position: absolute;
+                bottom: 35px;
+                right: 90px;
+                z-index: 1;
+                color:white;
+                font-size: 13px;
+                /*width:120px;*/
+                font-weight: bold;
+            }
+
+             /*수정후 지울것 */
+            .imText1{
+                position: absolute;
+                bottom: 10px;
+                right: 90px;
+                z-index: 1;
+                color:white;
+                font-size: 18px;
+                /*width:120px;*/
+                font-weight: bold;
+            }
+
+            /*.img-cover{*/
+            /*    background-image: linear-gradient(to top,rgba(0,0,0,.6) 0,transparent 100%);*/
+            /*   position: absolute;*/
+            /*   bottom: -10px;*/
+            /*   height: 40px;*/
+            /*   width: 130px;*/
+            /*   background-color: rgba(0, 0, 0, 0.4);*/
+            /*   z-index:1;*/
+            /*}*/
+            /*.backColor{*/
+            /*     background-image: linear-gradient(to top,rgba(0,0,0,.6) 0,transparent 100%);*/
+            /*}*/
+
+
+
+            /*.wrapper {*/
+            /*    background-color: #bb2d3b;*/
+            /*    display: grid;*/
+            /*    grid-template-columns: repeat(3, 1fr);*/
+            /*    grid-gap: 10px;*/
+            /*    grid-auto-rows: minmax(100px, auto);*/
+            /*}*/
+
+            /*섹션 구분 회색선 */
+             .gray-line{
+                width: 400rem;
+                height: 0.1rem;
+                background-color: #D4D4D4;
+                margin: 1rem 0px 3rem 0px;
+            }
+
+             /*미디어 섹션 그리드 레이아웃 */
+            .container_media{
+                display: grid;
+                grid-template-columns: 340px 340px 340px;
+                grid-template-rows: 200px 200px 200px ;
+                column-gap: 10px;
+                row-gap : 30px;
+                justify-content: center;
+                margin-left: -20px;
+                height: 450px;
+            }
+
+            .container_media1{
+                /*display: grid;*/
+                column-gap: 10px;
+                row-gap : 30px;
+                justify-content: center;
+                margin-right: 20px;
+            }
+
+            img{
+                filter: brightness(1);
+            }
+
+            /*미디어 프리뷰(이미지) */
+            .media_preview{
+                overflow: hidden;
+                object-fit: cover;
+                margin-left: -90px;
+                /*margin-top:15px;*/
+                width: 110px;
+                height:340px;
+                border-radius: 10px;
+                /*overflow: hidden;*/
+                /*width: 70px;*/
+                /*height: 70px;*/
+                /*object-fit: cover;*/
+                /*flex:auto;*/
+                /*float: left;*/
+                /*margin: 10px;*/
+            }
+
+            /*이미지 하단 그라데이션 영역*/
+            .shadow_box{
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+            .shadow{
+                width: 330px;
+                height: 190px;
+                margin-left: -185px;
+                border-radius: 10px;
+                bottom: 5px;
+                background: linear-gradient(to bottom, rgba(20, 20, 20, 0) 10%, rgba(20, 20, 20, 0) 5%, rgba(20, 20, 20, 0.15) 20%, rgba(20, 20, 20, 0.5) 55%, rgba(20, 20, 20, 0.75) 100%)
+            }
+
+            .shadow_box2{
+                position: absolute;
+                top: 360px;
+                left: 40px;
+            }
+
+
+            .shadow_vertical{
+                width: 340px;
+                height: 110px;
+                border-radius: 10px;
+                bottom: 5px;
+                background: linear-gradient(to bottom, rgba(20, 20, 20, 0) 10%, rgba(20, 20, 20, 0) 5%, rgba(20, 20, 20, 0.15) 20%, rgba(20, 20, 20, 0.5) 55%, rgba(20, 20, 20, 0.75) 100%)
+            }
+
+            .container_media_vertical{
+                margin-top: 10px;
+                display: grid;
+                grid-template-columns: 340px 340px 340px;
+                grid-template-rows: 450px 450px 450px ;
+                column-gap: 10px;
+                row-gap : 50px;
+                justify-content: center;
+                margin-left: -20px;
+            }
+            .vertical_preview{
+                margin-left: 10px;
+                margin-top:15px;
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+            }
+
+
+

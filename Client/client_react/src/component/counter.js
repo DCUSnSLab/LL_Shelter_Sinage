@@ -51,7 +51,7 @@ const Counter = () => {
      const getDeadTime = () => {
         let deadline = new Date();
         //300 = 5분
-        deadline.setSeconds(deadline.getSeconds() + 300);
+        deadline.setSeconds(deadline.getSeconds() + 30000);
         return deadline;
     }
 

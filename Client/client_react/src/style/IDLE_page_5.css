@@ -2,7 +2,6 @@
 
 .buttonDiv{
     color: white;
-    height: 27vh;
     position: relative;
     text-align: center;
     display: grid;
@@ -24,11 +23,13 @@ img{
     margin-right: auto;
 }
 
-.buttonDiv > div{
+.BTN{
+    text-decoration-line: none;
     font-family: 'yg-jalnan';
     color: white;
-    font-size: 2.7rem;
-    padding-top: 6rem;
+    font-size: 4.5rem;
+    height: 23vh;
+    padding-top: 10rem;
     background: deepskyblue;
 }
 

@@ -3,13 +3,13 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './App.css';
-import IDLE_page_5 from "./component/IDLE_page_5";
 import IDLE_page_3 from "./component/IDLE_page_3";
 import IDLE_page_4 from "./component/IDLE_page_4";
+import IDLE_page_5 from "./component/IDLE_page_5";
 import BOARD_page from "./component/BOARD_page";
 import SELECT_page from "./component/SELECT_page";
 
-function App({match}){
+function App(){
     //5분 타이머
     const Ref = useRef(null);
     const[text, setText] = useState('');
@@ -55,7 +55,7 @@ function App({match}){
     const getDeadTime = () => {
         let deadline = new Date();
         //300 = 5분
-        deadline.setSeconds(deadline.getSeconds() + 10);
+        deadline.setSeconds(deadline.getSeconds() + 300);
         return deadline;
     }
     useEffect(() => {
@@ -87,7 +87,7 @@ function App({match}){
             if (timer === '00:00') {
                 const num_ = getRandomInt(3);
                 setNum(num_);
-                navigate(Page[num_]);
+                navigate(Page[num]);
                 console.log('change page' + num_);
             }
     }, [timer]);
@@ -103,13 +103,13 @@ function App({match}){
                     <br/>
                     {text}
                 </div>
-                <Routes>
-                    <Route path='/' element={<IDLE_page_3/>} />
-                    <Route path='/page4' element={<IDLE_page_4/>}/>
-                    <Route path='/page5' element={<IDLE_page_5/>} />
-                    <Route path='/board' element={<BOARD_page/>}/>
-                    <Route path='/select' element={<SELECT_page/>} />
-                </Routes>
+            <Routes>
+                <Route path='/' element={<IDLE_page_3/>}/>
+                <Route path='/page4' element={<IDLE_page_4/>}/>
+                <Route path='/page5' element={<IDLE_page_5/>} />
+                <Route path='/board' element={<BOARD_page/>}/>
+                <Route path='/select' element={<SELECT_page/>} />
+            </Routes>
             </div>
         </div>
     );

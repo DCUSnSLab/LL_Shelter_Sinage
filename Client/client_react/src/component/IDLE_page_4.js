@@ -3,11 +3,16 @@
 import '../style/IDLE_page_4.css';
 import React, {useEffect, useRef, useState} from "react";
 import {Link, Route, Routes} from "react-router-dom";
+import board from '../img/board.png';
+import good from '../img/good.png';
+import hand from '../img/hand.png';
+import img from '../img/img.png';
+import next from '../img/next.png';
+import pencil from '../img/pencil.png';
 
 function IDLE_page_4() {
     const addr = "ws://localhost:5000";
     const [outputs, setOutputs] = useState([]);
-    const [img, setImg] = useState([0, 1, 2, 3, 4, 5]);
     const [socketConnected, setSocketConnected] = useState(false);
 
     let ws = useRef(null);
@@ -39,13 +44,6 @@ function IDLE_page_4() {
                 // server에서 보낸 데이터
                 const data = JSON.parse(evt.data);
                 console.log(data);
-                setImg[0] = data[0];
-                setImg[1] = data[1];
-                setImg[2] = data[2];
-                setImg[3] = data[3];
-                setImg[4] = data[4];
-                setImg[5] = data[5];
-
                 setOutputs((prevItems) => data);
             };
         };
@@ -54,40 +52,69 @@ function IDLE_page_4() {
         connectServer();
     });
     return (
-        <div>
+        <div className="bo">
             <header>
                 <div className="h1">사이니지 이용방법</div>
             </header>
-            <section className="gallery">
-                <div className="h2">쉘터 사이니지를 100% 활용할 수 있는 방법</div>
-                <div>
+            <wrap>
+            <div className="h2">쉘터 사이니지를 100% 활용할 수 있는 방법</div>
+            <table className="gallery">
                     <div className="h4">콘텐츠 이용방법</div>
-                    <div className="STEP"><td>STEP1</td><td>STEP2</td><td>STEP3</td></div>
+                    <tr className="STEP">
+                        <td className="B">STEP1</td>
+                        <td></td>
+                        <td className="B">STEP2</td>
+                        <td></td>
+                        <td className="B">STEP3</td>
+                    </tr>
 
-                    <img src={setImg[0]}/>
-                    <img className="A" src={setImg[5]}/>
-                    <img src={setImg[1]}/>
-                    <img className="A" src={setImg[5]}/>
-                    <img src={setImg[2]}/>
-                    <div><p>작품 보러가기 클릭!</p> <p>보고싶은 작품 선택</p> <p>작품 감상!</p></div>
+                    <tr>
+                        <td><img src={hand}/></td>
+                        <td><img className="A" src={next}/></td>
+                        <td><img src={img}/></td>
+                        <td><img className="A" src={next}/></td>
+                        <td><img src={good}/></td>
+                        
+                    </tr>
+                    <tr>
+                        <td><p>작품 보러가기 클릭!</p></td>
+                        <td></td>
+                        <td><p>보고싶은 작품 선택</p></td>
+                        <td></td>
+                        <td><p>작품 감상!</p></td>
+                    </tr>
 
-                    <tr className="h4"><td colSpan='3'>커뮤니티 이용방법</td></tr>
+                    <div id="sp"></div>
 
-                    <tr className="STEP"><td>STEP1</td><td>STEP2</td><td>STEP3</td></tr>
+                    <div className="h4">커뮤니티 이용방법</div>
+                
+                    <tr className="STEP">
+                        <td className="B">STEP1</td>
+                        <td></td>
+                        <td className="B">STEP2</td>
+                        <td></td>
+                        <td className="B">STEP3</td>
+                    </tr>
+                    <tr>
+                        <td><img src={hand}/></td>
+                        <td><img className="A" src={next}/></td>
+                        <td><img src={board}/></td>
+                        <td><img className="A" src={next}/></td>
+                        <td><img src={pencil}/></td>
+                    </tr>
 
-                    <img src={setImg[0]}/>
-                    <img className="A" src={setImg[5]}/>
-                    <img src={setImg[3]}/>
-                    <img className="A" src={setImg[5]}/>
-                    <img src={setImg[4]}/>
-
-                    <div><p>커뮤니티 클릭!</p> <p>주제별<br/>게시판 선택</p> <p>글 작성하기</p></div>
-
-                </div>
-            </section>
+                    <tr>
+                    <td><p>커뮤니티 클릭!!</p></td>
+                    <td></td>
+                    <td><p>주제별<br/>게시판 선택</p></td>
+                    <td></td>
+                    <td><p>글 작성하기</p></td>
+                    </tr>
+            </table>
+            </wrap>
             <footer>
-            <button className="btn_a"><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>작품 보러가기</Link></button>
-                <button className="btn_b"><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>커뮤니티</Link></button>
+            <Link to='/select' style={{color : 'white', textDecoration: 'none'}}><button className="btn_a">작품 보러가기</button></Link>
+                <Link to='/board' style={{color : 'white', textDecoration: 'none'}}><button className="btn_b">커뮤니티</button></Link>
             </footer>
         </div>
     );

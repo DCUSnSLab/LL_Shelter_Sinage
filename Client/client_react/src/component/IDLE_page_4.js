@@ -74,7 +74,7 @@ function IDLE_page_4() {
                         <td><img src={img}/></td>
                         <td><img className="A" src={next}/></td>
                         <td><img src={good}/></td>
-                        
+
                     </tr>
                     <tr>
                         <td><p>작품 보러가기 클릭!</p></td>

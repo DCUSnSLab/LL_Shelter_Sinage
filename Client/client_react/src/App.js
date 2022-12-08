@@ -89,14 +89,14 @@ function App(){
         return Math.floor(Math.random() * max);
     }
 
-    // useEffect((e) => {
-    //     if (timer === '00:00') {
-    //         const num_ = getRandomInt(3);
-    //         setNum(num_);
-    //         navigate(Page[num_]);
-    //         console.log('change page' + num_);
-    //     }
-    // }, [timer]);
+    useEffect((e) => {
+        if (timer === '00:00') {
+            const num_ = getRandomInt(3);
+            setNum(num_);
+            navigate(Page[num_]);
+            console.log('change page' + num_);
+        }
+    }, [timer]);
 
     return(
         <div>

@@ -41,11 +41,12 @@ function IDLE_page_5() {
             ws.current.onmessage = (evt) => {
                 // server에서 보낸 데이터
                 const data = JSON.parse(evt.data);
-                console.log(data);
-                setImg[0] = data[0];
-                setImg[1] = data[1];
-                setImg[2] = data[2];
-
+                //데이터의 길이
+                const numbers = data.length;
+                for (let i = 0; i < numbers; i++){
+                    setImg[i] = data[i];
+                    console.log(setImg[i]);
+                }
                 setOutputs((prevItems) => data);
             };
         };
@@ -89,15 +90,19 @@ function IDLE_page_5() {
 
     return (
         <div>
+            <Link to='/page4'>4</Link>
             <Slider {...settings}>
-                <img src={setImg[0]}/>
-                <img src={setImg[1]}/>
-                <img src={setImg[2]}/>
+                {img.map((data)=>{
+                    return(
+                        <div>
+                            <img  src={data} style={{height:'100px', width:'100px'}}/>
+                        </div>
+                    )})}
             </Slider>
             <div className="buttonDiv">
-                <div><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>작품 선택</Link></div>
+                <Link to='/select' style={{color : 'white', textDecoration: 'none'}}><div className="BTN">작품 선택</div></Link>
                 <p></p>
-                <div><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>게시판</Link></div>
+                <Link to='/board' style={{color : 'white', textDecoration: 'none'}}><div className="BTN">게시판</div></Link>
             </div>
 
         </div>

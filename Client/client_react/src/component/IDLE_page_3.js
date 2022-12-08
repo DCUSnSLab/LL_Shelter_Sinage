@@ -9,12 +9,12 @@ import {Link, Route, Routes} from "react-router-dom";
 function IDLE_page_3() {
     const addr = "ws://localhost:5000";
     const [outputs, setOutputs] = useState([]);
-    const [img, setImg] = useState([0, 1, 2]);
+    const [img, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
 
     let ws = useRef(null);
 
-    const connectServer = () => {
+    const connectServer= () => {
         if(!ws.current){
             ws.current = new WebSocket(addr);
             ws.current.onopen = () => {
@@ -40,11 +40,12 @@ function IDLE_page_3() {
             ws.current.onmessage = (evt) => {
                 // server에서 보낸 데이터
                 const data = JSON.parse(evt.data);
-                console.log(data);
-                setImg[0] = data[0];
-                setImg[1] = data[1];
-                setImg[2] = data[2];
-
+                //데이터의 길이
+                const numbers = data.length;
+                for (let i = 0; i < numbers; i++){
+                    setImg[i] = data[i];
+                    console.log(setImg[i]);
+                }
                 setOutputs((prevItems) => data);
             };
         };
@@ -53,34 +54,32 @@ function IDLE_page_3() {
         connectServer();
     });
     const settings = {
-        slide: 'div',
+        slide: 'img',
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrow: false
     };
+
+    const sliders = img.map((data)=>{
+        return(
+            <div src={data} style={{height:'100px', width:'100px'}}></div>
+        );
+    })
+
     return (
         <div>
             <Header/>
+            <Link to='/page4'>4</Link>
             <Slider {...settings}>
-                <div>
-                    <img src={setImg[0]}/>
-                    {/*<iframe src={setImg[0]} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>*/}
-                    <div className="button_div">
-                        {/*<button id="skipButton">Skip</button>*/}
-                        {/*<div></div>*/}
-                        {/*<button id="qrButton">상세보기</button>*/}
-                    </div>
-                </div>
-                <div>
-                    <img src={setImg[1]}/>
-                    {/*<iframe src={setImg[1]} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>*/}
-                </div>
-                <div>
-                    <img src={setImg[2]}/>
-                    {/*<iframe src={setImg[2]} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>*/}
-                </div>
+                {img.map((data)=>{
+                    return(
+                        <div>
+                            <img  src={data} style={{height:'100px', width:'100px'}}/>
+                        </div>
+                    )})}
             </Slider>
+
             <div className="social">
                 <p>작품선택<br/>
                     <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>

@@ -3,7 +3,10 @@
 html,body{
     margin: 0;
     text-align: center;
-    font-family: 'TTTogether';
+}
+
+.bo{
+    background-color: #afe5fe;
 }
 
 .h1{
@@ -16,6 +19,11 @@ html,body{
     color: white;
     margin-top: 3rem;
     margin-bottom: 1rem;
+    display: inline-block;
+}
+
+#sp{
+    height: 20px;
 }
 
 .h2{
@@ -23,7 +31,7 @@ html,body{
     text-align: center;
     font-family: 'TTTogether';
     font-weight: initial;
-    font-size: 1.3rem;
+    font-size: 2rem;
     -webkit-text-stroke: 0.8px black;
     line-height: 200%;
     text-shadow: 0px 0px;
@@ -31,13 +39,16 @@ html,body{
     border: 2.2px solid black;
     background-color: #fff14f;
     margin-bottom: 0;
-    display: inline-block;
-    width: 39.7rem;
 }
 
+wrap{
+    display: inline-block;
+    height: 100%;
+    font-family: 'GangwonEduPowerExtraBoldA';
+}
 
 .h4{
-    margin-top: 10rem;
+    margin-bottom: 1rem;
     text-align: left;
     font-family: 'TTTogether';
     -webkit-text-stroke: 0.5px black;
@@ -66,28 +77,35 @@ html,body{
     margin: 1.2rem;
 }
 
-.A{
-    width: 10px;
-
+img{
+    width: 8rem;
+    height: 8rem;
 }
 
+.A{
+    width: 3rem;
+    height: 3rem;
+}
 
-.STEP>td{
+.gallery{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.STEP>.B{
     font-family: none;
     border-top-left-radius: 15px; border-top-right-radius: 15px;
     border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;
     text-align: center;
     background-color: #553830;
     color: white;
-    font-size: 0.7rem;
 }
-
 
 table{
     border-bottom: 2.2px solid black;
     border-left: 2.2px solid black;
     border-right: 2.2px solid black;
-    width: 40rem;
     background-color: white;
     position: relative;
     padding: 2rem;
@@ -96,14 +114,6 @@ table{
     height: 40rem;
     font-size: 1.2rem;
 }
-
-img{
-    width: 8rem;
-    height: 8rem;
-    padding: 30px;
-}
-
-
 
 .font{
     font-family: 'yg-jalnan';

@@ -10,13 +10,16 @@ import {Link} from "react-router-dom";
 function IDLE_page_5() {
     const addr = "ws://localhost:5000";
     const [outputs, setOutputs] = useState([]);
-    const [img, setImg] = useState([0, 1, 2]);
+    const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
 
     let ws = useRef(null);
 
-    const connectServer = () => {
-        if(!ws.current){
+    function addMessage(img) {
+        setImg([...imgs, img]);
+    }
+    useEffect(() => {
+        if(!ws.current) {
             ws.current = new WebSocket(addr);
             ws.current.onopen = () => {
                 console.log("connected to " + addr);
@@ -40,21 +43,14 @@ function IDLE_page_5() {
             };
             ws.current.onmessage = (evt) => {
                 // server에서 보낸 데이터
-                const data = JSON.parse(evt.data);
-                //데이터의 길이
-                const numbers = data.length;
-                for (let i = 0; i < numbers; i++){
-                    setImg[i] = data[i];
-                    console.log(setImg[i]);
-                }
-                setOutputs((prevItems) => data);
+                const data = JSON.parse(evt.data)
+                data.map((data) => {
+                    addMessage(data);
+                    console.log(data);
+                })
             };
         };
-    };
-    useEffect(() => {
-        connectServer();
-    });
-
+    })
 
     const SampleNextArrow = (props) => {
         const { className, style, onClick } = props;
@@ -92,12 +88,7 @@ function IDLE_page_5() {
         <div>
             <Link to='/page4'>4</Link>
             <Slider {...settings}>
-                {img.map((data)=>{
-                    return(
-                        <div>
-                            <img  src={data} style={{height:'100px', width:'100px'}}/>
-                        </div>
-                    )})}
+                {imgs.map(m => <div><img src={m}/></div>)}
             </Slider>
             <div className="buttonDiv">
                 <Link to='/select' style={{color : 'white', textDecoration: 'none'}}><div className="BTN">작품 선택</div></Link>

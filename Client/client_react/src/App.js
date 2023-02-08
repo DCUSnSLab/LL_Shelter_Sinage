@@ -7,15 +7,14 @@ import './App.css';
 import IDLE_page_3 from "./component/IDLE_page_3";
 import IDLE_page_4 from "./component/IDLE_page_4";
 import IDLE_page_5 from "./component/IDLE_page_5";
-import ContentDetailView from "./component/ContentDetailView";
-import SignageShow from "./component/SignageShow";
+import BOARD_page from "./component/BOARD_page";
+import SELECT_page from "./component/SELECT_page";
 
-const App = () => {
-
+function App(){
+    //5분 타이머
     const Ref = useRef(null);
-    const[text, setText] = useState("START");
-    // The state for our timer
-    const [timer, setTimer] = useState('00:00');
+    const [text, setText] = useState('');
+    const [timer, setTimer] = useState();
 
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date());
@@ -61,7 +60,7 @@ const App = () => {
     const getDeadTime = () => {
         let deadline = new Date();
         //300 = 5분
-        deadline.setSeconds(deadline.getSeconds() + 300);
+        deadline.setSeconds(deadline.getSeconds() + 5);
         return deadline;
     }
 
@@ -76,16 +75,42 @@ const App = () => {
     }
     const [idle, setIdle] = useState([IDLE_page_5, IDLE_page_4, IDLE_page_3]);
 
-    setInterval( (idle) => ( setIdle(Math.random * 3) ), 30000);
+    // 카운터 00:00 정보 받아온 뒤 IDLE 페이지 이동
+    const navigate = useNavigate();
+    const Page = ['/', '/page4', '/page5'];
+    const [num, setNum] = useState(0);
+
+    const getRandomInt = (max) => {
+        return Math.floor(Math.random() * max);
+    }
+
+    useEffect((e) => {
+            if (timer === '00:00') {
+                const num_ = getRandomInt(3);
+                setNum(num_);
+                navigate(Page[num_]);
+                console.log('change page' + num_);
+            }
+    }, [timer]);
 
     return(
-        <div onClick={TimerReset}
-             style={{fontSize : '3rem'}}>
-            <div style={{backgroundColor : 'black', fontSize : '3rem',
-                fontFamily: 'yg-jalnan', color : 'white'}}>
-                {timer}
-                <br/>
-                {text}
+        <div>
+            <div onClick={TimerReset} style={{fontSize : '3rem'}}>
+                <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+                <div style={{backgroundColor : 'black', fontSize : '3rem',
+                    fontFamily: 'yg-jalnan', color : 'white'}}>
+                    {timer}
+                    <br/>
+                    {text}
+                </div>
+            <Routes>
+                <Route path='/' element={<IDLE_page_3/>}/>
+                <Route path='/page4' element={<IDLE_page_4/>}/>
+                <Route path='/page5' element={<IDLE_page_5/>} />
+                <Route path='/board' element={<BOARD_page/>}/>
+                <Route path='/select' element={<SELECT_page/>} />
+            </Routes>
             </div>
             <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 

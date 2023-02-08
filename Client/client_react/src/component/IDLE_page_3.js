@@ -11,13 +11,17 @@ import {Link, Route, Routes} from "react-router-dom";
 function IDLE_page_3() {
     const addr = "ws://localhost:5000";
     const [outputs, setOutputs] = useState([]);
-    const [img, setImg] = useState([0, 1, 2]);
+    const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
+
 
     let ws = useRef(null);
 
-    const connectServer = () => {
-        if(!ws.current){
+    function addMessage(img) {
+        setImg([...imgs, img]);
+    }
+    useEffect(() => {
+        if(!ws.current) {
             ws.current = new WebSocket(addr);
             ws.current.onopen = () => {
                 console.log("connected to " + addr);
@@ -41,21 +45,16 @@ function IDLE_page_3() {
             };
             ws.current.onmessage = (evt) => {
                 // server에서 보낸 데이터
-                const data = JSON.parse(evt.data);
-                console.log(data);
-                setImg[0] = data[0];
-                setImg[1] = data[1];
-                setImg[2] = data[2];
-
-                setOutputs((prevItems) => data);
+                const data = JSON.parse(evt.data)
+                data.map((data) => {
+                    addMessage(data);
+                    console.log(data);
+                })
             };
         };
-    };
-    useEffect(() => {
-        connectServer();
-    });
+    })
     const settings = {
-        slide: 'div',
+        slide: 'img',
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -65,23 +64,10 @@ function IDLE_page_3() {
         <div>
             <Header/>
             <Slider {...settings}>
-                <div>
-                    <img src={setImg[0]}/>
-                    {/*<iframe src={setImg[0]} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>*/}
-                    <div className="button_div">
-                        {/*<button id="skipButton">Skip</button>*/}
-                        {/*<div></div>*/}
-                        {/*<button id="qrButton">상세보기</button>*/}
-                    </div>
-                </div>
-                <div>
-                    <img src={setImg[1]}/>
-                    {/*<iframe src={setImg[1]} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>*/}
-                </div>
-                <div>
-                    <img src={setImg[2]}/>
-                    {/*<iframe src={setImg[2]} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>*/}
-                </div>
+                {imgs.map(m =>
+                    <div className="image-box">
+                        <img src={m} className="image-thumbnail"/>
+                    </div>)}
             </Slider>
             <div className="social">
                 <p>작품선택<br/>

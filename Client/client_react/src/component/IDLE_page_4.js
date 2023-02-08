@@ -76,6 +76,7 @@ function IDLE_page_4() {
 
                     <tr className="h4"><td colSpan='3'>커뮤니티 이용방법</td></tr>
 
+
                     <tr className="STEP"><td>STEP1</td><td>STEP2</td><td>STEP3</td></tr>
 
                     <img src={setImg[0]}/>

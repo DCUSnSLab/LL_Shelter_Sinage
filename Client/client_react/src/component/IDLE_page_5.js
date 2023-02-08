@@ -1,5 +1,4 @@
 // Signage 5 - App.js
-
 import Slider from "react-slick";
 import React, {useEffect, useRef, useState} from "react";
 import "slick-carousel/slick/slick.css";
@@ -12,13 +11,16 @@ import {Link} from "react-router-dom";
 function IDLE_page_5() {
     const addr = "ws://localhost:5000";
     const [outputs, setOutputs] = useState([]);
-    const [img, setImg] = useState([0, 1, 2]);
+    const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
 
     let ws = useRef(null);
 
-    const connectServer = () => {
-        if(!ws.current){
+    function addMessage(img) {
+        setImg([...imgs, img]);
+    }
+    useEffect(() => {
+        if(!ws.current) {
             ws.current = new WebSocket(addr);
             ws.current.onopen = () => {
                 console.log("connected to " + addr);
@@ -42,20 +44,15 @@ function IDLE_page_5() {
             };
             ws.current.onmessage = (evt) => {
                 // server에서 보낸 데이터
-                const data = JSON.parse(evt.data);
+                const data = JSON.parse(evt.data)
                 console.log(data);
-                setImg[0] = data[0];
-                setImg[1] = data[1];
-                setImg[2] = data[2];
-
-                setOutputs((prevItems) => data);
+                data.map((data) => {
+                    addMessage(data);
+                    console.log(data);
+                })
             };
         };
-    };
-    useEffect(() => {
-        connectServer();
-    });
-
+    })
 
     const SampleNextArrow = (props) => {
         const { className, style, onClick } = props;
@@ -92,9 +89,10 @@ function IDLE_page_5() {
     return (
         <div>
             <Slider {...settings}>
-                <img src={setImg[0]}/>
-                <img src={setImg[1]}/>
-                <img src={setImg[2]}/>
+                {imgs.map(m =>
+                <div className="image-box">
+                    <img src={m} className="image-thumbnail"/>
+                </div>)}
             </Slider>
             <diav className="buttonDiv">
                 <div onClick={SELECT_page}>작품 선택</div>
@@ -102,9 +100,9 @@ function IDLE_page_5() {
                 <div onClick={BOARD_page}>게시판</div>
             </diav>
             <div className="buttonDiv">
-                <div><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>작품 선택</Link></div>
+                <Link to='/select' style={{color : 'white', textDecoration: 'none'}}><div className="BTN">작품 선택</div></Link>
                 <p></p>
-                <div><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>게시판</Link></div>
+                <Link to='/board' style={{color : 'white', textDecoration: 'none'}}><div className="BTN">게시판</div></Link>
             </div>
 
         </div>

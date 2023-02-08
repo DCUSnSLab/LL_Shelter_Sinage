@@ -3,10 +3,11 @@ import json
 import random
 import pymysql
 import psycopg2
+import socket
 
 #conn = pymysql.connect(host="localhost", user="main1", password="main1", db="main_server01", charset="utf8")
 conn = psycopg2.connect(
-        host="172.18.0.3",
+        host="",
         port="5433",
         user="shelter",
         password="20121208",

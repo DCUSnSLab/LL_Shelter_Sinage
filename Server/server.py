@@ -24,7 +24,7 @@ adv = Advertiser()
 
 async def main():
     await adv.init_adv()
-    async with websockets.serve(accept, "172.18.0.5", 5000):
+    async with websockets.serve(accept, socket.gethostbyname(socket.gethostname()), 5000):
         await asyncio.Future()
 
 

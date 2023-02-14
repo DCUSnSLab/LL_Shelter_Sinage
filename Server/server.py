@@ -5,7 +5,6 @@ import websockets  # 클라이언트 접속이 되면 호출된다.
 
 from advertiser import Advertiser
 
-
 async def accept(websocket, path):
     print('accepted', websocket.origin, websocket.id)
     while True:
@@ -24,7 +23,8 @@ adv = Advertiser()
 
 async def main():
     await adv.init_adv()
-    async with websockets.serve(accept, "localhost", 5000):
+    ipaddr = get_ip_address('eth0')
+    async with websockets.serve(accept, ipaddr, 5000):
         await asyncio.Future()
 
 

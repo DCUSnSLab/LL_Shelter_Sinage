@@ -10,7 +10,7 @@ import {Link} from "react-router-dom";
 function IssueBoard(){
     const [media, setMedia] = useState(null);
     const [comment, setComment] = useState(null);
-    const backend_url = "http://203.250.33.53:8080"
+    const backend_url = "http://127.0.0.1:8001"
 
     useEffect(() => {
         const Community_media_list = () => {

@@ -12,7 +12,7 @@ import ContentDetailView from "./ContentDetailView";
 function SignageShow({id,title,des}) {
     const [images, setImages] = useState(null);
     const [content, setContent] = useState(null);
-    const backend_url = "http://203.250.33.53:8080"
+    const backend_url = "http://127.0.0.1:8001"
 
     useEffect(() => {
         const imagelist = () => {

@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 // import "slick-carousel/slick/slick-theme.css";
 
 function Community() {
-    const backend_url = "http://203.250.33.53:8000"
+    const backend_url = "http://127.0.0.1:8001"
 
     return(
         <html>

@@ -1,7 +1,7 @@
 import axios from "axios"
-import '../style/main.css';
-import '../style/noscript.css';
-import '../style/sigdesign.css';
+import '../style/main.module.css';
+import '../style/noscript.module.css';
+import '../style/sigdesign.module.css';
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 // import "slick-carousel/slick/slick.css";

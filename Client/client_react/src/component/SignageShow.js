@@ -1,8 +1,8 @@
 import axios from "axios"
-// import '../style/main.css';
-// import '../style/noscript.css';
+// import '../style/main.module.css';
+// import '../style/noscript.module.css';
 // import '../style/main.82cfd66e.css';
-import '../style/sigdesign.css';
+import '../style/sigdesign.module.css';
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import ContentDetailView from "./ContentDetailView";

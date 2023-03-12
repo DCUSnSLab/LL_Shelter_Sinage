@@ -1,7 +1,7 @@
 import axios from "axios"
-import '../style/main.css';
-import '../style/noscript.css';
-import '../style/mycss.css';
+import '../style/main.module.css';
+import '../style/noscript.module.css';
+import '../style/mycss.module.css';
 // import '../style/main.82cfd66e.css';
 import React, {useState} from "react";
 import {Link} from "react-router-dom";

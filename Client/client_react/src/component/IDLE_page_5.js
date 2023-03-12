@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import React, {useEffect, useRef, useState} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../style/IDLE_page_5.css";
+import "../style/IDLE_page_5.module.css";
 import {Link} from "react-router-dom";
 
 function IDLE_page_5() {

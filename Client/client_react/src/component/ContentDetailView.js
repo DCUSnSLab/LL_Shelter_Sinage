@@ -1,10 +1,10 @@
 import axios from "axios"
-import '../style/main.css';
-import '../style/noscript.css';
-import '../style/mycss.css';
+import '../style/main.module.css';
+import '../style/noscript.module.css';
+import '../style/mycss.module.css';
 // import '../style/main.82cfd66e.css';
-import '../style/recommend.css';
-import '../style/detail.css';
+import '../style/recommend.module.css';
+import '../style/detail.module.css';
 
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";

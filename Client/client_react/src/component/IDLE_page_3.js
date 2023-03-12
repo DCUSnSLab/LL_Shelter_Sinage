@@ -2,7 +2,9 @@ import Slider from "react-slick";
 import React, {useRef, useState, useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../style/IDLE_page_3.css';
+import idle_3 from "../style/IDLE_page_3.module.css";
+import idle_4 from "../style/IDLE_page_4.module.css";
+import idle_5 from "../style/IDLE_page_5.module.css";
 import Header from "./header";
 import {Link, Route, Routes} from "react-router-dom";
 
@@ -59,7 +61,7 @@ function IDLE_page_3() {
         arrow: false
     };
     return (
-        <div>
+        <div class="IDLE3 test" className={`${idle_3.IDLE_page_3} ${idle_4.IDLE_page_4} ${idle_5.IDLE_page_5}`}>
             <Header/>
             <Slider {...settings}>
                 {imgs.map(m =>

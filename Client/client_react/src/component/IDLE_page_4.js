@@ -1,6 +1,6 @@
 // signage 4 app.js
 
-import '../style/IDLE_page_4.css';
+import '../style/IDLE_page_4.module.css';
 import React, {useEffect, useRef, useState} from "react";
 import {Link, Route, Routes} from "react-router-dom";
 

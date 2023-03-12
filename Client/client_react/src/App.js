@@ -6,8 +6,16 @@ import './App.css';
 import IDLE_page_3 from "./component/IDLE_page_3";
 import IDLE_page_4 from "./component/IDLE_page_4";
 import IDLE_page_5 from "./component/IDLE_page_5";
-import BOARD_page from "./component/BOARD_page";
-import SELECT_page from "./component/SELECT_page";
+// import BOARD_page from "./component/BOARD_page"; // Legacy Board page
+import BOARD_page from "./component/Community";
+// import SELECT_page from "./component/SELECT_page"; // Legacy Select page
+import SELECT_page from "./component/SignageShow";
+
+import IssueBoard from "./component/IssueBoard";
+import DailyBoard from "./component/DailyBoard";
+import PaintList from "./component/PaintList";
+import ContentDetailView from "./component/ContentDetailView";
+import MediaDetailView from "./component/MediaDetailView";
 
 function App(){
     //5분 타이머
@@ -99,11 +107,21 @@ function App(){
                     {text}
                 </div>
             <Routes>
+                {/*Default IDLE page*/}
                 <Route path='/' element={<IDLE_page_3/>}/>
                 <Route path='/page4' element={<IDLE_page_4/>}/>
                 <Route path='/page5' element={<IDLE_page_5/>} />
+
+                {/*Board, Select page*/}
                 <Route path='/board' element={<BOARD_page/>}/>
                 <Route path='/select' element={<SELECT_page/>} />
+
+                {/*Detail pages*/}
+                <Route path='/issueboard' element={<IssueBoard/>} />
+                <Route path='/dailyboard' element={<DailyBoard/>} />
+                <Route path='/paintlist' element={<PaintList/>} />
+                <Route path='/contentDetailView' element={<ContentDetailView/>}/>
+                <Route path='/mediaDetailView' element={<MediaDetailView/>}/>
             </Routes>
             </div>
         </div>

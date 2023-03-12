@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'MinSans-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+            #headerArea{
+                height:30px;
+                background-color:#000000;
+            }
+             #div1 {
+                 text-align:center;
+             }
+            #picture {
+                border: 1px solid ;
+
+            }
+            #section1{
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: relative;
+                flex-wrap: wrap;
+                flex-basis: 33.3%;
+                flex-direction: column;
+                background-color:#000000;
+                /*height: 350px;*/
+
+            }
+
+            .profile_user_img{
+                border-radius: 70%;
+                overflow: hidden;
+                width: 70px;
+                height: 70px;
+                object-fit: cover;
+                flex:auto;
+                float: left;
+                margin: 10px;
+
+            }
+            /*#profile_user_img{*/
+            /*    width: 70px;*/
+            /*    height: 70px;*/
+            /*    border-radius: 70%;*/
+            /*    overflow: hidden;*/
+            /*    flex:auto;*/
+            /*    float: left;*/
+            /*    margin: 10px;*/
+            /*}*/
+
+            #section2{
+                border-radius: 7px;
+                height:900px;
+            }
+
+            body{
+                margin:0;
+                padding:0;
+                overflow-y:hidden;
+                overflow-x:hidden;
+                height: 100%;
+                /*font-size: 30px;*/
+            }
+            #section3{
+                margin-top: 20px;
+                height: 750px;
+                overflow-y:scroll;
+                overflow-x:hidden;
+                background-color:#E8EBED;
+            }
+
+            p{
+                margin-left: 90px;
+                margin-right: 80px;
+                line-height: 190%;
+                font-size: large;
+
+            }
+
+              body::-webkit-scrollbar{
+                display:none;
+            }
+            /* BUTTON 5 */
+
+            /* GENERAL BUTTON STYLING */
+            button,
+            button::after {
+              -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+              -o-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+
+            button {
+              background: none;
+              border: 1px solid #fff;
+              border-radius: 10px;
+              color: #fff;
+              display: block;
+              position: relative;
+              text-transform: uppercase;
+              font-size: 0.6em;
+              /*font-weight: bold;*/
+              /*margin: 1em auto;*/
+              padding: 0.5em 1em;
+            }
+            .gray-line{
+                width: 60rem;
+                height: 0.1rem;
+                background-color: #eeeeee;
+                margin: 0.5rem 80px 1rem 90px;
+            }
+            .detail_contents{
+                margin-top: 1.2rem;
+                border: 0.1rem solid #e0e0e0;
+                border-radius: 10px;
+                word-wrap:break-word;
+
+            }
+

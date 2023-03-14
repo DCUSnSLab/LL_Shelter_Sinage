@@ -73,7 +73,7 @@ function IDLE_page_3() {
                 <p className={`${idle3.idle3_footer_p}`}>작품선택<br/>
                     <button className={`${idle3.idle3_footer_button}`}><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
-                <p className={`${idle3.idle3_footer_p}`}>게시판<br/>
+                <p className={`${idle3.idle3_footer_p} ${idle3.line}`}>게시판<br/>
                     <button className={`${idle3.idle3_footer_button}`}><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
             </div>

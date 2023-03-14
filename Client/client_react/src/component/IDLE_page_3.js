@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import React, {useRef, useState, useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../style/IDLE_page_3.css';
+import idle3 from '../style/IDLE_page_3.module.css';
 import Header from "./header";
 import {Link, Route, Routes} from "react-router-dom";
 
@@ -59,6 +59,7 @@ function IDLE_page_3() {
         arrow: false
     };
     return (
+        // <p className={`${idle3.social} ${idle3.button}`}> // to apply multiple css module to tag
         <div>
             <Header/>
             <Slider {...settings}>
@@ -67,15 +68,35 @@ function IDLE_page_3() {
                         <img src={`${process.env.PUBLIC_URL}` + m} className="image-thumbnail"/>
                     </div>)}
             </Slider>
-            <div className="social">
-                <p>작품선택<br/>
-                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+            <div className={`${idle3.idle3_footer}`}>
+            {/*<div className="social">*/}
+                <p className={`${idle3.idle3_footer_p}`}>작품선택<br/>
+                    <button className={`${idle3.idle3_footer_button}`}><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
-                <p className="line">게시판<br/>
-                    <button><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                <p className={`${idle3.idle3_footer_p}`}>게시판<br/>
+                    <button className={`${idle3.idle3_footer_button}`}><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
             </div>
         </div>
+
+        // <div>
+        //     <Header/>
+        //     <Slider {...settings}>
+        //         {imgs.map(m =>
+        //             <div className="image-box">
+        //                 <img src={`${process.env.PUBLIC_URL}` + m} className="image-thumbnail"/>
+        //             </div>)}
+        //     </Slider>
+        //     <div className={idle3.social}>
+        //         {/*<div className="social">*/}
+        //         <p className={`${idle3.social} ${idle3.button}`}>작품선택<br/>
+        //             <button className={idle3.social}><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+        //         </p>
+        //         <p className="line">게시판<br/>
+        //             <button className={idle3.pink_button}><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+        //         </p>
+        //     </div>
+        // </div>
     );
 }
 

@@ -7,6 +7,9 @@ import IDLE_page_3 from "./component/IDLE_page_3";
 import IDLE_page_4 from "./component/IDLE_page_4";
 import IDLE_page_5 from "./component/IDLE_page_5";
 
+// import SignageShow from "./component/SignageShow";
+import ContentDetailView from "./component/ContentDetailView";
+
 function App(){
     //5분 타이머
     const Ref = useRef(null);
@@ -100,6 +103,7 @@ function App(){
                 <Route path='/' element={<IDLE_page_3/>}/>
                 <Route path='/page4' element={<IDLE_page_4/>}/>
                 <Route path='/page5' element={<IDLE_page_5/>} />
+                {/*<Route path='/select' element={<SignageShow/>} />*/}
             </Routes>
             </div>
         </div>

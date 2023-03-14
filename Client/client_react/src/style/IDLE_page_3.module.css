@@ -75,16 +75,8 @@ Slider{
     object-fit:cover;
 }
 
-.social > button,
-.social > p{
-    display:table-cell;
-    vertical-align:middle;
-    width: 100%;
-}
-
-
 /*맨 맽에 버튼을 포괄적으로 감싸고있는*/
-.social {
+.idle3_footer {
     display:grid;
     font-family: 'yg-jalnan';
     background-color: black;
@@ -98,7 +90,7 @@ Slider{
 }
 
 /*hotpink button*/
-.social button{
+.idle3_footer_button {
     background-color: deeppink;
     width: 5rem;
     font-size: 2.2rem;
@@ -106,8 +98,16 @@ Slider{
     border-top-right-radius: 0.4rem;
     border-bottom-left-radius: 0.4rem;
     border-bottom-right-radius: 0.4rem;
+    display:table-cell;
+    vertical-align:middle;
+    width: 7rem;
 }
 
+.idle3_footer_p {
+    display:table-cell;
+    vertical-align:middle;
+    width: 100%;
+}
 
 .font {
     font-family: 'yg-jalnan';

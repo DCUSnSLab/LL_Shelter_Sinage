@@ -1,3 +1,7 @@
+cd /root/LL_Shelter_API-Server/ShelterInfo
+
+sh infoupdator.sh
+
 export PATH=$PATH:$NPM_PATH
 
 echo $PATH

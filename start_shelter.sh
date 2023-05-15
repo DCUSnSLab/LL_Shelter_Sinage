@@ -1,4 +1,4 @@
-cd /root/LL_Shelter_API-Server/ShelterInfo
+cd /root/LL_Shelter_Sinage/ShelterInfo
 
 sh infoupdator.sh
 

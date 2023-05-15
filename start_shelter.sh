@@ -19,7 +19,20 @@ cd /root/LL_Shelter_API-Server/local_shelter_server
 
 sleep 3s
 
-python3 manage.py migrate # migrate database
+# Check db container connection
+while :
+do
+	# Check db container connection via ping cmd
+	ping -c1 cms_shelter_db > /dev/null 2>&1
+	if [ $? -eq 0 ];then # if database container connected,
+		sleep 5s
+		python3 manage.py migrate # migrate database
+		break # and brack while loop
+	else
+		echo "Not detec main database server..."
+		sleep 3s
+	fi
+done
 
 python3 manage.py runserver $DEST &
 

@@ -62,7 +62,6 @@ function IDLE_page_5() {
             />
         );
     };
-
     const SamplePrevArrow = (props) => {
         const { className, style, onClick } = props;
         return (

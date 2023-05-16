@@ -1,19 +1,15 @@
 // signage 4 app.js
-
-import '../style/IDLE_page_4.css';
+import '../../style/IDLE_page_4.css';
 import React, {useEffect, useRef, useState} from "react";
 import {Link, Route, Routes} from "react-router-dom";
 
 function IDLE_page_4() {
-    const addr = "ws://localhost:5000";
-    const [outputs, setOutputs] = useState([]);
     const [img, setImg] = useState([0, 1, 2, 3, 4, 5]);
-    const [socketConnected, setSocketConnected] = useState(false);
-
-    const static_imgs = [];
-
+    const host_ip = `${process.env.REACT_APP_IP}`;
+    const addr = "ws://" + host_ip + ":5000";
+    const [outputs, setOutputs] = useState([]);
     let ws = useRef(null);
-
+    const [socketConnected, setSocketConnected] = useState(false);
     const connectServer = () => {
         if(!ws.current){
             ws.current = new WebSocket(addr);
@@ -52,9 +48,9 @@ function IDLE_page_4() {
         };
     };
     useEffect(() => {
-        // 더 이상 사용하지 않는 코드
-        // connectServer();
+        connectServer();
     });
+
     return (
         <div className="bo">
             <header>
@@ -92,7 +88,6 @@ function IDLE_page_4() {
 
                     <div className="h4">커뮤니티 이용방법</div>
 
-
                     <tr className="STEP">
                         <td className="B">STEP1</td>
                         <td></td>
@@ -111,7 +106,6 @@ function IDLE_page_4() {
 
                     {/*
                     Image insert sample (not from websocket or db)
-
                     process.env.PUBLIC_URL meaning /public directory in npm home directory
                     <img src={`${process.env.PUBLIC_URL}`} className="image-thumbnail"/>
                     */}

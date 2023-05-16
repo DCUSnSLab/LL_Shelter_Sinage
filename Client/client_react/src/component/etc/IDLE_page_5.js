@@ -7,18 +7,15 @@ import "../style/IDLE_page_5.css";
 import {Link} from "react-router-dom";
 
 function IDLE_page_5() {
-    const addr = "ws://localhost:5000";
+    const host_ip = `${process.env.REACT_APP_IP}`;
+    const addr = "ws://" + host_ip + ":5000";
     const [outputs, setOutputs] = useState([]);
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
-
     let ws = useRef(null);
 
-    function addMessage(img) {
-        setImg([...imgs, img]);
-    }
-    useEffect(() => {
-        if(!ws.current) {
+    const connectServer = () => {
+        if(!ws.current){
             ws.current = new WebSocket(addr);
             ws.current.onopen = () => {
                 console.log("connected to " + addr);
@@ -42,15 +39,19 @@ function IDLE_page_5() {
             };
             ws.current.onmessage = (evt) => {
                 // server에서 보낸 데이터
-                const data = JSON.parse(evt.data)
+                const data = JSON.parse(evt.data);
                 console.log(data);
-                data.map((data) => {
-                    addMessage(data);
-                    console.log(data);
-                })
+                setOutputs((prevItems) => data);
             };
         };
-    })
+    };
+    useEffect(() => {
+        connectServer();
+    });
+
+    function addMessage(img) {
+        setImg([...imgs, img]);
+    }
 
     const SampleNextArrow = (props) => {
         const { className, style, onClick } = props;

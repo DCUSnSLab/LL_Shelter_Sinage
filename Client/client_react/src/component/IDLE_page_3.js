@@ -2,8 +2,8 @@ import Slider from "react-slick";
 import React, {useRef, useState, useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../style/IDLE_page_3.css';
-import Header from "./header";
+import '../../style/IDLE_page_3.css';
+import Header from "../header";
 import {Link, Route, Routes} from "react-router-dom";
 
 function IDLE_page_3() {
@@ -12,6 +12,7 @@ function IDLE_page_3() {
     const [outputs, setOutputs] = useState([]);
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
+    const [page, setpage] = useState();
 
     let ws = useRef(null);
 
@@ -58,6 +59,7 @@ function IDLE_page_3() {
         slidesToScroll: 1,
         arrow: false
     };
+
     return (
         <div>
             <Header/>
@@ -65,8 +67,10 @@ function IDLE_page_3() {
                 {imgs.map(m =>
                     <div className="image-box">
                         <img src={`${process.env.PUBLIC_URL}` + m} className="image-thumbnail"/>
-                    </div>)}
+                    </div>
+                )}
             </Slider>
+
             <div className="social">
                 <p>작품선택<br/>
                     <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>

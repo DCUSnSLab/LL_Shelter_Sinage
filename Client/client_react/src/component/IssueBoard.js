@@ -2,6 +2,7 @@ import axios from "axios"
 import '../style/main.css';
 import '../style/noscript.css';
 import '../style/sigdesign.css';
+import styles from "../style/issue.module.css";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import Painterro from 'painterro'
@@ -11,6 +12,12 @@ function IssueBoard(){
     const [comment, setComment] = useState(null);
     const local_ip = `${process.env.REACT_APP_IP}`;
     const backend_url = "http://localhost:8000";
+
+    const [imgAvailable, setImgAvailable] = useState("");
+    const showPaint = Painterro();
+    console.log(showPaint);
+    let showCreate = {};
+    showCreate = imgAvailable !== "" ? imgAvailable : {};
 
     useEffect(() => {
         const Community_media_list = () => {
@@ -38,13 +45,8 @@ function IssueBoard(){
         Community_comments_list();
     }, []);
 
-    useEffect(() => {
-        window.ptro = Painterro({
-            id: 'painterro',
-        }).show();
-    });
-
     return(
+        <div className={styles.issue}>
         <html>
         <head>
             <title>Phantom by HTML5 UP</title>
@@ -66,7 +68,12 @@ function IssueBoard(){
         {/* <div className="nav_blank" style={{marginRight : "80px"}}></div> */}
         <div className="container_media1" style={container_issueBoard}>
             <div className="painterro">
-                <div id="painterro">
+                <div>
+                    {Object.keys(
+                        showPaint.show(showCreate)
+                    ).map((obj) => {
+                        return obj;
+                    })}
                 </div>
             </div>
             {media && media.map((list, i) => (
@@ -85,6 +92,7 @@ function IssueBoard(){
         </div>
         </body>
         </html>
+        </div>
     );
 }
 const container_issueBoard = {
@@ -104,3 +112,4 @@ const issueBoard_preview = {
     borderRadius: '10px'    
 }
 export default IssueBoard;
+

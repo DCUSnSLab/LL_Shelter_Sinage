@@ -1,9 +1,6 @@
 import axios from "axios"
-import '../style/sigdesign.css';
 import React, {useEffect, useState, useRef} from "react";
 import {Link} from "react-router-dom";
-import ContentDetailView from "./ContentDetailView";
-import styled from "styled-components";
 import Modal from './Modal';
 
 function SignageShow({id,title,des}) {
@@ -11,7 +8,7 @@ function SignageShow({id,title,des}) {
     const [content, setContent] = useState(null);
     const host_ip = `${process.env.REACT_APP_IP}`;
     const port = "8000";
-    const backend_url = "http://" + host_ip + ":" + port;
+    const backend_url = "http://localhost:" + port;
     
     useEffect(() => {
         const imagelist = () => {

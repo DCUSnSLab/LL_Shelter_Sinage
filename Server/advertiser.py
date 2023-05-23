@@ -9,7 +9,7 @@ from websockets.exceptions import ConnectionClosedOK
 #dbip = os.environ['SHELTER_DB']
 
 conn = psycopg2.connect(
-        host="cms_shelter_db",
+        host="cms-shelter-db",
         port="5433",
         user="shelter",
         password="20121208",

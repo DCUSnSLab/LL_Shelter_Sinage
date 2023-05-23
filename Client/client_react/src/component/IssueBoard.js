@@ -1,7 +1,4 @@
 import axios from "axios"
-import '../style/main.css';
-import '../style/noscript.css';
-import '../style/sigdesign.css';
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 

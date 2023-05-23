@@ -47,7 +47,7 @@ LOCAL_SHELTER_SERVER_DB = pymysql.connect(host='localhost',  # DB 주소
                                           cursorclass=pymysql.cursors.DictCursor)
                                           '''
 
-LOCAL_SHELTER_SERVER_DB = psycopg2.connect(host='cms_shelter_db',  # DB 주소
+LOCAL_SHELTER_SERVER_DB = psycopg2.connect(host='cms-shelter-db',  # DB 주소
                                           port=5433,  # DB port
                                           user='shelter',  # DB 관리자 계정
                                           password='20121208',  # DB 접속 비밀번호

@@ -25,7 +25,7 @@ python3 manage.py runserver $DEST &
 
 sleep 2s
 
-cd /root/LivinglabWiFi
+cd /root/Livinglab_WiFi
 
 # npm install and start
 /bin/bash -c "source $NVM_DIR/nvm.sh && nvm use --delete-prefix $NODE_VERSION && PORT=3001 npm start &"

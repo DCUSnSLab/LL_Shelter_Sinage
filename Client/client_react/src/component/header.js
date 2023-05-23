@@ -1,5 +1,5 @@
 // signage 3 상단 시간, 날짜 표시
-
+import styles from '../style/IDLE.module.css';
 import React, {useEffect, useState} from "react";
 import moment from "moment/moment";
 
@@ -16,12 +16,12 @@ function Header() {
     }, []);
 
     return (
-        <div className="header">
-            <div className="date">
+        <div className={styles.page3_header}>
+            <div className={styles.page3_date}>
                 {time.format('YYYY-MM-DD')}
             </div>
             {/* LT=4:50 , LTS=4:50:21 */}
-            <div className="time">{time.format('LT')}</div>
+            <div className={styles.page3_time}>{time.format('LT')}</div>
         </div>
     );
 }

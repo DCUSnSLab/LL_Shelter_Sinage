@@ -45,36 +45,34 @@
 Slider{
     overflow-x: hidden;
     overflow: hidden;
-    width: 100%;
-    height: 40rem;
-    margin:0 auto;
 }
 
-/*slide height*/
-.slick_track{
-    overflow: hidden;
-    width: 100%;
-    height: 40rem;
+.image-box {
+    background-color: black;
+    width: auto;
+    height: auto;
     overflow:hidden;
     margin:0 auto;
 }
 
 
+/*slide height*/
+.slick_track{
+    overflow: hidden;
+    height: 42rem;
+}
+
+.image_thumbnail {
+    background-color: black;
+    width: 100%;
+    height: 42rem;
+    object-fit:cover;
+}
+
 /*하단에 버튼 옆옆 라인*/
 .line {
     border-left: 2px solid darkgrey;
     /*border-right: 2px solid darkgrey;*/
-}
-
-.image_box {
-    width: auto;
-    height: auto;
-}
-
-.image_thumbnail {
-    width:100%;
-    height:100%;
-    object-fit:cover;
 }
 
 .social > button,

@@ -25,7 +25,8 @@ function App(){
     const [timer, setTimer] = useState();
     const [ ip , setIp ] = useState();
 
-    const idle_time = 30;
+    // 타이머 임시 제거함
+    const idle_time = 10000;
 
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date());

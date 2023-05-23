@@ -4,6 +4,7 @@ import '../style/noscript.css';
 import '../style/sigdesign.css';
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import Painterro from 'painterro'
 
 function IssueBoard(){
     const [media, setMedia] = useState(null);
@@ -37,6 +38,12 @@ function IssueBoard(){
         Community_comments_list();
     }, []);
 
+    useEffect(() => {
+        window.ptro = Painterro({
+            id: 'painterro',
+        }).show();
+    });
+
     return(
         <html>
         <head>
@@ -58,6 +65,10 @@ function IssueBoard(){
         </div>
         {/* <div className="nav_blank" style={{marginRight : "80px"}}></div> */}
         <div className="container_media1" style={container_issueBoard}>
+            <div className="painterro">
+                <div id="painterro">
+                </div>
+            </div>
             {media && media.map((list, i) => (
                 <p key={i}>
                     <p style={{height:"20px"}}></p>

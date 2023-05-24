@@ -1,4 +1,7 @@
 import axios from "axios"
+import '../style/main.css';
+import '../style/noscript.css';
+import '../style/mycss.css';
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
@@ -50,21 +53,23 @@ function Community() {
                             <strong>Daily Board</strong></Link>
                     </p>
                     <hr></hr>
-                    <div className="wrapper">
-                        {/*<table>*/}
-                            {/*{% for list in communitylist %}*/}
-                            <ul className="nav my_center_txt">
-                                {/*<li><a href="#">{{list.name}}</a></li>*/}
-                            </ul>
-                            {/*{% endfor %}*/}
-                        {/*</table>*/}
-                    </div>
-                    <p style={{textAlign: 'center'}}>
+                        <div className="wrapper">
+                            {/*<table>*/}
+                                {/*{% for list in communitylist %}*/}
+                                <ul className="nav my_center_txt">
+                                    {/*<li><a href="#">{{list.name}}</a></li>*/}
+                                </ul>
+                                {/*{% endfor %}*/}
+                            {/*</table>*/}
+                        </div>
+
+                        <p style={{textAlign: 'center'}}>
+                            <a href = {'http://' + host_ip + ':' + port + '/Service/paintlist'} className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>
+                                <strong>Drawing Guest Book</strong></a>
                             {/*<Link to = '/paintlist' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>*/}
                             {/*    <strong>Drawing Guest Book</strong></Link>*/}
-                            <Link to = '/issueboard' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>
-                                <strong>Drawing Guest Book</strong></Link>
-                    </p>
+
+                        </p>
 
 
             </div>

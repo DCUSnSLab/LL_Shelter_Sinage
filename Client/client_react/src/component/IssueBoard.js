@@ -1,17 +1,14 @@
 import axios from "axios"
-import '../style/main.css';
-import '../style/noscript.css';
-import '../style/sigdesign.css';
-import styles from "../style/issue.module.css";
+import Painterro from 'painterro'
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import Painterro from 'painterro'
+import styles from "../style/issue.module.css";
 
 function IssueBoard(){
     const [media, setMedia] = useState(null);
     const [comment, setComment] = useState(null);
-    const local_ip = `${process.env.REACT_APP_IP}`;
-    const backend_url = "http://localhost:8000";
+    const host_ip = `${process.env.REACT_APP_IP}`;
+    const backend_url = "http://" + host_ip + ":8000";
 
     const painter_config = ['select', 'crop', 'pixelize', 'line', 'arrow', 'rect', 'ellipse', 'text', 'rotate', 'resize', 'setting', 'zoomin', 'zoomout', 'bucket', 'load', 'open'];
     const black = '#000000'

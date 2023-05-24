@@ -3,7 +3,8 @@ import React, {useRef, useState, useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from '../style/IDLE.module.css';
-import {Link, Route, Routes} from "react-router-dom";
+import {Link} from "react-router-dom";
+import moment from "moment";
 
 function IDLE() {
     const host_ip = `${process.env.REACT_APP_IP}`;
@@ -49,22 +50,43 @@ function IDLE() {
                 })
             };
         };
-    })
+    }, []);
     const settings = {
-        slide: 'obejct',
+        slide: 'iframe',
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrow: false
     };
+
+    let timer = null;
+    const [time, setTime] = useState(moment());
+
+    useEffect(() => {
+        timer = setInterval(() => {
+            setTime(moment());
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+
     return (
         <div>
-            <Header/>
+            <header className={styles.page3_header}>
+                <div className={styles.page3_date}>
+                    {time.format('YYYY-MM-DD')}
+                </div>
+                {/* LT=4:50 , LTS=4:50:21 */}
+                <div className={styles.page3_time}>{time.format('LT')}</div>
+            </header>
             <Slider {...settings}>
-                {imgs.map(m =>
-                    <div className={styles.image_box}>
-                        <object data={`${process.env.PUBLIC_URL}` + m} key={m} className={styles.image_thumbnail}/>
-                    </div>)}
+                    {imgs.map(m =>
+                        <div className={styles.slide_list} key={m}>
+                            <iframe src={`${process.env.PUBLIC_URL}` + m + '?autoplay=1&mute=1'}
+                                    key={m} allowFullScreen className={styles.iframe100}/>
+                        </div>
+                    )}
             </Slider>
             <div className={styles.social}>
                 <p>작품선택<br/>

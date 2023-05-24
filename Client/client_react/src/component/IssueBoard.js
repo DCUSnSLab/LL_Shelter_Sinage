@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import styles from "../style/issue.module.css";
 
 function IssueBoard(){
     const [media, setMedia] = useState(null);

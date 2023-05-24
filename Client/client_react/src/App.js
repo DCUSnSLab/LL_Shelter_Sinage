@@ -12,6 +12,7 @@ import Community from "./component/Community";
 import DailyBoard from "./component/DailyBoard";
 import PaintList from "./component/PaintList";
 import MediaDetailView from "./component/MediaDetailView";
+import IssueBoard from "./component/DailyBoard";
 
 function App(){
     //5분 타이머
@@ -86,7 +87,7 @@ function App(){
     useEffect((e) => {
         console.log(location.pathname)
         console.log(timer)
-        if (timer === '00:00') {
+        if (timer === '00:00' && location.pathname !== '/') {
             navigate('/');
             axios.get('https://geolocation-db.com/json/')
             .then((res) => {
@@ -111,6 +112,7 @@ function App(){
                 <Route path='/' element={<IDLE/>}/>
                 <Route path='/select' element={<SignageShow/>} />
                 <Route path='/board' element={<Community/>} />
+                <Route path='/issueboard' element={<IssueBoard/>} />
                 <Route path='/dailyboard' element={<DailyBoard/>} />
                 <Route path='/paintlist' element={<PaintList/>} />
                 <Route path='/mediaDetailView' element={<MediaDetailView/>}/>

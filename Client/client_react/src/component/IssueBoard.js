@@ -13,11 +13,8 @@ function IssueBoard(){
     const local_ip = `${process.env.REACT_APP_IP}`;
     const backend_url = "http://localhost:8000";
 
-    const [imgAvailable, setImgAvailable] = useState("");
-    const showPaint = Painterro();
-    console.log(showPaint);
-    let showCreate = {};
-    showCreate = imgAvailable !== "" ? imgAvailable : {};
+    const painter_config = ['select', 'crop', 'pixelize', 'line', 'arrow', 'rect', 'ellipse', 'text', 'rotate', 'resize', 'setting', 'zoomin', 'zoomout', 'bucket', 'load', 'open'];
+    const black = '#000000'
 
     useEffect(() => {
         const Community_media_list = () => {
@@ -69,11 +66,12 @@ function IssueBoard(){
         <div className="container_media1" style={container_issueBoard}>
             <div className="painterro">
                 <div>
-                    {Object.keys(
-                        showPaint.show(showCreate)
-                    ).map((obj) => {
-                        return obj;
-                    })}
+                    {
+                        Painterro({
+                            activeColor : black,
+                            hiddenTools : painter_config
+                        }).show()
+                    }
                 </div>
             </div>
             {media && media.map((list, i) => (

@@ -2,19 +2,14 @@ import axios from "axios"
 import '../style/main.css';
 import '../style/noscript.css';
 import '../style/sigdesign.css';
-import styles from "../style/issue.module.css";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import Painterro from 'painterro'
 
 function IssueBoard(){
     const [media, setMedia] = useState(null);
     const [comment, setComment] = useState(null);
     const local_ip = `${process.env.REACT_APP_IP}`;
-    const backend_url = "http://localhost:8000";
-
-    const painter_config = ['select', 'crop', 'pixelize', 'line', 'arrow', 'rect', 'ellipse', 'text', 'rotate', 'resize', 'setting', 'zoomin', 'zoomout', 'bucket', 'load', 'open'];
-    const black = '#000000'
+    const backend_url = "http://" + local_ip + ":8000";
 
     useEffect(() => {
         const Community_media_list = () => {
@@ -43,7 +38,6 @@ function IssueBoard(){
     }, []);
 
     return(
-        <div className={styles.issue}>
         <html>
         <head>
             <title>Phantom by HTML5 UP</title>
@@ -64,23 +58,13 @@ function IssueBoard(){
         </div>
         {/* <div className="nav_blank" style={{marginRight : "80px"}}></div> */}
         <div className="container_media1" style={container_issueBoard}>
-            <div className="painterro">
-                <div>
-                    {
-                        Painterro({
-                            activeColor : black,
-                            hiddenTools : painter_config
-                        }).show()
-                    }
-                </div>
-            </div>
             {media && media.map((list, i) => (
                 <p key={i}>
                     <p style={{height:"20px"}}></p>
                     <span className="media_content_box" style={{position: 'relative'}}>
                 <img style={issueBoard_preview} src={backend_url + list.image}/>
-                    {/* <p style={{height:"20px"}}></p> */}
-                    <div>{ comment && comment[i].text}</div>
+                        {/* <p style={{height:"20px"}}></p> */}
+                        <div>{ comment && comment[i].text}</div>
                     <h3>{ comment && comment[i].email}</h3>
                     <h4>{ comment && comment[i].createDate}</h4>
                     <h4>{ comment && comment[i].lastEditDate}</h4>
@@ -90,7 +74,6 @@ function IssueBoard(){
         </div>
         </body>
         </html>
-        </div>
     );
 }
 const container_issueBoard = {
@@ -107,7 +90,6 @@ const issueBoard_preview = {
     objectFit: 'cover',
     width: '330px',
     height: '200px',
-    borderRadius: '10px'    
+    borderRadius: '10px'
 }
 export default IssueBoard;
-

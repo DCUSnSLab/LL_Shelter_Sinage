@@ -66,9 +66,8 @@ function Community() {
                     <p style={{textAlign: 'center'}}>
                         {/*<Link to = '/paintlist' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>*/}
                         {/* <strong>Drawing Guest Book</strong></Link>*/}
-                        <Link to = '/issueboard' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>
+                        <Link to = '/DrawingGuestBook' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>
                             <strong>Drawing Guest Book</strong></Link>
-
                     </p>
 
 

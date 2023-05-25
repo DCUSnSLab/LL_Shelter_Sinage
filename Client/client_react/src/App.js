@@ -14,6 +14,7 @@ import ContentDetailView from "./component/ContentDetailView";
 import SignageShow from "./component/SignageShow";
 import Community from "./component/Community";
 import IssueBoard from "./component/IssueBoard";
+import DrawingGuestBook from "./component/DrawingGuestBook";
 import DailyBoard from "./component/DailyBoard";
 import PaintList from "./component/PaintList";
 import MediaDetailView from "./component/MediaDetailView";
@@ -125,6 +126,7 @@ function App(){
                 <Route path='/select' element={<SignageShow/>} />
                 <Route path='/board' element={<Community/>} />
                 <Route path='/issueboard' element={<IssueBoard/>} />
+                <Route path='/DrawingGuestBook' element={<DrawingGuestBook/>} />
                 <Route path='/dailyboard' element={<DailyBoard/>} />
                 <Route path='/paintlist' element={<PaintList/>} />
                 <Route path='/contentDetailView' element={<ContentDetailView/>}/>

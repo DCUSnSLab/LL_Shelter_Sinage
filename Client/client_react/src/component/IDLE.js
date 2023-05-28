@@ -2,13 +2,13 @@ import Slider from "react-slick";
 import React, {useRef, useState, useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../style/IDLE_page_3.css';
-import Header from "./header";
-import {Link, Route, Routes} from "react-router-dom";
+import styles from '../style/IDLE.module.css';
+import {Link} from "react-router-dom";
+import moment from "moment";
 
-function IDLE_page_3() {
+function IDLE() {
     const host_ip = `${process.env.REACT_APP_IP}`;
-    const addr = "ws://localhost:5000";
+    const addr = "ws://"+ host_ip + ":5000";
     const [outputs, setOutputs] = useState([]);
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
@@ -50,28 +50,49 @@ function IDLE_page_3() {
                 })
             };
         };
-    })
+    }, []);
     const settings = {
-        slide: 'img',
+        slide: 'iframe',
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrow: false
     };
+
+    let timer = null;
+    const [time, setTime] = useState(moment());
+
+    useEffect(() => {
+        timer = setInterval(() => {
+            setTime(moment());
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+
     return (
         <div>
-            <Header/>
+            <header className={styles.page3_header}>
+                <div className={styles.page3_date}>
+                    {time.format('YYYY-MM-DD')}
+                </div>
+                {/* LT=4:50 , LTS=4:50:21 */}
+                <div className={styles.page3_time}>{time.format('LT')}</div>
+            </header>
             <Slider {...settings}>
-                {imgs.map(m =>
-                    <div className="image-box">
-                        <img src={`${process.env.PUBLIC_URL}` + m} className="image-thumbnail"/>
-                    </div>)}
+                    {imgs.map(m =>
+                        <div className={styles.slide_list} key={m}>
+                            <iframe src={`${process.env.PUBLIC_URL}` + m + '?autoplay=1&mute=1'}
+                                    key={m} allowFullScreen className={styles.iframe100}/>
+                        </div>
+                    )}
             </Slider>
-            <div className="social">
+            <div className={styles.social}>
                 <p>작품선택<br/>
                     <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
-                <p className="line">게시판<br/>
+                <p className={styles.line}>게시판<br/>
                     <button><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
             </div>
@@ -80,4 +101,4 @@ function IDLE_page_3() {
 }
 
 
-export default IDLE_page_3
+export default IDLE

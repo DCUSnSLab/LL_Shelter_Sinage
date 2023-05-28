@@ -14,7 +14,6 @@ import DrawingGuestBook from "./component/DrawingGuestBook";
 import DailyBoard from "./component/DailyBoard";
 import PaintList from "./component/PaintList";
 import MediaDetailView from "./component/MediaDetailView";
-import IssueBoard from "./component/IssueBoard";
 
 function App(){
     //5분 타이머

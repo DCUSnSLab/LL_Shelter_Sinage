@@ -7,8 +7,8 @@ import Painterro from 'painterro'
 function DrawingGuestBook(){
     const [media, setMedia] = useState(null);
     const [comment, setComment] = useState(null);
-    const local_ip = `${process.env.REACT_APP_IP}`;
-    const backend_url = "http://localhost:8000";
+    const host_ip = `${process.env.REACT_APP_IP}`;
+    const backend_url = "http://" + host_ip + ":8000";
 
     const painter_config = ['select', 'crop', 'pixelize', 'line', 'arrow', 'rect', 'ellipse', 'text', 'rotate', 'resize', 'setting', 'zoomin', 'zoomout', 'bucket', 'load', 'open'];
     const black = '#000000'

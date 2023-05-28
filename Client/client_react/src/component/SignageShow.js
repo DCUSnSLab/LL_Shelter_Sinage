@@ -8,7 +8,7 @@ function SignageShow({id,title,des}) {
     const [content, setContent] = useState(null);
     const host_ip = `${process.env.REACT_APP_IP}`;
     const port = "8000";
-    const backend_url = "http://localhost:" + port;
+    const backend_url = "http://" + host_ip + ":" + port;
     
     useEffect(() => {
         const imagelist = () => {

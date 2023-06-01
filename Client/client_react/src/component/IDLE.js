@@ -5,8 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from '../style/IDLE.module.css';
 import {Link} from "react-router-dom";
 import moment from "moment";
+import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
 
-function IDLE() {
+export default function IDLE() {
     const host_ip = `${process.env.REACT_APP_IP}`;
     const addr = "ws://"+ host_ip + ":5000";
     const [outputs, setOutputs] = useState([]);
@@ -14,6 +15,8 @@ function IDLE() {
     const [socketConnected, setSocketConnected] = useState(false);
 
     let ws = useRef(null);
+
+    const shelter_num = 7
 
     function addMessage(img) {
         setImg([...imgs, img]);
@@ -52,7 +55,7 @@ function IDLE() {
         };
     }, []);
     const settings = {
-        slide: 'iframe',
+        slide: 'div',
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -89,16 +92,26 @@ function IDLE() {
                     )}
             </Slider>
             <div className={styles.social}>
-                <p>작품선택<br/>
-                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                <p>작품보기<br/>
+                    <motion.button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} >
+                        <Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
+                    </motion.button>
                 </p>
-                <p className={styles.line}>게시판<br/>
-                    <button><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                <p className={styles.line}>낙서장<br/>
+                    <motion.button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} >
+                        <Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
+                    </motion.button>
+                </p>
+                <p className={styles.QR}>
+                    {/*<motion.div onClick={() => setSelectedId(item.id)}>*/}
+                    {/*    <motion.h2>{item.title}</motion.h2>*/}
+                    {/*</motion.div>*/}
+                    <AnimatePresence>
+                        <motion.img whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.1 }} key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
+                    </AnimatePresence>
                 </p>
             </div>
         </div>
     );
 }
 
-
-export default IDLE

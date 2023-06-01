@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
 
 function Community() {
     const host_ip = `${process.env.REACT_APP_IP}`;
@@ -75,7 +76,6 @@ function Community() {
             {/*    <div><h3 style={{paddingLeft: '40px'}}>QR코드를 찍어 커뮤니티 댓글작성!</h3></div>*/}
                 {/*<img src="/media/{{communityQR}}">*/}
             {/*</div>*/}
-
 
         </div>
         </body>

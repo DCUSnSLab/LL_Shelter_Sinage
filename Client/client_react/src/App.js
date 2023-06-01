@@ -9,10 +9,11 @@ import axios from "axios";
 
 import SignageShow from "./component/SignageShow";
 import Community from "./component/Community";
+import IssueBoard from "./component/IssueBoard";
+import DrawingGuestBook from "./component/DrawingGuestBook";
 import DailyBoard from "./component/DailyBoard";
 import PaintList from "./component/PaintList";
 import MediaDetailView from "./component/MediaDetailView";
-import IssueBoard from "./component/DailyBoard";
 
 function App(){
     //5분 타이머
@@ -21,7 +22,7 @@ function App(){
     const [timer, setTimer] = useState();
     const [ ip , setIp ] = useState();
 
-    const idle_time = 15;
+    const idle_time = 1000000;
 
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date());
@@ -108,11 +109,13 @@ function App(){
                 {/*    <br/>*/}
                 {/*    {text}*/}
                 {/*</div>*/}
+
             <Routes>
                 <Route path='/' element={<IDLE/>}/>
                 <Route path='/select' element={<SignageShow/>} />
                 <Route path='/board' element={<Community/>} />
                 <Route path='/issueboard' element={<IssueBoard/>} />
+                <Route path='/DrawingGuestBook' element={<DrawingGuestBook/>} />
                 <Route path='/dailyboard' element={<DailyBoard/>} />
                 <Route path='/paintlist' element={<PaintList/>} />
                 <Route path='/mediaDetailView' element={<MediaDetailView/>}/>

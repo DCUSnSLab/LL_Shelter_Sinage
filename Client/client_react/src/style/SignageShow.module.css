@@ -52,19 +52,6 @@ p{
   margin: 20px 0;
 }
 
-.social{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: grid;
-    width: 100%;
-    font-family: 'yg-jalnan';
-    background-color: black;
-    color: white;
-    font-size: 1.8em;
-    /*text-align: center;*/
-    grid-template-columns: repeat(3, 1fr);
-}
 
 
 

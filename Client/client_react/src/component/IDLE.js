@@ -8,7 +8,7 @@ import moment from "moment";
 
 function IDLE() {
     const host_ip = `${process.env.REACT_APP_IP}`;
-    const addr = "ws://"+ host_ip + ":5000";
+    const addr = "ws://localhost:5000";
     const [outputs, setOutputs] = useState([]);
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);

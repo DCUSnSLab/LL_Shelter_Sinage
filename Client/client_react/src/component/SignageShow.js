@@ -1,171 +1,61 @@
-import axios from "axios"
+//import axios from "axios"
+import '../style/SignageShow.module.css';
 import React, {useEffect, useState, useRef} from "react";
-import {Link} from "react-router-dom";
+//import {Link, Route, Routes} from "react-router-dom";
+//import ContentDetailView from "./ContentDetailView";
+//import styled from "styled-components";
 import Modal from './Modal';
+import StoreImgList from "./StoreImgList";
+import Gallery from "./Carousel";
+import * as url from "url";
+import styles from "../style/IDLE.module.css";
+import {Link} from "react-router-dom";
 
-function SignageShow({id,title,des}) {
-    const [images, setImages] = useState(null);
-    const [content, setContent] = useState(null);
-    const host_ip = `${process.env.REACT_APP_IP}`;
-    const port = "8000";
-    const backend_url = "http://" + host_ip + ":" + port;
-    
-    useEffect(() => {
-        const imagelist = () => {
-            axios
-                .get(backend_url + "/Service/signage/")
-                .then(res => {
-                    setImages(res.data)
-                    console.log(res.data)
-                })
-                .catch((err) => console.log(err));
-        }
-        imagelist();
-        }, []);        
-    
-    let ws = useRef(null);
-    const addr = "ws://localhost:8765";
-    const [inputs, setInputs] = useState('ws://localhost:8765');
-    const [outputs, setOutputs] = useState([]);
-    const [socketConnected, setSocketConnected] = useState(false);
+function Title(){
+  return<header>
+    <h1>Contents Gallery</h1>
+  </header>
+}
 
-
-    const recivedData = (id) => {
-	openModal(id)
-        let data = {images};
-        ws.current.send(JSON.stringify(data.images[0]));
-        console.log(data.images[0]);
-        console.log("클릭?\n" + "id : " + data.images[0].id + "\nfile : " + data.images[0].upload_file);
-    }
-    const connectServer = () => {
-        setOutputs('connecting server...');
-        if(!ws.current){
-        ws.current = new WebSocket(addr);
-        ws.current.onopen = () => {
-            console.log("connected to " + addr);
-            setOutputs("connected to " + addr)
-            setSocketConnected(true);
-        };
-        ws.current.onclose = (error) => {
-            console.log("disconnect from " + addr);
-            setOutputs("disconnect from " + addr);
-            console.log(error);
-        };
-        ws.current.onerror = (error) => {
-            console.log("connection error " + addr);
-            setOutputs("connection error " + addr)
-            console.log(error);
-        };
-        };
-    };
-
-    useEffect(() => {connectServer()})
-
-    useEffect(() => {
-        const Content_detail_list = () => {
-            axios
-                .get(backend_url + "/Service/Content/")
-                .then(res => {
-                    setContent(res.data)
-                    // console.log(res.data)
-                })
-                .catch((err) => console.log(err));
-        }
-        Content_detail_list();
-         }, []);
-
-    const [modals, setModals] = useState([]);
-
-    const openModal = (id) => {
-	console.log("openModal");
-	const newModalId = Date.now().toString();
-	console.log("newModalId created.");
-	console.log(newModalId);
-	setModals([...modals, id]);
-    };
-
-    const closeModal = (modalId) => {
-	console.log("closeModal");
-	console.log(modalId);
-        setModals(modals.filter((id) => id !== modalId));
-    };
-
+function SignageShow() {
     return (
-        <html>
+        <div>
         <head>
-            <title>Phantom by HTML5 UP</title>
             <meta charSet="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
         </head>
-        <body>
+        <header>
+            <Title></Title>
+        </header>
+        <div className='body'>
+        <div>
+            <h3>인기순</h3>
+            <Gallery>
+            </Gallery>
+        </div>
         <div id="wrap" style={{height : '100000px'}}>
-            <header id="headerArea">
-            <div className="w3-top">
-                <div className="w3-bar w3-black w3-card">
-                    <Link to='/board' className="w3-bar-item w3-button w3-padding-large" style={{color : 'white', textDecoration: 'none'}}>COMMUNITY</Link>
-                </div>
-            </div>
-            </header>
 
-            <div class="section" style={top}>
+            <div class="section">
                 <div className="nav_blank"></div>
-                <h3>이미지 콘텐츠</h3>
-                <div style={grayLine}></div>
-                <div style={container_media}>
-                    {images && images.map((list, i) => list.thumbnailPath ? null : (
-                        <p key={i}>
-                                <span className="media_content_box" style={{position: 'relative'}}>
-                                    <img style={media_preview} src={backend_url + list.upload_file}/>
-                                    <div class="imText2" style={{left : "\
-                                    ", bottom : "-70px"}}>{ content && content[i].title}</div>
-                                    <Link to='/contentDetailView' style={{color : 'white', textDecoration: 'none'}}>
-                                    </Link>
-                                </span>
-                        </p>
-                    ))}
-                </div>
-
-                <div className="nav_blank2"></div>
-                    <div className="nav_blank"></div>
-                    <h3 style={{marginLeft: '30px'}}>동영상 콘텐츠</h3>
-                    <div style={grayLine}></div>
-                    <div style={container_media}>
-                        {images && images.map((list, i) => list.thumbnailPath ? (
-                            <p key={i}>
-                                <span className="media_content_box" style={{position: 'relative'}}>
-                                    <img className="media_preview" onClick={() => recivedData(list.id)}
-                                         style={media_preview}
-                                         src={backend_url + '/media/' + list.thumbnailPath}/>
-					{ modals.map((modalId) => (
-					    <Modal modalId={list.id} open={modals.includes(list.id)} close={closeModal} videourl={list.upload_file.substring(6, list.upload_file.length)} header={content && content[i].title}>
-					    </Modal>
-					)) }
-                                    <div className="imText2"
-                                         style={{left: "40px", bottom: "-70px"}}>{content && content[i].title}</div>
-                                    <Link to='/mediaDetailView' style={{color : 'white', textDecoration: 'none'}}>
-                                        </Link>
-                                </span>
-                            </p>
-                        ) : null )}
-                    </div>
-                <div className="nav_blank2"></div>
-                <div class="gray-line"></div>
-                <div class="container_media" style={{position: 'relative'}}>
-                    <div></div>
-                    {/*<div>*/}
-                    {/*    <div style={{textAlign: 'center'}}>*/}
-                    {/*        <div><h3 style={{paddingLeft: '40px'}}>QR코드를 찍어 콘텐츠 업로드!</h3></div>*/}
-                    {/*        <img src = "/media/{{contentQR}}"/>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    <div></div>
-                </div>
+                <h3>최신순</h3>
+                <StoreImgList>
+                </StoreImgList>
             </div>
         </div>
+            <div className={styles.social}>
+                <p>뒤로가기<br/>
+                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                </p>
+                <p className={styles.line}>뒤로가기<br/>
+                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                </p>
+                <p className={styles.line}>게시판<br/>
+                    <button><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                </p>
+            </div>
         <script type="text/javascript"></script>
-        </body>
-        </html>
+        </div>
+        </div>
     )
 }
 
@@ -179,45 +69,28 @@ const btn= {
     borderRadius: '4px'
 }
 
-const grayLine = {
-    width: '400rem',
-    height: '0.1rem',
-    backgroundColor: '#D4D4D4',
-    margin: '1rem 0px 3rem 0px'
-}
+// const top = {
+//     marginTop: '60px',
+// }
 
-const top = {
-    marginTop: '60px',
-}
+// const container_media = {
+//     dots: false,
+//         infinite: true,
+//         speed: 500,
+//         slidesToShow: 3,
+//         slidesToScroll: 1,
+// };
 
-const container_media = {
-    display: 'grid',
-    gridTemplateColumns: '340px 340px 340px',
-    gridTemplateRows: '200px 200px 200px',
-    columnGap: '10px',
-    rowGap: '30px',
-    justifyContent: 'center',
-    marginLeft: '-20px',
-    height: '1200px'
-}
+// const container_media1 = {
+//     columnGap: '10px',
+//     rowGap : '30px',
+//     justifyContent: 'center',
+//     marginRight: '20px'
+// }
+//
+// const img = {
+//     filter: 'brightness(1)'
+// }
 
-const container_media1 = {
-    columnGap: '10px',
-    rowGap : '30px',
-    justifyContent: 'center',
-    marginRight: '20px'
-}
-
-const img = {
-    filter: 'brightness(1)'
-}
-
-const media_preview = {
-    overflow: 'hidden',
-    objectFit: 'cover',
-    width: '330px',
-    height: '200px',
-    borderRadius: '10px'
-}
 
 export default SignageShow;

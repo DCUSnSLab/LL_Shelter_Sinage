@@ -1,103 +1,145 @@
+import React, {useEffect, useRef, useState} from "react";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import styles from "../style/IDLE.module.css";
+//import '../style/ContentDetailView.css'
 
-
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-
+function Title() {
+  return (
+    <header>
+      <h1>Contents Gallery</h1>
+    </header>
+  );
+}
 
 function ContentDetailView() {
-    // const {id} = useParams();
-    // // let showContent = images.find(function ())
-    // const [images, setImages] = useState(null);
-    // const backend_url = "http://203.250.33.53:8000"
-    //
-    //
-    // useEffect(() => {
-    //     const imagelist = () => {
-    //         axios
-    //             .get(backend_url + "/Service/signage/")
-    //             .then(res => {
-    //                 setImages(res.data)
-    //                 console.log(res.data)
-    //             })
-    //             .catch((err) => console.log(err));
-    //     }
-    //     imagelist();
-    // }, []);
+  const { id } = useParams();
+  const [image, setImage] = useState(null);
+  const [data, setData] = useState(null);
+  const [Content, setContent] = useState(null);
+  const backend_url = "http://localhost:8000";
 
-    return(
-        <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css"/>
-        </head>
+  // useEffect(() => {
+  //   const fetchImage = () => {
+  //     axios
+  //       .get(backend_url + "/Service/contentDetailView/" + id)
+  //       .then((res) => {
+  //         setImage(res.data.upload_file);
+  //         setData(res.data);
+  //         console.log(res.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   };
+  //   fetchImage();
+  // }, []);
 
-        <body>
-        <div className="w3-top">
-            <div className="w3-bar w3-black w3-card">
-                <Link to='/select' className="w3-bar-item w3-button w3-padding-large" style={{color : 'white', textDecoration: 'none'}}>BACK</Link>
+  let ws = useRef(null);
+  const addr = "ws://localhost:8765";
+  const [inputs, setInputs] = useState('ws://localhost:8765');
+  const [outputs, setOutputs] = useState([]);
+  const [socketConnected, setSocketConnected] = useState('ws://localhost:8765');
+
+  const connectServer = () => {
+      setOutputs('connecting server...');
+      if(!ws.current){
+          ws.current = new WebSocket(addr);
+          ws.current.onopen = () => {
+              console.log("connect to " + addr);
+              setOutputs("connect to " + addr)
+              setSocketConnected(true);
+          };
+          ws.current.onclose = (error) => {
+              console.log("disconnect from " + addr);
+              setOutputs("disconnect from " + addr);
+              console.log(error);
+          };
+          ws.current.onerror = (error) => {
+          console.log("connection error " + addr);
+          setOutputs("connection error " + addr)
+          console.log(error);
+      };
+  };
+  }
+useEffect(() => {
+    connectServer()
+  })
+
+  useEffect(() => {
+    const Content_detail_list = () => {
+      axios
+          .get(backend_url + "/Service/contentDetailView/" + id)
+          .then(res => {
+            setContent(res.data)
+            // console.log(res.data)
+          })
+          .catch((err) => console.log(err));
+    }
+    Content_detail_list();
+  }, []);
+
+  const [modals, setModals] = useState([]);
+
+  const openModal = (id) => {
+    console.log("openModal");
+    const newModalId = Date.now().toString();
+    console.log("newModalId created.");
+    console.log(newModalId);
+    setModals([...modals, id]);
+  };
+
+  const closeModal = (modalId) => {
+    console.log("closeModal");
+    console.log(modalId);
+    setModals(modals.filter((id) => id !== modalId));
+  };
+  return (
+    <div className='html'>
+      <header>
+        <div className="Title">
+          <Title></Title>
+        </div>
+      </header>
+      <section>
+        <div className="DetailView">
+            <img src={image} style={{ width: 250, height: 350 }} alt= " " />
+            <div className="Arti">
+              <div>
+                  <p>작자명</p>
+                  {data && <p>{data.author}</p>}
+              </div>
+              <div>
+                  <p>이메일 입력</p>
+                  {data && <p>{data.email}</p>}
+              </div>
+              <div>
+                  <p>전화번호</p>
+                  {data && <p>{data.phonenum}</p>}
+              </div>
+              <div className="gray-line"/>
+              <div>
+                  <p>콘텐츠 이름</p>
+                  {data && <p>{data.title}</p>}
+              </div>
+              <div>
+                  <p>콘텐츠 설명</p>
+                  {data && <p>{data.description}</p>}
+              </div>
+            </div>
+            <div className={styles.social}>
+                <p>뒤로가기<br/>
+                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                </p>
+                <p className={styles.line}>뒤로가기<br/>
+                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                </p>
+                <p className={styles.line}>게시판<br/>
+                    <button><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                </p>
             </div>
         </div>
-
-
-
-
-        <article class="no-pd" id="content"> </article>
-        <div class="headerBlock"></div>
-        <section id="section1" style={{marginTop: '69px'}}>
-            <div class="container">
-                <p></p>
-
-                <div id="div1">
-
-                </div>
-
-            </div>
-        </section>
-        <div class="section" id="section2">
-            <div class="container">
-                <div class="row">
-                    <div class="img_box">
-                        <div class="title_box" style={{marginBottom : '3rem'}}>
-                            {/*<h2 style="margin-left : 5px;  font-size: 50px; font-family: 'MinSans-Medium';"><strong>{{content_info.title}}</strong></h2>*/}
-
-                            {/*<span><h2 class="Recommand">조회수 {{contents_info.hits}} 회</h2></span>*/}
-                            {/*<span><h2 class="Recommand">추천수 {{contents_info.likes}} 회</h2></span>*/}
-
-                            {/*<div id="btn_group">*/}
-                            {/*    <span>*/}
-                            {/*        <button id="test_btn1">*/}
-                            {/*            <a id = "likelink" href="{% url 'ContentLike' content_info.id %}">좋아요</a>*/}
-                            {/*            </button>*/}
-                            {/*    </span>*/}
-                            {/*</div>*/}
-                        </div>
-
-                        {/*<div class="img">*/}
-                            {/*/!*{% for customUser in user_img %}*!/*/}
-                            {/*<img class="profile_user_img" src = "/media/{{customUser.user_profile}}" alt ="No Content"/>*/}
-                            {/*    /!*{% endfor %}*!/*/}
-
-
-                                <div class="gray-line"></div>
-
-
-                                <div class="detail_contents" style={{marginLeft : '-100px', marginRight : '1000px'}}>
-                                    <h4 style={{width : '200px', fontSize : '35px', fontFamily : 'MinSans-Medium'}}>작품소개</h4>
-                                    {/*<p style="margin-left: 10px; margin-right: 10px; font-size: 25px;">{{description_info.description}}</p>*/}
-                                {/*</div>*/}
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="section" id="section3"  >
-            <h3><strong>댓글 영역 : 댓글기능은 추후 지원될 예정입니다.</strong></h3>
-        </div>
-
-</body>
-</html>
-    )
+      </section>
+    </div>
+  );
 }
+
 export default ContentDetailView;

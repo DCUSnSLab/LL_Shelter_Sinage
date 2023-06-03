@@ -1,0 +1,16 @@
+.DetailView{
+    text-align: left;
+}
+
+
+p{
+    color: white;
+    font-size: 5rem;
+}
+
+.gray-line{
+    width: 100%;
+    height: 1rem;
+    background-color: gray;
+    margin: 0
+}

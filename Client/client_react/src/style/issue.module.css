@@ -1,0 +1,18 @@
+
+container_issueBoard {
+    display: grid;
+    gridTemplateColumns: 340px 340px 340px;
+    gridTemplateRows: 400px 400px 400px;
+    columnGap: 10px;
+    rowGap: 30px;
+    justifyContent: center;
+    height: 2000px;
+}
+
+issueBoard_preview {
+    overflow: hidden;
+    objectFit: cover;
+    width: 330px;
+    height: 200px;
+    borderRadius: '10px';
+}

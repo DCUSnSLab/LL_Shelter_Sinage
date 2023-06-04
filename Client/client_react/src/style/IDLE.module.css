@@ -4,64 +4,69 @@
 /*time, date*/
 .page3_header{
     display: inline-block;
-    padding-top: 2em;
+    padding-top: 15rem;
+    padding-bottom: 5rem;
     background-color: black;
     color: white;
-    height: 13rem;
+    height: 35rem;
     width: 100%;
+    border: none;
 }
 
 .page3_date{
-    font-size: 2.5rem;
+    font-size: 7.5rem;
 }
 
 .page3_time{
     margin-bottom: 2rem;
     font-weight: bold;
-    font-size: 4.3rem;
+    font-size: 12rem;
 }
 
 /*contents*/
 
+
 .slide_list {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    object-fit: scale-down;
-    -webkit-overflow-scrolling: touch;
+    text-align:center;
+    width: 2040px;
+    height: 1919px;
     background-color: black;
 }
 
-.iframe100 {
-    position: relative;
+.slide_list > img {
+    /*note 중앙정렬 */
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
     width: 100%;
-    height: 100%;
+    position: absolute;
     display: inline-block;
+    /*note 부모 div의 height에 맞지않으면 자름 */
+    height: auto !important;
+}
+
+
+.slide_list > video {
+    display: grid;
+    place-items: center;
+    height: 80%;
+    width: 100%;
     pointer-events: none;
-    border: none;
-    overflow: hidden;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
-.iframe100 > video img{
-    padding-top: 56.25%;
-}
-
-/*social footer*/
 /*하단에 버튼 옆옆 라인*/
 .line {
     border-left: 2px solid darkgrey;
     border-right: 2px solid darkgrey;
 }
 
-.social > p{
-    top: 50%;
-    bottom: 60%;
-    padding: 13%;
-}
-
 /*맨 맽에 버튼을 포괄적으로 감싸고있는*/
 .social{
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     display: grid;
@@ -69,18 +74,19 @@
     font-family: 'yg-jalnan';
     background-color: black;
     color: white;
-    font-size: 4.1rem;
+    font-size: 9rem;
     /*text-align: center;*/
-    height: 27%;
+    height: 30%;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
 /*hotpink button*/
-.social button{
+.social > tr > p > button{
+    margin-top: 10%;
     background-color: deeppink;
-    width: 12rem;
-    height: 5rem;
-    font-size: 4rem;
+    width: 25rem;
+    height: 10rem;
+    font-size: 7rem;
     font-weight: bold;
     border-top-left-radius: 0.25em;
     border-top-right-radius: 0.25em;
@@ -88,19 +94,14 @@
     border-bottom-right-radius: 0.25em;
 }
 
-.button_div {
-    display: grid;
-    grid-template-rows: 1fr 0.2rem 1fr;
+.social > tr{
+    margin-top: 15%;
 }
-
-
-
-
 
 .QR > img
 {
-    width: 80%;
-    height: 80%;
+    width: 60%;
+    height: 60%;
 }
 
 .font {

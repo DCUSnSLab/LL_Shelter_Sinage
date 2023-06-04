@@ -151,6 +151,7 @@ export default function IDLE() {
                         </AnimatePresence>
                     </p>
                 </tr>
+                
             </div>
         </div>
     );

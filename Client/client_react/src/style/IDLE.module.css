@@ -24,8 +24,6 @@
 }
 
 /*contents*/
-
-
 .slide_list {
     text-align:center;
     width: 2040px;
@@ -34,15 +32,14 @@
 }
 
 .slide_list > img {
-    /*note 중앙정렬 */
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    width: 100%;
     position: absolute;
     display: inline-block;
-    /*note 부모 div의 height에 맞지않으면 자름 */
-    height: auto !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 

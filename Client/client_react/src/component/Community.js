@@ -1,8 +1,6 @@
 import axios from "axios"
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
-
 function Community() {
     const host_ip = `${process.env.REACT_APP_IP}`;
     const port = "8000";

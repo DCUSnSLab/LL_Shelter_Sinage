@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from '../style/IDLE.module.css';
 import {Link} from "react-router-dom";
 import moment from "moment";
-import { motion, AnimatePresence } from 'framer-motion';
 
 
 // const Component = (props) => {
@@ -175,23 +174,21 @@ export default function IDLE() {
             <div className={styles.social}>
                 <tr>
                     <p>작품보기<br/>
-                        <motion.button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} >
+                        <button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} >
                             <Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
-                        </motion.button>
+                        </button>
                     </p>
                 </tr>
                 <tr>
                     <p className={styles.line}>낙서장<br/>
-                        <motion.button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} >
+                        <button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} >
                             <Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
-                        </motion.button>
+                        </button>
                     </p>
                 </tr>
                 <tr>
                     <p className={styles.QR}>
-                        <AnimatePresence>
-                            <motion.img whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.1 }} key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
-                        </AnimatePresence>
+                        <img whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.1 }} key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
                     </p>
                 </tr>
                 

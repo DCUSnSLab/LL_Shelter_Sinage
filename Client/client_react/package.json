@@ -7,7 +7,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.4",
-    "framer-motion": "8.1.0",
     "import-modules": "^3.1.0",
     "moment": "^2.29.4",
     "painterro": "1.2.78",

@@ -17,6 +17,7 @@ async def accept(websocket, path):
             recvdata = json.loads(data)
             recvMsg = int(recvdata['message'])
             print("after")
+            print("Msg :", recvMsg)
 
             #if you receive '0' data from client once, add client socket into Advertiser client list
             if recvMsg == 0: #advertise mode ready to client

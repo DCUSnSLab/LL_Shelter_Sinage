@@ -106,7 +106,7 @@ export default function IDLE() {
             setImg([...imgs, img]);
         }
     }
-
+    
     useEffect(() => {
         if(!ws.current) {
             ws.current = new WebSocket(addr);

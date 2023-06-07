@@ -86,8 +86,8 @@ function App(){
     const location = useLocation();
 
     useEffect((e) => {
-        console.log(location.pathname)
-        console.log(timer)
+        // console.log(location.pathname)
+        // console.log(timer)
         if (timer === '00:00' && location.pathname !== '/') {
             navigate('/');
             axios.get('https://geolocation-db.com/json/')

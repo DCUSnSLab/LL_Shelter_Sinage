@@ -13,7 +13,7 @@ export default function IDLE() {
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
     let ws = useRef(null);
-    const shelter_num = 7
+    const shelter_num = `${process.env.SHELTER_NUM}`;
 
     let timer = null;
     const [time, setTime] = useState(moment());

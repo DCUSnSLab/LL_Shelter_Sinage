@@ -6,6 +6,22 @@ import styles from '../style/IDLE.module.css';
 import {Link} from "react-router-dom";
 import moment from "moment";
 
+// 아래 주석 코드 블록은 무슨 목적이지?
+// const Component = (props) => {
+//     const {receiveAmount} = props
+//     const prevAmount = usePrevious({receiveAmount});
+//     useEffect(() => {
+//         if(prevAmount.receiveAmount !== receiveAmount) {
+//             console.log("change");
+//             return true
+//         }
+//         else if(prevAmount.receiveAmount === receiveAmount){
+//             console.log("nothing change");
+//             return false
+//         }
+//     }, [receiveAmount])
+// }
+
 export default function IDLE() {
     const host_ip = `${process.env.REACT_APP_IP}`;
     const addr = "ws://"+ host_ip + ":5000";
@@ -13,6 +29,7 @@ export default function IDLE() {
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
     let ws = useRef(null);
+
     const shelter_num = `${process.env.REACT_APP_SHELTER_NUM}`;
 
     let timer = null;
@@ -32,6 +49,8 @@ export default function IDLE() {
         return parts[parts.length - 1];
     }
 
+
+    // note 데이터 이미지 type 판별
     function isImage(filename) {
         let extI = getExtension(filename);
         switch (extI.toLowerCase()) {
@@ -44,6 +63,7 @@ export default function IDLE() {
         return false;
     }
 
+    // note 데이터 동영상 type 판별
     function isVideo(filename) {
         let extV = getExtension(filename);
         console.log(extV.toLowerCase())
@@ -55,6 +75,36 @@ export default function IDLE() {
                 return true;
         }
         return false;
+    }
+
+// note 예전값과 현재값 비교
+    const ref = useRef([]);
+    function usePrevious(value) {
+        useEffect(() => {
+            ref.current = value; //assign the value of ref to the argument
+        },[value]); //this code will run when the value of 'value' changes
+        return ref.current; //in the end, return the current ref value.
+    }
+    const Component = (props) => {
+        const {receiveAmount} = props
+        const prevAmount = usePrevious({receiveAmount});
+        if(prevAmount.receiveAmount !== receiveAmount) {
+            console.log("change");
+            return true
+        }
+        else if(prevAmount.receiveAmount === receiveAmount){
+            console.log("nothing change");
+            return false
+        }
+    }
+
+    function addMessage(img) {
+        if (<Component/> === true ){
+            setImg([...imgs, img]);
+        }
+        else{
+            setImg([...imgs, img]);
+        }
     }
 
     useEffect(() => {
@@ -82,10 +132,10 @@ export default function IDLE() {
             };
             ws.current.onmessage = (evt) => {
                 // server에서 보낸 데이터
-                const data = JSON.parse(evt.data)
+                const data = JSON.parse(evt.data);
                 data.map((data) => {
-                    addMessage(data);
                     console.log(data);
+                    addMessage(data);
                 })
             };
         };
@@ -117,15 +167,15 @@ export default function IDLE() {
 
 
             <Slider {...settings}>
-                    {imgs.map(m =>
-                        <div className={styles.slide_list} key={m}>
-                            {
-                                isImage(m) === true ?
+                {imgs.map(m =>
+                    <div className={styles.slide_list} key={m}>
+                        {
+                            isImage(m) === true ?
                                 <img src={`${process.env.PUBLIC_URL}` + m} key={m} />
                                 : <video muted autoPlay src={`${process.env.PUBLIC_URL}` + m} key={m} />
-                            }
-                        </div>
-                    )}
+                        }
+                    </div>
+                )}
             </Slider>
 
             <div className={styles.social}>

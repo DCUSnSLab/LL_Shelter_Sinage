@@ -68,7 +68,6 @@ function App(){
     }
     useEffect(() => {
         clearTimer(getDeadTime());
-
     }, []);
     // 타이머 리셋
     const TimerReset = () => {

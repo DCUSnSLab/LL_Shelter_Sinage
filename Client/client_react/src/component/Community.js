@@ -72,7 +72,6 @@ function Community() {
                 {/*<img src="/media/{{communityQR}}">*/}
             {/*</div>*/}
 
-
         </div>
         </body>
         </html>

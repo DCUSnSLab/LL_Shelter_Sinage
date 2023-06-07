@@ -22,7 +22,7 @@ function App(){
     const [timer, setTimer] = useState();
     const [ ip , setIp ] = useState();
 
-    const idle_time = 10000;
+    const idle_time = 1000000;
 
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date());
@@ -109,6 +109,7 @@ function App(){
                 {/*    <br/>*/}
                 {/*    {text}*/}
                 {/*</div>*/}
+
             <Routes>
                 <Route path='/' element={<IDLE/>}/>
                 <Route path='/select' element={<SignageShow/>} />

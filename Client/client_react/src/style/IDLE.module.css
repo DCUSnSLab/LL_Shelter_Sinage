@@ -26,14 +26,14 @@
 /*contents*/
 
 
-.slide_list {
+.slick-track{
     text-align:center;
     width: 2040px;
     height: 1919px;
     background-color: black;
 }
 
-.slide_list > img {
+.slick-slide{
     /*note 중앙정렬 */
     top: 50%;
     left: 50%;
@@ -45,8 +45,7 @@
     object-fit: cover;
 }
 
-
-.slide_list > video {
+.slick-slide{
     display: grid;
     place-items: center;
     height: 80%;

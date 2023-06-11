@@ -13,7 +13,7 @@ export default function IDLE() {
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
     let ws = useRef(null);
-    const shelter_num = 7
+    const shelter_num = 1
     let timer = null;
     const [time, setTime] = useState(moment());
 
@@ -94,19 +94,36 @@ export default function IDLE() {
 
     const settings = {
         infinite: true,
+        initialSlide: 0,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplaySpeed: 0, // Set to 0 to disable default autoplay behavior
-        speed: 1000, // Adjust the transition speed as per your preference
+        focusOnSelect: true,
+        pauseOnFocus: true,
+        beforeChange: (current, next) =>
+            slideaction(next, "after"),
     };
+
+    function slideaction(index, str) {
+        console.log(str);
+        console.log(index);
+        console.log(sliderRef.current);
+
+        if (sliderRef.current.props.children[index].type == 'img') {
+            console.log("image");
+            setTimeout(function() {
+                sliderRef.current.slickNext();
+            }, 5000);
+        }
+    }
+
     const sliderRef = useRef(null);
+    const sliders = useRef([]);
 
-    let inter;
-    const __image = setInterval(() => {
-            inter = sliderRef.current.slickNext();
-        }, 10000); // 10000 milliseconds = 10 seconds
-
-    const handleVideoEnd = () => {
+    function handleVideoEnd(index) {
+        console.log(index);
+        console.log("handleVideoEnd");
+        console.log(sliders[index]);
+        // sliders[index].current.scrollTop = 0;
         // Go to the next slide when the video ends
         sliderRef.current.slickNext();
     };
@@ -122,11 +139,12 @@ export default function IDLE() {
             </header>
             <Slider {...settings} ref={sliderRef} id="list">
                 {imgs.map((image, index) =>
-                    __image && isImage(image) === true && (
+                    // __image &&
+                    isImage(image) === true && (
                         <img id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
                     ) ||
                     isVideo(image) === true && (
-                        <video id="video_list" onEnded={handleVideoEnd} muted autoPlay src={`${process.env.PUBLIC_URL}` + image}/>
+                        <video id="video_list" onEnded={() => handleVideoEnd(index)} autoPlay muted src={`${process.env.PUBLIC_URL}` + image}/>
                     )
                 )}
             </Slider>

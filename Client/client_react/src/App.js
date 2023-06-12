@@ -14,6 +14,7 @@ import DrawingGuestBook from "./component/DrawingGuestBook";
 import DailyBoard from "./component/DailyBoard";
 import PaintList from "./component/PaintList";
 import MediaDetailView from "./component/MediaDetailView";
+import ContentDetailView from "./component/ContentDetailView";
 
 function App(){
     //5분 타이머
@@ -118,6 +119,7 @@ function App(){
                 <Route path='/dailyboard' element={<DailyBoard/>} />
                 <Route path='/paintlist' element={<PaintList/>} />
                 <Route path='/mediaDetailView' element={<MediaDetailView/>}/>
+                <Route path='/ContentDetailView/:id' element={<ContentDetailView/>}/>
             </Routes>
             </div>
         </div>

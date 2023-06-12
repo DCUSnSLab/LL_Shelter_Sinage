@@ -44,10 +44,10 @@ function SignageShow() {
         </div>
             <div className={styles.social}>
                 <p>뒤로가기<br/>
-                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                    <button><Link to='/' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
                 </p>
-                <p className={styles.line}>뒤로가기<br/>
-                    <button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>
+                <p className={styles.line}><br/>
+                    {/*<button><Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>*/}
                 </p>
                 <p className={styles.line}>게시판<br/>
                     <button><Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link></button>

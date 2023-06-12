@@ -116,7 +116,7 @@ function Gallery({id,title,des}) {
 
 
           <div key={i} onClick={() => window.location.replace('/ContentDetailView/' + `${list.id}`)}>
-                <img src={backend_url + list.upload_file} style={{ width: '100%', height: 'auto', maxWidth: '1000px' }} alt=""/>
+                <img src={backend_url + list.upload_file} style={{ width: '100%', height: 'auto', maxWidth: '1200px', maxHeight: '1500px' }} alt=""/>
             </div>
 
         ))}

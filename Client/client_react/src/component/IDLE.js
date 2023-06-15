@@ -16,7 +16,7 @@ export default function IDLE() {
     const shelter_num = 1
     let timer = null;
     const [time, setTime] = useState(moment());
-
+    let i = 0;
 
     useEffect(() => {
         if(!ws.current) {
@@ -53,7 +53,16 @@ export default function IDLE() {
         }
     }, []);
 
-    let i = 0;
+    // imgs에 값이 초기화되면 1.5초 후 Slider를 시작하는 useEffect
+    useEffect(() => {
+        if (imgs.length !== 0) {
+            setTimeout(function() {
+                console.log("play");
+                itemsRef.current[0].play();
+            }, 1500);
+        }
+    }, [imgs]);
+
     useEffect(() => {
         timer = setInterval(() => {
             setTime(moment());
@@ -93,39 +102,53 @@ export default function IDLE() {
     }
 
     const settings = {
-        infinite: true,
+        infinite: false,
         initialSlide: 0,
         slidesToShow: 1,
         slidesToScroll: 1,
-        focusOnSelect: true,
-        pauseOnFocus: true,
-        beforeChange: (current, next) =>
-            slideaction(next, "after"),
+        focusOnSelect: false,
+        fade: true,
+        swipe: false,
+        afterChange: index =>
+            afterchange(index),
     };
 
-    function slideaction(index, str) {
-        console.log(str);
-        console.log(index);
-        console.log(sliderRef.current);
 
-        if (sliderRef.current.props.children[index].type == 'img') {
-            console.log("image");
+    function afterchange(index) {
+        console.log(itemsRef);
+        console.log(itemsRef.current[index]);
+        console.log("afterchange");
+        // console.log(index);
+        if (sliderRef.current.props.children[index].type == 'video') {
+            itemsRef.current[index].play();
+        }
+
+        else if (sliderRef.current.props.children[index].type == 'img') {
             setTimeout(function() {
                 sliderRef.current.slickNext();
-            }, 5000);
+            }, 3000);
         }
     }
 
     const sliderRef = useRef(null);
-    const sliders = useRef([]);
+    const itemsRef = useRef([]);
+
+    useEffect(() => {
+        itemsRef.current = itemsRef.current.slice(0, imgs.length);
+    }, [imgs]);
 
     function handleVideoEnd(index) {
-        console.log(index);
         console.log("handleVideoEnd");
-        console.log(sliders[index]);
-        // sliders[index].current.scrollTop = 0;
+        // itemsRef.currentTime = 0;
         // Go to the next slide when the video ends
         sliderRef.current.slickNext();
+
+        console.log(index);
+        console.log(imgs.length);
+
+        if (index === imgs.length - 1) {
+            sliderRef.current.slickGoTo(0);
+        }
     };
 
     return (
@@ -144,7 +167,7 @@ export default function IDLE() {
                         <img id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
                     ) ||
                     isVideo(image) === true && (
-                        <video id="video_list" onEnded={() => handleVideoEnd(index)} autoPlay muted src={`${process.env.PUBLIC_URL}` + image}/>
+                        <video ref={el => itemsRef.current[index] = el} id="video_list" onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image}/>
                     )
                 )}
             </Slider>

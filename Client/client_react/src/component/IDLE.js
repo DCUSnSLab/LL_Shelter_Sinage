@@ -29,11 +29,55 @@ export default function IDLE() {
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
     let ws = useRef(null);
-
     const shelter_num = `${process.env.REACT_APP_SHELTER_NUM}`;
-
     let timer = null;
     const [time, setTime] = useState(moment());
+    let i = 0;
+
+    useEffect(() => {
+        if(!ws.current) {
+            ws.current = new WebSocket(addr);
+            ws.current.onopen = () => {
+                console.log("connected to " + addr);
+                setOutputs("connected to " + addr);
+                setSocketConnected(true);
+                ws.current.send(
+                    JSON.stringify({
+                        message: 0
+                    })
+                )
+            };
+            ws.current.onclose = (error) => {
+                console.log("disconnect from " + addr);
+                setOutputs("disconnect from " + addr)
+                console.log(error);
+            };
+            ws.current.onerror = (error) => {
+                console.log("connection error " + addr);
+                setOutputs("connection error " + addr)
+                console.log(error);
+            };
+            ws.current.onmessage = (evt) => {
+                // server에서 보낸 데이터
+                const data = JSON.parse(evt.data);
+                if(i===0){
+                    setImg(data)
+                    console.log(imgs);
+                    i++;
+                }
+            };
+        }
+    }, []);
+
+    // imgs에 값이 초기화되면 1.5초 후 Slider를 시작하는 useEffect
+    useEffect(() => {
+        if (imgs.length !== 0) {
+            setTimeout(function() {
+                console.log("play");
+                itemsRef.current[0].play();
+            }, 1500);
+        }
+    }, [imgs]);
 
     useEffect(() => {
         timer = setInterval(() => {
@@ -66,7 +110,6 @@ export default function IDLE() {
     // note 데이터 동영상 type 판별
     function isVideo(filename) {
         let extV = getExtension(filename);
-        console.log(extV.toLowerCase())
         switch (extV.toLowerCase()) {
             case 'm4v':
             case 'avi':
@@ -77,81 +120,54 @@ export default function IDLE() {
         return false;
     }
 
-// note 예전값과 현재값 비교
-    const ref = useRef([]);
-    function usePrevious(value) {
-        useEffect(() => {
-            ref.current = value; //assign the value of ref to the argument
-        },[value]); //this code will run when the value of 'value' changes
-        return ref.current; //in the end, return the current ref value.
-    }
-    const Component = (props) => {
-        const {receiveAmount} = props
-        const prevAmount = usePrevious({receiveAmount});
-        if(prevAmount.receiveAmount !== receiveAmount) {
-            console.log("change");
-            return true
-        }
-        else if(prevAmount.receiveAmount === receiveAmount){
-            console.log("nothing change");
-            return false
-        }
-    }
-
-    function addMessage(img) {
-        if (<Component/> === true ){
-            setImg([...imgs, img]);
-        }
-        else{
-            setImg([...imgs, img]);
-        }
-    }
-    
-    useEffect(() => {
-        if(!ws.current) {
-            ws.current = new WebSocket(addr);
-            ws.current.onopen = () => {
-                console.log("connected to " + addr);
-                setOutputs("connected to " + addr);
-                setSocketConnected(true);
-                ws.current.send(
-                    JSON.stringify({
-                        message: 0
-                    })
-                )
-            };
-            ws.current.onclose = (error) => {
-                console.log("disconnect from " + addr);
-                setOutputs("disconnect from " + addr)
-                console.log(error);
-            };
-            ws.current.onerror = (error) => {
-                console.log("connection error " + addr);
-                setOutputs("connection error " + addr)
-                console.log(error);
-            };
-            ws.current.onmessage = (evt) => {
-                // server에서 보낸 데이터
-                const data = JSON.parse(evt.data);
-                data.map((data) => {
-                    console.log(data);
-                    addMessage(data);
-                })
-            };
-        };
-    }, []);
-
-    function addMessage(img) {
-
-        setImg([...imgs, img]);
-    }
-
     const settings = {
-        slide: 'div',
-        infinite: true,
+        infinite: false,
+        initialSlide: 0,
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrow: false
+        focusOnSelect: false,
+        fade: true,
+        swipe: false,
+        afterChange: index =>
+            afterchange(index),
+    };
+
+
+    function afterchange(index) {
+        console.log(itemsRef);
+        console.log(itemsRef.current[index]);
+        console.log("afterchange");
+        // console.log(index);
+        if (sliderRef.current.props.children[index].type == 'video') {
+            itemsRef.current[index].play();
+        }
+
+        else if (sliderRef.current.props.children[index].type == 'img') {
+            setTimeout(function() {
+                sliderRef.current.slickNext();
+            }, 3000);
+        }
+    }
+
+    const sliderRef = useRef(null);
+    const itemsRef = useRef([]);
+
+    useEffect(() => {
+        itemsRef.current = itemsRef.current.slice(0, imgs.length);
+    }, [imgs]);
+
+    function handleVideoEnd(index) {
+        console.log("handleVideoEnd");
+        // itemsRef.currentTime = 0;
+        // Go to the next slide when the video ends
+        sliderRef.current.slickNext();
+
+        console.log(index);
+        console.log(imgs.length);
+
+        if (index === imgs.length - 1) {
+            sliderRef.current.slickGoTo(0);
+        }
     };
 
     return (
@@ -163,39 +179,35 @@ export default function IDLE() {
                 {/* LT=4:50 , LTS=4:50:21 */}
                 <div className={styles.page3_time}>{time.format('LT')}</div>
             </header>
-
-
-
-            <Slider {...settings}>
-                {imgs.map(m =>
-                    <div className={styles.slide_list} key={m}>
-                        {
-                            isImage(m) === true ?
-                                <img src={`${process.env.PUBLIC_URL}` + m} key={m} />
-                                : <video muted autoPlay src={`${process.env.PUBLIC_URL}` + m} key={m} />
-                        }
-                    </div>
+            <Slider {...settings} ref={sliderRef} id="list">
+                {imgs.map((image, index) =>
+                    // __image &&
+                    isImage(image) === true && (
+                        <img id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
+                    ) ||
+                    isVideo(image) === true && (
+                        <video ref={el => itemsRef.current[index] = el} id="video_list" onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image}/>
+                    )
                 )}
             </Slider>
-
             <div className={styles.social}>
                 <tr>
                     <p>작품보기<br/>
-                        <button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} >
+                        <button>
                             <Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
                         </button>
                     </p>
                 </tr>
                 <tr>
                     <p className={styles.line}>낙서장<br/>
-                        <button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} >
+                        <button>
                             <Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
                         </button>
                     </p>
                 </tr>
                 <tr>
                     <p className={styles.QR}>
-                        <img whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.1 }} key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
+                        <img key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
                     </p>
                 </tr>
             </div>

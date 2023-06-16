@@ -137,6 +137,7 @@ export default function IDLE() {
         console.log(itemsRef);
         console.log(itemsRef.current[index]);
         console.log("afterchange");
+	console.log(imgs);
         // console.log(index);
         if (sliderRef.current.props.children[index].type == 'video') {
             itemsRef.current[index].play();
@@ -144,7 +145,13 @@ export default function IDLE() {
 
         else if (sliderRef.current.props.children[index].type == 'img') {
             setTimeout(function() {
-                sliderRef.current.slickNext();
+		if (index === imgs.length - 1) {
+		    console.log("End");
+		    sliderRef.current.slickGoTo(0);
+		}
+		else {
+                    sliderRef.current.slickNext();
+		}
             }, 3000);
         }
     }
@@ -165,9 +172,7 @@ export default function IDLE() {
         console.log(index);
         console.log(imgs.length);
 
-        if (index === imgs.length - 1) {
-            sliderRef.current.slickGoTo(0);
-        }
+
     };
 
     return (

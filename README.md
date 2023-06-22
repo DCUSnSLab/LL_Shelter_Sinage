@@ -10,7 +10,7 @@
 Client/client_react/ 경로 터미널에서 아래 명령어 순차 실행
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 npm start
 ```
 

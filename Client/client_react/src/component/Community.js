@@ -38,37 +38,33 @@ function Community() {
                         <strong>Issue Board</strong></Link>
                 </p>
                 <hr></hr>
-                    <div className="wrapper">
-                            {/*{% for list in communitylist %}*/}
-                            <ul className="nav my_center_txt">
-                                {/*<li><a href="#">{{list.name}}</a></li>*/}
-                            </ul>
-                            {/*{% endfor %}*/}
-                    </div>
-                    <p style={{textAlign: 'center'}}>
-                        <Link to = '/dailyboard' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>
-                            <strong>Daily Board</strong></Link>
-                    </p>
-                    <hr></hr>
-                        <div className="wrapper">
-                            {/*<table>*/}
-                                {/*{% for list in communitylist %}*/}
-                                <ul className="nav my_center_txt">
-                                    {/*<li><a href="#">{{list.name}}</a></li>*/}
-                                </ul>
-                                {/*{% endfor %}*/}
-                            {/*</table>*/}
-                        </div>
-
-                        <p style={{textAlign: 'center'}}>
-                            {/*<Link to = '/paintlist' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>*/}
-                            {/*    <strong>Drawing Guest Book</strong></Link>*/}
-                            <Link to = '/issueboard' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>
-                                <strong>Drawing Guest Book</strong></Link>
-
-                        </p>
-
-
+                <div className="wrapper">
+                        {/*{% for list in communitylist %}*/}
+                        <ul className="nav my_center_txt">
+                            {/*<li><a href="#">{{list.name}}</a></li>*/}
+                        </ul>
+                        {/*{% endfor %}*/}
+                </div>
+                <p style={{textAlign: 'center'}}>
+                    <Link to = '/dailyboard' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>
+                        <strong>Daily Board</strong></Link>
+                </p>
+                <hr></hr>
+                <div className="wrapper">
+                    {/*<table>*/}
+                        {/*{% for list in communitylist %}*/}
+                        <ul className="nav my_center_txt">
+                            {/*<li><a href="#">{{list.name}}</a></li>*/}
+                        </ul>
+                        {/*{% endfor %}*/}
+                    {/*</table>*/}
+                </div>
+                <p style={{textAlign: 'center'}}>
+                    {/*<Link to = '/paintlist' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>*/}
+                    {/* <strong>Drawing Guest Book</strong></Link>*/}
+                    <Link to = '/DrawingGuestBook' className="w3-bar-item w3-button w3-padding-large" style={{color : 'black', textDecoration: 'none'}}>
+                        <strong>Drawing Guest Book</strong></Link>
+                </p>
             </div>
 
             {/*<div style={{textAlign: 'center'}}>*/}

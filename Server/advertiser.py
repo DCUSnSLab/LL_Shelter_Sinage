@@ -4,6 +4,7 @@ import random
 import psycopg2
 import socket
 import os
+import time
 from websockets.exceptions import ConnectionClosedOK
 
 #dbip = os.environ['SHELTER_DB']
@@ -21,6 +22,10 @@ class Advertiser:
         self.temp = 0
         self.clients = dict()
 
+        # flag variable for websocket msg send.
+        # True : send messages
+        # False : do not send messages
+
     async def init_adv(self):
         print('Advertiser has been ready')
         asyncio.create_task(self.runAdvertiser())
@@ -37,7 +42,7 @@ class Advertiser:
             print(idx, cli.origin, cli.id)
 
     async def runAdvertiser(self):
-        cnt = 0
+        print("runAdvertiser called.")
 
         cur = conn.cursor()
 
@@ -49,40 +54,56 @@ class Advertiser:
 
         ftp_path = "/ftp/"
 
+        interval = 5
+
         for rst in cur:
             advlist.append(ftp_path + rst[1])
 
-        #advlist = [
-        #    "http://ocean.cu.ac.kr/files/W_CONTENTS/1620/20220930170044(1).jpg",
-        #    "http://ocean.cu.ac.kr/files/W_CONTENTS/1300/thumb_20190522135811.jpg",
-        #    "http://ocean.cu.ac.kr/files/W_CONTENTS/1512/thumb_20211221105853(3).jpg"
-        #]
+        while True:
+            if len(self.clients) > 0: # 최소 1개의 클라이언트가 있는 경우에 동작
+                for idx, cli in enumerate(self.clients.values()):
+                    adv_string = json.dumps(advlist)
+                    try:
+                        print("send?")
+                        await cli.send(adv_string)
+                    # await cli.send(data_string)
+                    except ConnectionClosedOK:
+                        print(idx, cli.origin, 'data sended', adv_string)
+                        del self.clients[cli.id]
+                        self.printClients()
+                        break
+                break
+            await asyncio.sleep(3) # 클라이언트가 하나도 ㅇ벗는 경우, 비동기적으로 대기합니다.
 
-        four_icon = [
-            "https://cdn-icons-png.flaticon.com/512/636/636047.png",
-            "https://cdn-icons-png.flaticon.com/512/3342/3342137.png",
-            "https://cdn-icons-png.flaticon.com/512/686/686308.png",
-            "https://cdn-icons-png.flaticon.com/512/5843/5843713.png",
-            "https://cdn-icons-png.flaticon.com/512/2940/2940431.png",
-            "https://cdn-icons-png.flaticon.com/512/1549/1549454.png"
-        ]
+        initclients = len(self.clients)
 
         while True:
-            for idx, cli in enumerate(self.clients.values()):
-                #여기에 사진 링크 보내면 될듯
-                data = random.sample(advlist, len(advlist))
-                # data_string = json.dumps(four_icon)
-                adv_string = json.dumps(data)
-                try:
-                    await cli.send(adv_string)
-                # await cli.send(data_string)
-                except ConnectionClosedOK:
-                    print(idx, cli.origin, 'data sended', adv_string)
-                    del self.clients[cli.id]
-                    self.printClients()
-                    break
+            print("runadv while loop, loop interval :", interval)
 
-            cnt += 1
-            #1초 주기로 데이터 변경됨 -> 주기 변경 가능
-            
-            await asyncio.sleep(5)
+            new_advlist = []
+
+            cur.execute(sql)
+
+            for rst in cur:
+                new_advlist.append(ftp_path + rst[1])
+
+            if (new_advlist != advlist) or (initclients != len(self.clients)):
+                initclients = len(self.clients)
+                for idx, cli in enumerate(self.clients.values()):
+                    #여기에 사진 링크 보내면 될듯
+                    # data = random.sample(advlist, len(advlist))
+                    # data_string = json.dumps(four_icon)
+                    adv_string = json.dumps(new_advlist)
+                    try:
+                        await cli.send(adv_string)
+                    # await cli.send(data_string)
+                    except ConnectionClosedOK:
+                        print(idx, cli.origin, 'data sended', adv_string)
+                        del self.clients[cli.id]
+                        self.printClients()
+                        break
+
+                #1초 주기로 데이터 변경됨 -> 주기 변경 갥
+            else:
+                pass
+            await asyncio.sleep(interval)

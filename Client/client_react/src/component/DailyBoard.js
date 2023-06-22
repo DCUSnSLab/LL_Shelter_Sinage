@@ -7,7 +7,7 @@ function IssueBoard(){
     const [comment, setComment] = useState(null);
     const host_ip = `${process.env.REACT_APP_IP}`;
     const port = "8000";
-    const backend_url = "http://" + host_ip + ":" + port;
+    const backend_url = "http://localhost:" + port;
 
     useEffect(() => {
         const Community_media_list = () => {

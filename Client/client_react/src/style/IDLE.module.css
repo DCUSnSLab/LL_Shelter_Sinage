@@ -23,40 +23,45 @@
     font-size: 12rem;
 }
 
-/*contents*/
-.slick-track{
-    text-align:center;
-    width: 2040px;
-    height: 1919px;
-    background-color: black;
-}
+/*!*contents*!*/
+/*.slick-track{*/
+/*    text-align:center;*/
+/*    width: 2040px;*/
+/*    height: 1919px;*/
+/*    background-color: black;*/
+/*}*/
 
-.slick-slide{
-    /*note 중앙정렬 */
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    position: absolute;
-    display: inline-block;
-    object-fit: cover;
-    width: 100%;
-    position: absolute;
-    display: inline-block;
-    /*note 부모 div의 height에 맞지않으면 자름 */
-    height: auto !important;
-}
+/*.slick-slide{*/
+/*    !*note 중앙정렬 *!*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%) translateY(-50%);*/
+/*    position: absolute;*/
+/*    display: inline-block;*/
+/*    object-fit: cover;*/
+/*    width: 100%;*/
+/*    position: absolute;*/
+/*    display: inline-block;*/
+/*    !*note 부모 div의 height에 맞지않으면 자름 *!*/
+/*    height: auto !important;*/
+/*}*/
 
-.slick-slide{
-    display: grid;
-    place-items: center;
-    height: 80%;
-    width: 100%;
-    pointer-events: none;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}
+/*#img_list, #video_list{*/
+/*    width: 100%;*/
+/*    */
+/*}*/
+
+/*.slick-slide{*/
+/*    display: grid;*/
+/*    place-items: center;*/
+/*    height: 80%;*/
+/*    width: 90%;*/
+/*    pointer-events: none;*/
+/*    position: relative;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%) translateY(-50%);*/
+/*}*/
 
 /*하단에 버튼 옆옆 라인*/
 .line {

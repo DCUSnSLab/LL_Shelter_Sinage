@@ -69,16 +69,6 @@ export default function IDLE() {
         }
     }, []);
 
-    // imgs에 값이 초기화되면 1.5초 후 Slider를 시작하는 useEffect
-    useEffect(() => {
-        if (imgs.length !== 0) {
-            setTimeout(function() {
-                console.log("play");
-                itemsRef.current[0].play();
-            }, 1500);
-        }
-    }, [imgs]);
-
     useEffect(() => {
         timer = setInterval(() => {
             setTime(moment());
@@ -134,9 +124,15 @@ export default function IDLE() {
 
 
     function afterchange(index) {
+<<<<<<< Updated upstream
         // Slider 컴포넌트의 내용 변경 시 호출되는 함수입니다.
 
         // console.log("afterchange");
+=======
+        console.log(itemsRef);
+        console.log(itemsRef.current[index]);
+        console.log("afterchange");
+>>>>>>> Stashed changes
         // console.log(index);
         if (sliderRef.current.props.children[index].type == 'video') {
             // Slider 컴포넌트가 영상인 경우 재생 수행
@@ -146,6 +142,7 @@ export default function IDLE() {
         else if (sliderRef.current.props.children[index].type == 'img') {
             // 이미지인 경우 약 3초 후 다음 슬라이드로 넘깁니다.
             setTimeout(function() {
+<<<<<<< Updated upstream
                 if (index === imgs.length - 1) {
                     // 현재 슬라이드 요소가 마지막 요소인 경우, 0번째 요소로 초기화 진행
                     console.log("Loop finish");
@@ -154,12 +151,26 @@ export default function IDLE() {
                 else {
                     sliderRef.current.slickNext();
                 }
+=======
+                sliderRef.current.slickNext();
+>>>>>>> Stashed changes
             }, 3000);
         }
     }
 
     const sliderRef = useRef(null);
     const itemsRef = useRef([]);
+
+    // imgs에 값이 초기화되면 1.5초 후 Slider를 시작하는 useEffect
+    useEffect(() => {
+        console.log("item" + itemsRef.current)
+        if (imgs.length !== 0) {
+            setTimeout(function() {
+                console.log("play");
+                itemsRef.current[0].play();
+            }, 1500);
+        }
+    }, [imgs]);
 
     useEffect(() => {
         itemsRef.current = itemsRef.current.slice(0, imgs.length);
@@ -170,6 +181,7 @@ export default function IDLE() {
         // console.log("handleVideoEnd");
         // itemsRef.currentTime = 0;
         // Go to the next slide when the video ends
+<<<<<<< Updated upstream
         if (index === imgs.length - 1) {
             // 현재 슬라이드 요소가 마지막 요소인 경우, 0번째 요소로 초기화 진행
             console.log("Loop finish");
@@ -178,6 +190,16 @@ export default function IDLE() {
         else {
             sliderRef.current.slickNext();
         }
+=======
+        sliderRef.current.slickNext();
+
+        console.log(index);
+        console.log(imgs.length);
+
+        if (index === imgs.length - 1) {
+            sliderRef.current.slickGoTo(0);
+        }
+>>>>>>> Stashed changes
     };
 
     return (
@@ -191,13 +213,13 @@ export default function IDLE() {
             </header>
             <Slider {...settings} ref={sliderRef} id="list">
                 {imgs.map((image, index) =>
-                    // __image &&
-                    isImage(image) === true && (
-                        <img id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
-                    ) ||
-                    isVideo(image) === true && (
-                        <video ref={el => itemsRef.current[index] = el} id="video_list" onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image}/>
-                    )
+                        // __image &&
+                        isImage(image) === true && (
+                            <img id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
+                        ) ||
+                        isVideo(image) === true && (
+                            <video ref={el => itemsRef.current[index] = el} id="video_list" onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image}/>
+                        )
                 )}
             </Slider>
             <div className={styles.social}>

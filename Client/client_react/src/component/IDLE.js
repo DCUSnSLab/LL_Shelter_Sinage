@@ -134,24 +134,26 @@ export default function IDLE() {
 
 
     function afterchange(index) {
-        console.log(itemsRef);
-        console.log(itemsRef.current[index]);
-        console.log("afterchange");
-	console.log(imgs);
+        // Slider 컴포넌트의 내용 변경 시 호출되는 함수입니다.
+
+        // console.log("afterchange");
         // console.log(index);
         if (sliderRef.current.props.children[index].type == 'video') {
+            // Slider 컴포넌트가 영상인 경우 재생 수행
             itemsRef.current[index].play();
         }
 
         else if (sliderRef.current.props.children[index].type == 'img') {
+            // 이미지인 경우 약 3초 후 다음 슬라이드로 넘깁니다.
             setTimeout(function() {
-		if (index === imgs.length - 1) {
-		    console.log("End");
-		    sliderRef.current.slickGoTo(0);
-		}
-		else {
+                if (index === imgs.length - 1) {
+                    // 현재 슬라이드 요소가 마지막 요소인 경우, 0번째 요소로 초기화 진행
+                    console.log("Loop finish");
+                    sliderRef.current.slickGoTo(0);
+                }
+                else {
                     sliderRef.current.slickNext();
-		}
+                }
             }, 3000);
         }
     }
@@ -164,15 +166,18 @@ export default function IDLE() {
     }, [imgs]);
 
     function handleVideoEnd(index) {
-        console.log("handleVideoEnd");
+        // 영상 재생 완료 시 호출되는 함수
+        // console.log("handleVideoEnd");
         // itemsRef.currentTime = 0;
         // Go to the next slide when the video ends
-        sliderRef.current.slickNext();
-
-        console.log(index);
-        console.log(imgs.length);
-
-
+        if (index === imgs.length - 1) {
+            // 현재 슬라이드 요소가 마지막 요소인 경우, 0번째 요소로 초기화 진행
+            console.log("Loop finish");
+            sliderRef.current.slickGoTo(0);
+        }
+        else {
+            sliderRef.current.slickNext();
+        }
     };
 
     return (

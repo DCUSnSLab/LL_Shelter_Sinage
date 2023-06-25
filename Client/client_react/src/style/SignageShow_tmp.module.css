@@ -1,0 +1,89 @@
+/*Signage 3 slide*/
+
+/*header*/
+/*time, date*/
+.signageshow_contents{
+    background-color: black;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    height: 100vh;
+}
+
+.signageshow_title{
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    font-size: 9rem;
+    /*background-color: red;*/
+    /*height: 20%;*/
+}
+
+.signageshow_popular{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    font-size: 4rem;
+    /*background-color: blue;*/
+    /*height: 40%;*/
+}
+
+.signageshow_popular > p{
+    font-size: 5rem;
+}
+
+.signageshow_latest{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    font-size: 4rem;
+    /*background-color: green;*/
+    /*height: 40%;*/
+}
+
+
+/*맨 맽에 버튼을 포괄적으로 감싸고있는*/
+.social{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    width: 100%;
+    font-family: 'yg-jalnan';
+    background-color: black;
+    color: white;
+    font-size: 9rem;
+    /*text-align: center;*/
+    height: 30%;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/*hotpink button*/
+.social > tr > p > button{
+    margin-top: 10%;
+    background-color: deeppink;
+    width: 25rem;
+    height: 10rem;
+    font-size: 7rem;
+    font-weight: bold;
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
+    border-bottom-left-radius: 0.25em;
+    border-bottom-right-radius: 0.25em;
+}
+
+.social > tr{
+    margin-top: 15%;
+}
+
+.font {
+    font-family: 'yg-jalnan';
+    text-shadow: 2px 2px 0 #727272;
+}
+
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+}

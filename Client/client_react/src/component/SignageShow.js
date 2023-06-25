@@ -1,65 +1,71 @@
 import axios from "axios"
 import React, {useEffect, useState, useRef} from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {Link} from "react-router-dom";
-import Modal from './Modal';
+import styles from "../style/SignageShow.module.css";
+import Slider from "react-slick";
+import moment from "moment/moment";
 
 function SignageShow({id,title,des}) {
     const [images, setImages] = useState(null);
-    const [content, setContent] = useState(null);
+    const [contents, setContent] = useState(null);
+    const initDesc = {
+        contentType: null,
+        content_statue: null,
+        createDate: "",
+        email: "",
+        hits: null,
+        id: -1,
+        isUpdate: null,
+        lastEditDate: null,
+        likes: null,
+        shelterFK: null,
+        title: "",
+    }
+
+    const [contentsdesc, setDesc] = useState(initDesc);
+
     const host_ip = `${process.env.REACT_APP_IP}`;
     const port = "8000";
     const backend_url = "http://" + host_ip + ":" + port;
+
+    let timer = null;
+    const [time, setTime] = useState(moment());
+
+    // 상단 타이머 업데이트 useEffect
+    useEffect(() => {
+        timer = setInterval(() => {
+            setTime(moment());
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
     
     useEffect(() => {
         const imagelist = () => {
             axios
                 .get(backend_url + "/Service/signage/")
                 .then(res => {
+                    // DB에 저장된 콘텐츠 파일의 경로가 잘못되어 있어서 수정하는 작업입니다.
+                    res.data.map((data) => {
+                            if (data.thumbnailPath === null) {
+                                data.upload_file = data.upload_file.substring(6, data.upload_file.length)
+                                data.upload_file = "ftp" + data.upload_file
+                            }
+                            else {
+                                data.thumbnailPath = "ftp/" + data.thumbnailPath
+                            }
+                        }
+                    )
                     setImages(res.data)
                     console.log(res.data)
                 })
                 .catch((err) => console.log(err));
         }
         imagelist();
-        }, []);        
-    
-    let ws = useRef(null);
-    const addr = "ws://localhost:8765";
-    const [inputs, setInputs] = useState('ws://localhost:8765');
-    const [outputs, setOutputs] = useState([]);
-    const [socketConnected, setSocketConnected] = useState(false);
-
-
-    const recivedData = (id) => {
-	openModal(id)
-        let data = {images};
-        ws.current.send(JSON.stringify(data.images[0]));
-        console.log(data.images[0]);
-        console.log("클릭?\n" + "id : " + data.images[0].id + "\nfile : " + data.images[0].upload_file);
-    }
-    const connectServer = () => {
-        setOutputs('connecting server...');
-        if(!ws.current){
-        ws.current = new WebSocket(addr);
-        ws.current.onopen = () => {
-            console.log("connected to " + addr);
-            setOutputs("connected to " + addr)
-            setSocketConnected(true);
-        };
-        ws.current.onclose = (error) => {
-            console.log("disconnect from " + addr);
-            setOutputs("disconnect from " + addr);
-            console.log(error);
-        };
-        ws.current.onerror = (error) => {
-            console.log("connection error " + addr);
-            setOutputs("connection error " + addr)
-            console.log(error);
-        };
-        };
-    };
-
-    useEffect(() => {connectServer()})
+        }, []);
 
     useEffect(() => {
         const Content_detail_list = () => {
@@ -67,157 +73,128 @@ function SignageShow({id,title,des}) {
                 .get(backend_url + "/Service/Content/")
                 .then(res => {
                     setContent(res.data)
-                    // console.log(res.data)
+                    console.log(res.data)
                 })
                 .catch((err) => console.log(err));
         }
         Content_detail_list();
-         }, []);
+        }, []);
 
-    const [modals, setModals] = useState([]);
-
-    const openModal = (id) => {
-	console.log("openModal");
-	const newModalId = Date.now().toString();
-	console.log("newModalId created.");
-	console.log(newModalId);
-	setModals([...modals, id]);
+    const settings_popular = {
+        // className: "styles.popular_slider",
+        centerMode: true,
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        // centerPadding: "100px",
     };
 
-    const closeModal = (modalId) => {
-	console.log("closeModal");
-	console.log(modalId);
-        setModals(modals.filter((id) => id !== modalId));
+    const settings_latest = {
+        // className: "styles.latest_slider",
+        centerMode: true,
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        // centerPadding: "100px",
+    };
+
+    const descriptionModal = (index) => {
+        console.log("descriptionModal");
+        console.log(index);
+        console.log(initDesc);
+        console.log(contents[index]);
+
+        // setDesc(contents[index]);
+
+        // setDesc(contentsdesc => ({...contentsdesc,
+        //     id: contents[index].id,
+        //     createDate: contents[index].createDate,
+        //     email: contents[index].email,
+        //     hits: contents[index].hits,
+        //     likes: contents[index].likes,
+        //     title: contents[index].title,
+        // }));
+
+        setDesc((contentsdesc) => ({
+            ...contentsdesc,
+            id: contents[index].id,
+        }));
     };
 
     return (
-        <html>
-        <head>
-            <title>Phantom by HTML5 UP</title>
-            <meta charSet="utf-8"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-        </head>
-        <body>
-        <div id="wrap" style={{height : '100000px'}}>
-            <header id="headerArea">
-            <div className="w3-top">
-                <div className="w3-bar w3-black w3-card">
-                    <Link to='/board' className="w3-bar-item w3-button w3-padding-large" style={{color : 'white', textDecoration: 'none'}}>COMMUNITY</Link>
+        <div>
+            <div className={styles.signageshow_container}>
+                <div className={styles.signageshow_title}>
+                    Contents Gallery
+                </div>
+                <div className={styles.signageshow_popular}>
+                    <p>인기순</p>
+                    <Slider className={styles.popular_slider} {...settings_popular}>
+                        {/*
+                        아래 조건식은 컨텐츠의 thumbnailPath가 null인 경우 이미지로 인지하고
+                        null이 아닌 경우 출력할 이미지 소스 경로를 영상 파일의 썸네일로 지정한다.
+                        */}
+                        {images && images.map((image, index) =>
+                            image.thumbnailPath === null && (
+                                <img src={image.upload_file} onClick={() => descriptionModal(index)}></img>
+                            ) ||
+                            image.thumbnailPath != null && (
+                                <img src={image.thumbnailPath} onClick={() => descriptionModal(index)}></img>
+                            )
+                        )}
+                    </Slider>
+                </div>
+                <div className={styles.signageshow_latest}>
+                    <p>최신순</p>
+                    <Slider className={styles.latest_slider} {...settings_latest}>
+                        {images && images.map((image, index) =>
+                            image.thumbnailPath === null && (
+                                <img src={image.upload_file} onClick={() => descriptionModal(index)}></img>
+                            ) ||
+                            image.thumbnailPath != null && (
+                                <img src={image.thumbnailPath} onClick={() => descriptionModal(index)}></img>
+                            )
+                        )}
+                    </Slider>
+                </div>
+                <div className={styles.desctitle}>
+                    설명
+                </div>
+                <div className={styles.signageshow_desc}>
+                    <div>타입</div><div>{ contentsdesc.id != -1 && contentsdesc.contentType }</div>
+                    <div>생성일</div><div>{ contentsdesc.id != -1 && contentsdesc.createDate }</div>
+                    <div>사용자 메일</div><div>{ contentsdesc.id != -1 && contentsdesc.email }</div>
+                    <div>조회수</div><div>{ contentsdesc.id != -1 && contentsdesc.hits }</div>
+                    <div>추천(좋아요)</div><div>{ contentsdesc.id != -1 && contentsdesc.likes }</div>
+                    <div>타이틀</div><div>{ contentsdesc.id != -1 && contentsdesc.title }</div>
                 </div>
             </div>
-            </header>
-
-            <div class="section" style={top}>
-                <div className="nav_blank"></div>
-                <h3>이미지 콘텐츠</h3>
-                <div style={grayLine}></div>
-                <div style={container_media}>
-                    {images && images.map((list, i) => list.thumbnailPath ? null : (
-                        <p key={i}>
-                                <span className="media_content_box" style={{position: 'relative'}}>
-                                    <img style={media_preview} src={backend_url + list.upload_file}/>
-                                    <div class="imText2" style={{left : "\
-                                    ", bottom : "-70px"}}>{ content && content[i].title}</div>
-                                    <Link to='/contentDetailView' style={{color : 'white', textDecoration: 'none'}}>
-                                    </Link>
-                                </span>
-                        </p>
-                    ))}
-                </div>
-
-                <div className="nav_blank2"></div>
-                    <div className="nav_blank"></div>
-                    <h3 style={{marginLeft: '30px'}}>동영상 콘텐츠</h3>
-                    <div style={grayLine}></div>
-                    <div style={container_media}>
-                        {images && images.map((list, i) => list.thumbnailPath ? (
-                            <p key={i}>
-                                <span className="media_content_box" style={{position: 'relative'}}>
-                                    <img className="media_preview" onClick={() => recivedData(list.id)}
-                                         style={media_preview}
-                                         src={backend_url + '/media/' + list.thumbnailPath}/>
-					{ modals.map((modalId) => (
-					    <Modal modalId={list.id} open={modals.includes(list.id)} close={closeModal} videourl={list.upload_file.substring(6, list.upload_file.length)} header={content && content[i].title}>
-					    </Modal>
-					)) }
-                                    <div className="imText2"
-                                         style={{left: "40px", bottom: "-70px"}}>{content && content[i].title}</div>
-                                    <Link to='/mediaDetailView' style={{color : 'white', textDecoration: 'none'}}>
-                                        </Link>
-                                </span>
-                            </p>
-                        ) : null )}
-                    </div>
-                <div className="nav_blank2"></div>
-                <div class="gray-line"></div>
-                <div class="container_media" style={{position: 'relative'}}>
-                    <div></div>
-                    {/*<div>*/}
-                    {/*    <div style={{textAlign: 'center'}}>*/}
-                    {/*        <div><h3 style={{paddingLeft: '40px'}}>QR코드를 찍어 콘텐츠 업로드!</h3></div>*/}
-                    {/*        <img src = "/media/{{contentQR}}"/>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    <div></div>
-                </div>
+            <div className={styles.social}>
+                <tr>
+                    <p className={styles.line}>뒤로가기<br/>
+                        <button>
+                            <Link to='/' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
+                        </button>
+                    </p>
+                </tr>
+                <tr>
+                    <p className={styles.line}><br/>
+                    </p>
+                </tr>
+                <tr>
+                    <p className={styles.line}>게시판<br/>
+                        <button>
+                            <Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
+                        </button>
+                    </p>
+                </tr>
             </div>
         </div>
-        <script type="text/javascript"></script>
-        </body>
-        </html>
     )
-}
-
-const btn= {
-    height: '100px',
-    width: '100px',
-    backgroundColor: 'blue',
-    color: 'white',
-    padding: '10px 20px',
-    fontSize: '16px',
-    borderRadius: '4px'
-}
-
-const grayLine = {
-    width: '400rem',
-    height: '0.1rem',
-    backgroundColor: '#D4D4D4',
-    margin: '1rem 0px 3rem 0px'
-}
-
-const top = {
-    marginTop: '60px',
-}
-
-const container_media = {
-    display: 'grid',
-    gridTemplateColumns: '340px 340px 340px',
-    gridTemplateRows: '200px 200px 200px',
-    columnGap: '10px',
-    rowGap: '30px',
-    justifyContent: 'center',
-    marginLeft: '-20px',
-    height: '1200px'
-}
-
-const container_media1 = {
-    columnGap: '10px',
-    rowGap : '30px',
-    justifyContent: 'center',
-    marginRight: '20px'
-}
-
-const img = {
-    filter: 'brightness(1)'
-}
-
-const media_preview = {
-    overflow: 'hidden',
-    objectFit: 'cover',
-    width: '330px',
-    height: '200px',
-    borderRadius: '10px'
 }
 
 export default SignageShow;

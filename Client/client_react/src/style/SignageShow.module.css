@@ -1,0 +1,138 @@
+/* SignageShow */
+
+.signageshow_container{
+    background-color: black;
+    height: 100vh;
+}
+
+.signageshow_title{
+    display: inline-block;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-size: 5rem;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    width: 100%;
+    border: none;
+}
+
+.popular_title{
+    display: inline-block;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-size: 5rem;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    width: 100%;
+    border: none;
+}
+
+.signageshow_popular{
+    display: inline-block;
+    background-color: black;
+    font-weight: bold;
+    color: white;
+    height: 35rem;
+    width: 100%;
+    border: none;
+}
+
+.signageshow_popular > img{
+    height: 100px;
+}
+
+.popular_slider {
+    background-color: black;
+}
+
+.popular_slider > div > div{
+
+}
+
+.popular_slider > div > div > div{
+
+}
+
+.popular_slider > div > div > div > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popular_slider > div > div > div > div > img{
+    max-height: 100%;
+}
+
+.latest_slider {
+    background-color: black;
+}
+
+.signageshow_latest{
+    display: inline-block;
+    background-color: black;
+    font-weight: bold;
+    color: white;
+    height: 35rem;
+    width: 100%;
+    border: none;
+}
+
+.slick-list {
+    height: 100%;
+}
+
+.desctitle {
+    background-color: black;
+    font-weight: bold;
+    color: white;
+}
+
+.signageshow_desc {
+    background-color: black;
+    font-weight: bold;
+    color: white;
+    text-align: left;
+}
+
+/*하단에 버튼 옆옆 라인*/
+.line {
+    border-left: 2px solid darkgrey;
+    border-right: 2px solid darkgrey;
+}
+
+/*맨 맽에 버튼을 포괄적으로 감싸고있는*/
+.social{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    width: 100%;
+    font-family: 'yg-jalnan';
+    background-color: black;
+    color: white;
+    font-size: 9rem;
+    /*text-align: center;*/
+    height: 30%;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/*hotpink button*/
+.social > tr > p > button{
+    margin-top: 10%;
+    background-color: deeppink;
+    width: 25rem;
+    height: 10rem;
+    font-size: 7rem;
+    font-weight: bold;
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
+    border-bottom-left-radius: 0.25em;
+    border-bottom-right-radius: 0.25em;
+}
+
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+}

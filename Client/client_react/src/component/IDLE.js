@@ -69,13 +69,13 @@ export default function IDLE() {
         }
     }, []);
 
-    // imgs에 값이 초기화되면 1.5초 후 Slider를 시작하는 useEffect
+    // imgs에 값이 초기화되면 0.5초 후 Slider를 시작하는 useEffect
     useEffect(() => {
         if (imgs.length !== 0) {
             setTimeout(function() {
                 console.log("play");
                 itemsRef.current[0].play();
-            }, 1500);
+            }, 500);
         }
     }, [imgs]);
 

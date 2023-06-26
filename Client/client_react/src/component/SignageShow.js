@@ -8,40 +8,15 @@ import Slider from "react-slick";
 import moment from "moment/moment";
 
 function SignageShow({id,title,des}) {
+    // Backend로부터 받은 데이터 저장을 위한 useState
     const [images, setImages] = useState(null);
     const [contents, setContent] = useState(null);
-    const initDesc = {
-        contentType: null,
-        content_statue: null,
-        createDate: "",
-        email: "",
-        hits: null,
-        id: -1,
-        isUpdate: null,
-        lastEditDate: null,
-        likes: null,
-        shelterFK: null,
-        title: "",
-    }
-
-    const [contentsdesc, setDesc] = useState(initDesc);
+    // 선택한 콘텐츠 데이터 저장을 위한 useState
+    const [contentsdesc, setDesc] = useState(null);
 
     const host_ip = `${process.env.REACT_APP_IP}`;
     const port = "8000";
     const backend_url = "http://" + host_ip + ":" + port;
-
-    let timer = null;
-    const [time, setTime] = useState(moment());
-
-    // 상단 타이머 업데이트 useEffect
-    useEffect(() => {
-        timer = setInterval(() => {
-            setTime(moment());
-        }, 1000);
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
     
     useEffect(() => {
         const imagelist = () => {
@@ -80,6 +55,8 @@ function SignageShow({id,title,des}) {
         Content_detail_list();
         }, []);
 
+    // 콘텐츠 슬라이드 별 설정을 위한 Dict
+
     const settings_popular = {
         // className: "styles.popular_slider",
         centerMode: true,
@@ -104,25 +81,7 @@ function SignageShow({id,title,des}) {
 
     const descriptionModal = (index) => {
         console.log("descriptionModal");
-        console.log(index);
-        console.log(initDesc);
-        console.log(contents[index]);
-
-        // setDesc(contents[index]);
-
-        // setDesc(contentsdesc => ({...contentsdesc,
-        //     id: contents[index].id,
-        //     createDate: contents[index].createDate,
-        //     email: contents[index].email,
-        //     hits: contents[index].hits,
-        //     likes: contents[index].likes,
-        //     title: contents[index].title,
-        // }));
-
-        setDesc((contentsdesc) => ({
-            ...contentsdesc,
-            id: contents[index].id,
-        }));
+        setDesc(contents[index]);
     };
 
     return (
@@ -165,12 +124,12 @@ function SignageShow({id,title,des}) {
                     설명
                 </div>
                 <div className={styles.signageshow_desc}>
-                    <div>타입</div><div>{ contentsdesc.id != -1 && contentsdesc.contentType }</div>
-                    <div>생성일</div><div>{ contentsdesc.id != -1 && contentsdesc.createDate }</div>
-                    <div>사용자 메일</div><div>{ contentsdesc.id != -1 && contentsdesc.email }</div>
-                    <div>조회수</div><div>{ contentsdesc.id != -1 && contentsdesc.hits }</div>
-                    <div>추천(좋아요)</div><div>{ contentsdesc.id != -1 && contentsdesc.likes }</div>
-                    <div>타이틀</div><div>{ contentsdesc.id != -1 && contentsdesc.title }</div>
+                    <div>타입</div><div>{ contentsdesc && contentsdesc.contentType }</div>
+                    <div>생성일</div><div>{ contentsdesc && contentsdesc.createDate }</div>
+                    <div>사용자 메일</div><div>{ contentsdesc && contentsdesc.email }</div>
+                    <div>조회수</div><div>{ contentsdesc && contentsdesc.hits }</div>
+                    <div>추천(좋아요)</div><div>{ contentsdesc && contentsdesc.likes }</div>
+                    <div>타이틀</div><div>{ contentsdesc && contentsdesc.title }</div>
                 </div>
             </div>
             <div className={styles.social}>

@@ -6,22 +6,6 @@ import styles from '../style/IDLE.module.css';
 import {Link} from "react-router-dom";
 import moment from "moment";
 
-// 아래 주석 코드 블록은 무슨 목적이지?
-// const Component = (props) => {
-//     const {receiveAmount} = props
-//     const prevAmount = usePrevious({receiveAmount});
-//     useEffect(() => {
-//         if(prevAmount.receiveAmount !== receiveAmount) {
-//             console.log("change");
-//             return true
-//         }
-//         else if(prevAmount.receiveAmount === receiveAmount){
-//             console.log("nothing change");
-//             return false
-//         }
-//     }, [receiveAmount])
-// }
-
 export default function IDLE() {
     const host_ip = `${process.env.REACT_APP_IP}`;
     const addr = "ws://"+ host_ip + ":5000";
@@ -73,8 +57,14 @@ export default function IDLE() {
     useEffect(() => {
         if (imgs.length !== 0) {
             setTimeout(function() {
-                console.log("play");
-                itemsRef.current[0].play();
+                if (itemsRef.current[0].id === "video_list") {
+                    console.log("play");
+                    itemsRef.current[0].play();
+                }
+                else {
+                    console.log("slickNext");
+                    sliderRef.current.slickNext();
+                }
             }, 500);
         }
     }, [imgs]);
@@ -193,7 +183,7 @@ export default function IDLE() {
                 {imgs.map((image, index) =>
                     // __image &&
                     isImage(image) === true && (
-                        <img id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
+                        <img ref={el => itemsRef.current[index] = el} id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
                     ) ||
                     isVideo(image) === true && (
                         <video ref={el => itemsRef.current[index] = el} id="video_list" onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image}/>

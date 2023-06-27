@@ -2,8 +2,9 @@ import Slider from "react-slick";
 import React, {useRef, useState, useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import '../style/test_idle.css'
 import styles from '../style/IDLE.module.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import moment from "moment";
 
 // 아래 주석 코드 블록은 무슨 목적이지?
@@ -113,6 +114,8 @@ export default function IDLE() {
     const settings = {
         infinite: false,
         initialSlide: 0,
+        arrow: false,
+        dots: false,
         slidesToShow: 1,
         slidesToScroll: 1,
         focusOnSelect: false,
@@ -122,17 +125,12 @@ export default function IDLE() {
             afterchange(index),
     };
 
-
     function afterchange(index) {
-<<<<<<< Updated upstream
         // Slider 컴포넌트의 내용 변경 시 호출되는 함수입니다.
-
         // console.log("afterchange");
-=======
         console.log(itemsRef);
         console.log(itemsRef.current[index]);
         console.log("afterchange");
->>>>>>> Stashed changes
         // console.log(index);
         if (sliderRef.current.props.children[index].type == 'video') {
             // Slider 컴포넌트가 영상인 경우 재생 수행
@@ -142,7 +140,6 @@ export default function IDLE() {
         else if (sliderRef.current.props.children[index].type == 'img') {
             // 이미지인 경우 약 3초 후 다음 슬라이드로 넘깁니다.
             setTimeout(function() {
-<<<<<<< Updated upstream
                 if (index === imgs.length - 1) {
                     // 현재 슬라이드 요소가 마지막 요소인 경우, 0번째 요소로 초기화 진행
                     console.log("Loop finish");
@@ -151,9 +148,7 @@ export default function IDLE() {
                 else {
                     sliderRef.current.slickNext();
                 }
-=======
                 sliderRef.current.slickNext();
->>>>>>> Stashed changes
             }, 3000);
         }
     }
@@ -163,13 +158,14 @@ export default function IDLE() {
 
     // imgs에 값이 초기화되면 1.5초 후 Slider를 시작하는 useEffect
     useEffect(() => {
-        console.log("item" + itemsRef.current)
-        if (imgs.length !== 0) {
-            setTimeout(function() {
-                console.log("play");
-                itemsRef.current[0].play();
-            }, 1500);
-        }
+        console.log("item" + itemsRef.current[0])
+        setTimeout(function() {
+            console.log("play");
+            // todo 첫 슬라이드가 이미지일 때 에러나는 부분
+            sliderRef.current.slickNext();
+            // itemsRef.current[0].play();
+        }, 1500);
+
     }, [imgs]);
 
     useEffect(() => {
@@ -181,7 +177,7 @@ export default function IDLE() {
         // console.log("handleVideoEnd");
         // itemsRef.currentTime = 0;
         // Go to the next slide when the video ends
-<<<<<<< Updated upstream
+
         if (index === imgs.length - 1) {
             // 현재 슬라이드 요소가 마지막 요소인 경우, 0번째 요소로 초기화 진행
             console.log("Loop finish");
@@ -190,20 +186,63 @@ export default function IDLE() {
         else {
             sliderRef.current.slickNext();
         }
-=======
         sliderRef.current.slickNext();
-
         console.log(index);
         console.log(imgs.length);
 
         if (index === imgs.length - 1) {
             sliderRef.current.slickGoTo(0);
         }
->>>>>>> Stashed changes
     };
 
+    const navigate = useNavigate();
+    function boardClick() {
+        navigate('/board');
+    }
+    function selectClick() {
+        navigate('/select');
+    }
     return (
-        <div>
+        // <div id="IDLE_PAGE">
+        //     <header className={styles.page3_header}>
+        //         <div className={styles.page3_date}>
+        //             {time.format('YYYY-MM-DD')}
+        //         </div>
+        //         {/* LT=4:50 , LTS=4:50:21 */}
+        //         <div className={styles.page3_time}>{time.format('LT')}</div>
+        //     </header>
+        //     <Slider {...settings} ref={sliderRef} id="list" className={styles.slide_css}>
+        //             {imgs.map((image, index) =>
+        //                 isImage(image) === true && (
+        //                         <img id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
+        //                 ) ||
+        //                 isVideo(image) === true && (
+        //                         <video ref={el => itemsRef.current[index] = el} id="video_list" onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image}/>
+        //                 )
+        //             )}
+        //     </Slider>
+        //     <div className={styles.social}>
+        //         <div onClick={selectClick}>
+        //             <div>
+        //                 <p>작품<br/>보기</p>
+        //             </div>
+        //         </div>
+        //         <div className={styles.vertical}></div>
+        //         <div onClick={boardClick}>
+        //             <div style={{marginTop: '40%'}}>
+        //                 <p>낙서장</p>
+        //             </div>
+        //         </div>
+        //         <div className={styles.vertical}></div>
+        //         <div className={styles.QR}>
+        //             <div>
+        //                 <img style={{marginTop: '25%'}} key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
+
+        <div id={styles.IDLE_PAGE}>
             <header className={styles.page3_header}>
                 <div className={styles.page3_date}>
                     {time.format('YYYY-MM-DD')}
@@ -211,9 +250,8 @@ export default function IDLE() {
                 {/* LT=4:50 , LTS=4:50:21 */}
                 <div className={styles.page3_time}>{time.format('LT')}</div>
             </header>
-            <Slider {...settings} ref={sliderRef} id="list">
+            <Slider {...settings} ref={sliderRef} id="list" className={styles.slide_css}>
                 {imgs.map((image, index) =>
-                        // __image &&
                         isImage(image) === true && (
                             <img id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
                         ) ||
@@ -223,25 +261,23 @@ export default function IDLE() {
                 )}
             </Slider>
             <div className={styles.social}>
-                <tr>
-                    <p>작품보기<br/>
-                        <button>
-                            <Link to='/select' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
-                        </button>
-                    </p>
-                </tr>
-                <tr>
-                    <p className={styles.line}>낙서장<br/>
-                        <button>
-                            <Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
-                        </button>
-                    </p>
-                </tr>
-                <tr>
-                    <p className={styles.QR}>
-                        <img key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
-                    </p>
-                </tr>
+                <div onClick={selectClick}>
+                    <div>
+                        <p>작품<br/>보기</p>
+                    </div>
+                </div>
+                <div className={styles.vertical}></div>
+                <div onClick={boardClick}>
+                    <div style={{marginTop: '40%'}}>
+                        <p>낙서장</p>
+                    </div>
+                </div>
+                <div className={styles.vertical}></div>
+                <div className={styles.QR}>
+                    <div>
+                        <img style={{marginTop: '25%'}} key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
+                    </div>
+                </div>
             </div>
         </div>
     );

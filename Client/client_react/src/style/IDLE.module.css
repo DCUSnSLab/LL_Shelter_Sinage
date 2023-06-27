@@ -1,4 +1,11 @@
 /*Signage 3 slide*/
+/*header*/
+/*time, date*/
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
 
 /*header*/
 /*time, date*/
@@ -9,107 +16,60 @@
     background-color: black;
     color: white;
     height: 35rem;
-    width: 100%;
-    border: none;
+    width: 2160px;
 }
-
+html,body
+{
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+}
 .page3_date{
     font-size: 7.5rem;
 }
-
+.wp-block-cb-carousel.cb-single-slide.alignfull .slick-slide {
+    padding-left: 0;
+    padding-right: 0;
+}
 .page3_time{
     margin-bottom: 2rem;
     font-weight: bold;
     font-size: 12rem;
 }
 
-/*contents*/
-.slick-track{
-    text-align:center;
-    width: 2040px;
-    height: 1919px;
-    background-color: black;
-}
-
-.slick-slide{
-    /*note 중앙정렬 */
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    position: absolute;
-    display: inline-block;
-    object-fit: cover;
-    width: 100%;
-    position: absolute;
-    display: inline-block;
-    /*note 부모 div의 height에 맞지않으면 자름 */
-    height: auto !important;
-}
-
-.slick-slide{
-    display: grid;
-    place-items: center;
-    height: 80%;
-    width: 100%;
-    pointer-events: none;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}
-
-/*하단에 버튼 옆옆 라인*/
-.line {
-    border-left: 2px solid darkgrey;
-    border-right: 2px solid darkgrey;
-}
-
 /*맨 맽에 버튼을 포괄적으로 감싸고있는*/
 .social{
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: relative;
     display: grid;
-    width: 100%;
+    width: 2160px !important;
+    height: 25%;
     font-family: 'yg-jalnan';
     background-color: black;
     color: white;
     font-size: 9rem;
-    /*text-align: center;*/
-    height: 30%;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    text-align: center;
 }
 
-/*hotpink button*/
-.social > tr > p > button{
-    margin-top: 10%;
-    background-color: deeppink;
-    width: 25rem;
-    height: 10rem;
-    font-size: 7rem;
-    font-weight: bold;
-    border-top-left-radius: 0.25em;
-    border-top-right-radius: 0.25em;
-    border-bottom-left-radius: 0.25em;
-    border-bottom-right-radius: 0.25em;
-}
-
-.social > tr{
-    margin-top: 15%;
+.vertical {
+    margin-top: 120px;
+    border-left: 2px solid darkgrey;
+    height: 70%;
 }
 
 .QR > img
 {
-    width: 60%;
-    height: 60%;
-}
-
-.font {
-    font-family: 'yg-jalnan';
-    text-shadow: 2px 2px 0 #727272;
+    width: 70%;
+    height: 70%;
 }
 
 @font-face {
     font-family: 'yg-jalnan';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
 }
+

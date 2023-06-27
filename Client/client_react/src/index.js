@@ -7,7 +7,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <>
         <BrowserRouter>
-            <meta name="viewport" content="width=device-width" />
             <App/>
         </BrowserRouter>
     </>

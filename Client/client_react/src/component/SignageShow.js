@@ -47,6 +47,18 @@ function SignageShow({id,title,des}) {
             axios
                 .get(backend_url + "/Service/Content/")
                 .then(res => {
+                    // hits, likes 두 컬럼의 값이 문자열로 넘어오기 때문에..
+                    // 해당 부분에서 정수형으로 변환을 진행합니다.
+                    res.data.map((data) => {
+                            if (data.thumbnailPath === null) {
+                                data.upload_file = data.upload_file.substring(6, data.upload_file.length)
+                                data.upload_file = "ftp" + data.upload_file
+                            }
+                            else {
+                                data.thumbnailPath = "ftp/" + data.thumbnailPath
+                            }
+                        }
+                    )
                     setContent(res.data)
                     console.log(res.data)
                 })
@@ -63,6 +75,7 @@ function SignageShow({id,title,des}) {
         dots: false,
         infinite: true,
         speed: 500,
+        rows: 1,
         slidesToShow: 5,
         slidesToScroll: 1,
         // centerPadding: "100px",
@@ -78,6 +91,19 @@ function SignageShow({id,title,des}) {
         slidesToScroll: 1,
         // centerPadding: "100px",
     };
+
+    const likeup = (content) => {
+        console.log(content);
+        axios
+            .get(backend_url + "/Service/ContentLike/" + content.id)
+            .then(res => {
+                // DB에 저장된 콘텐츠 파일의 경로가 잘못되어 있어서 수정하는 작업입니다.
+                console.log(res.data);
+                content.likes = content.likes + 1;
+            })
+            .catch((err) => console.log(err));
+
+    }
 
     const descriptionModal = (index) => {
         console.log("descriptionModal");
@@ -124,12 +150,21 @@ function SignageShow({id,title,des}) {
                     설명
                 </div>
                 <div className={styles.signageshow_desc}>
-                    <div>타입</div><div>{ contentsdesc && contentsdesc.contentType }</div>
-                    <div>생성일</div><div>{ contentsdesc && contentsdesc.createDate }</div>
-                    <div>사용자 메일</div><div>{ contentsdesc && contentsdesc.email }</div>
-                    <div>조회수</div><div>{ contentsdesc && contentsdesc.hits }</div>
-                    <div>추천(좋아요)</div><div>{ contentsdesc && contentsdesc.likes }</div>
-                    <div>타이틀</div><div>{ contentsdesc && contentsdesc.title }</div>
+                    <span>타입</span><span>{ contentsdesc && contentsdesc.contentType }</span>
+                    <br/>
+                    <span>생성일</span><span>{ contentsdesc && contentsdesc.createDate }</span>
+                    <br/>
+                    <span>사용자 메일</span><span>{ contentsdesc && contentsdesc.email }</span>
+                    <br/>
+                    <span>조회수</span><span>{ contentsdesc && contentsdesc.hits }</span>
+                    <br/>
+                    <span>추천(좋아요)</span><span>{ contentsdesc && contentsdesc.likes }</span>
+                    <br/>
+                    <span>타이틀</span><span>{ contentsdesc && contentsdesc.title }</span>
+                    <br/>
+                    <button onClick={() => likeup(contentsdesc)}>
+                        좋아요
+                    </button>
                 </div>
             </div>
             <div className={styles.social}>

@@ -91,6 +91,17 @@ function SignageShow({id,title,des}) {
         slidesToScroll: 1,
         // centerPadding: "100px",
     };
+    const views = (content) => {
+        console.log(content);
+        axios
+            .get(backend_url + "/Service/ContentLike/" + content.id)
+            .then(res => {
+                // DB에 저장된 콘텐츠 파일의 경로가 잘못되어 있어서 수정하는 작업입니다.
+                console.log(res.data);
+                content.likes = content.likes + 1;
+            })
+            .catch((err) => console.log(err));
+    }
 
     const likeup = (content) => {
         console.log(content);
@@ -102,12 +113,29 @@ function SignageShow({id,title,des}) {
                 content.likes = content.likes + 1;
             })
             .catch((err) => console.log(err));
-
     }
 
     const descriptionModal = (index) => {
-        console.log("descriptionModal");
-        setDesc(contents[index]);
+        // console.log("descriptionModal");
+
+        // 조회수 확인을 위해 동일 컨텐츠 클릭 유무를 확인합니다.
+        // contentsdesc가 null 또는 기존 content와 새 content의 id가 같은 경우 조회수를 올리지 않는다
+        if (contentsdesc != null && contentsdesc.id == contents[index].id) {
+            console.log("same content");
+        }
+        // 다른 경우 contentsdesc를 갱신하고 조회수를 1 올린다.
+        else {
+            setDesc(contents[index]);
+            // console.log(content);
+            axios
+                .get(backend_url + "/Service/ContentHits/" + contents[index].id)
+                .then(res => {
+                    // DB에 저장된 콘텐츠 파일의 경로가 잘못되어 있어서 수정하는 작업입니다.
+                    console.log(res.data);
+                    contentsdesc.hits = contentsdesc.hits + 1;
+                })
+                .catch((err) => console.log(err));
+        }
     };
 
     return (

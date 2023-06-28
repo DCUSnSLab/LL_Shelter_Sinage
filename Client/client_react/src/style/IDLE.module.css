@@ -56,6 +56,71 @@ body {
     text-align: center;
 }
 
+.slide_css {
+    position: relative;
+    display: block !important;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+
+    height: 100% !important;
+    width: auto !important;
+}
+
+.slide_css > div {
+    position: relative;
+    display: block !important;
+    overflow: hidden;
+    background-color: black;
+}
+
+.slide_css > div > div {
+    background-color: black;
+    position: relative;
+    /*top: 0;*/
+    /*left: 0;*/
+    display: inline-block;
+}
+
+.slide_css > div > div > div {
+    width: 2160px;
+    height: 2250px;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide_css > div > div > div > img {
+    /*가로 세로 길이에 맞춰서 이미지 조정*/
+    width: 2160px !important;
+    height: 2250px !important;
+    object-fit: contain;
+    /*세로 길이에 맞춤*/
+    /*width: auto !important;*/
+    /*height: 100%;*/
+    /*display: block !important;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+slide_css > div > div > div > video {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+slide_css > [aria-hidden="true"] {
+    position: relative;
+    /*z-index: 998;*/
+    transform: scale(1.3);
+    transition: 0.25s;
+}
+
 .vertical {
     margin-top: 120px;
     border-left: 2px solid darkgrey;

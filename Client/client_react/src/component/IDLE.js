@@ -2,7 +2,6 @@ import Slider from "react-slick";
 import React, {useRef, useState, useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../style/test_idle.css'
 import styles from '../style/IDLE.module.css';
 import {Link, useNavigate} from "react-router-dom";
 import moment from "moment";
@@ -128,8 +127,8 @@ export default function IDLE() {
     function afterchange(index) {
         // Slider 컴포넌트의 내용 변경 시 호출되는 함수입니다.
         // console.log("afterchange");
-        console.log(itemsRef);
-        console.log(itemsRef.current[index]);
+        // console.log(itemsRef);
+        // console.log(itemsRef.current[index]);
         console.log("afterchange");
         // console.log(index);
         if (sliderRef.current.props.children[index].type == 'video') {
@@ -148,25 +147,12 @@ export default function IDLE() {
                 else {
                     sliderRef.current.slickNext();
                 }
-                sliderRef.current.slickNext();
             }, 3000);
         }
     }
 
     const sliderRef = useRef(null);
     const itemsRef = useRef([]);
-
-    // imgs에 값이 초기화되면 1.5초 후 Slider를 시작하는 useEffect
-    useEffect(() => {
-        console.log("item" + itemsRef.current[0])
-        setTimeout(function() {
-            console.log("play");
-            // todo 첫 슬라이드가 이미지일 때 에러나는 부분
-            sliderRef.current.slickNext();
-            // itemsRef.current[0].play();
-        }, 1500);
-
-    }, [imgs]);
 
     useEffect(() => {
         itemsRef.current = itemsRef.current.slice(0, imgs.length);
@@ -186,9 +172,8 @@ export default function IDLE() {
         else {
             sliderRef.current.slickNext();
         }
-        sliderRef.current.slickNext();
-        console.log(index);
-        console.log(imgs.length);
+        // console.log(index);
+        // console.log(imgs.length);
 
         if (index === imgs.length - 1) {
             sliderRef.current.slickGoTo(0);

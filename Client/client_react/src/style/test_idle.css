@@ -3,6 +3,9 @@
 /* slick slide css*/
 
 /* 코드 가져온 부분 */
+
+/*slide_css*/
+
 .slick-slider {
     position: relative;
     display: block !important;
@@ -14,12 +17,17 @@
     width: auto !important;
 }
 
+/*slide_css > div*/
+
 .slick-list {
     position: relative;
     display: block !important;
     overflow: hidden;
     background-color: black;
 }
+
+/*slide_css > div > div*/
+
 .slick-track {
     background-color: black;
     position: relative;
@@ -28,12 +36,16 @@
     display: inline-block;
 }
 
+/*slide_css > div > div > div*/
+
 .slick-slide div {
     width: 2160px;
     height: 2250px;
     justify-content: center;
     align-items: center;
 }
+
+/* slide_css > div > div > div > img */
 
 #img_list{
     /*가로 세로 길이에 맞춰서 이미지 조정*/
@@ -50,9 +62,7 @@
     transform: translate(-50%, -50%);
 }
 
-.slick-slide > div > img{
-
-}
+/* slide_css > div > div > div > video */
 
 .slick-slide > div > video{
     width: 100% !important;
@@ -64,32 +74,11 @@
     transform: translate(-50%, -50%);
 }
 
+/*[aria-hidden="true"]*/
+
 .slick-slide.slick-active:not(.slick-current){
     position: relative;
     /*z-index: 998;*/
     transform: scale(1.3);
     transition: 0.25s;
-}
-
-.slick-slide.slick-active.slick-current {
-    position: relative;
-    /*z-index: 999;*/
-    background-color: black;
-    /*transform: scale(1.6);*/
-}
-
-.slick-slide.slick-active:not(.slick-current) .image,
-.slick-slide.slick-active.slick-current .image,
-.slick-slide:not(.slick-active) .image {
-}
-
-
-.font {
-    font-family: 'yg-jalnan';
-    text-shadow: 2px 2px 0 #727272;
-}
-
-@font-face {
-    font-family: 'yg-jalnan';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
 }

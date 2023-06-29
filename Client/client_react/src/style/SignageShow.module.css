@@ -44,6 +44,8 @@ body {
     border: none;
 }
 
+/* popular slider's stylesheet*/
+
 .signageshow_popular{
     display: inline-block;
     background-color: black;
@@ -54,16 +56,13 @@ body {
     border: none;
 }
 
-.signageshow_popular > img{
-    height: 100px;
-}
-
 .popular_slider {
     background-color: black;
 }
 
 .popular_slider > div > div{
-
+    display: flex;
+    align-items: center;
 }
 
 .popular_slider > div > div > div{
@@ -76,8 +75,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 25px;
+    margin: 20px;
 }
+
+/* latest slider's stylesheet*/
 
 .signageshow_latest{
     display: inline-block;
@@ -93,12 +94,22 @@ body {
     background-color: black;
 }
 
+.latest_slider > div > div{
+    display: flex;
+    align-items: center;
+}
+
+.latest_slider > div > div > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .latest_slider > div > div > div > div{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 25px;
-
+    margin: 20px;
 }
 
 .slick-list {

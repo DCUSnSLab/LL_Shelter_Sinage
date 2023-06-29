@@ -104,7 +104,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-slide_css > div > div > div > video {
+.slide_css > div > div > div > video {
     width: 100% !important;
     height: 100% !important;
     display: block !important;
@@ -114,7 +114,7 @@ slide_css > div > div > div > video {
     transform: translate(-50%, -50%);
 }
 
-slide_css > [aria-hidden="true"] {
+.slide_css > [aria-hidden="true"] {
     position: relative;
     /*z-index: 998;*/
     transform: scale(1.3);

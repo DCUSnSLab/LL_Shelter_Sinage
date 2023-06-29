@@ -189,24 +189,27 @@ function SignageShow({id,title,des}) {
                 </div>
             </div>
             <div className={styles.social}>
-                <tr>
-                    <p className={styles.line}>뒤로가기<br/>
-                        <button>
-                            <Link to='/' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
-                        </button>
-                    </p>
-                </tr>
-                <tr>
-                    <p className={styles.line}><br/>
-                    </p>
-                </tr>
-                <tr>
-                    <p className={styles.line}>게시판<br/>
-                        <button>
-                            <Link to='/board' style={{color : 'white', textDecoration: 'none'}}>GO</Link>
-                        </button>
-                    </p>
-                </tr>
+                <Link to={'/'} style={{color : 'white', textDecoration: 'none'}}>
+                <div>
+                    <div style={{marginTop: '40%'}}>
+                        <p>이전으로</p>
+                    </div>
+                </div>
+                </Link>
+                <div className={styles.vertical}></div>
+                <div>
+                    <div style={{marginTop: '40%'}}>
+                        <p></p>
+                    </div>
+                </div>
+                <div className={styles.vertical}></div>
+                <Link to={'/'} style={{color : 'white', textDecoration: 'none'}}>
+                <div>
+                    <div style={{marginTop: '40%'}}>
+                        <p>낙서장</p>
+                    </div>
+                </div>
+                </Link>
             </div>
         </div>
     )

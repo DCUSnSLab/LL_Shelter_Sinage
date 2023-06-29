@@ -180,13 +180,6 @@ export default function IDLE() {
         }
     };
 
-    const navigate = useNavigate();
-    function boardClick() {
-        navigate('/board');
-    }
-    function selectClick() {
-        navigate('/select');
-    }
     return (
         <div id={styles.IDLE_PAGE}>
             <header className={styles.page3_header}>
@@ -208,17 +201,21 @@ export default function IDLE() {
                 )}
             </Slider>
             <div className={styles.social}>
-                <div onClick={selectClick}>
+                <Link to={'/select'} style={{color : 'white', textDecoration: 'none'}}>
+                <div>
                     <div>
                         <p>작품<br/>보기</p>
                     </div>
                 </div>
+                </Link>
                 <div className={styles.vertical}></div>
-                <div onClick={boardClick}>
+                <Link to={'/'} style={{color : 'white', textDecoration: 'none'}}>
+                <div>
                     <div style={{marginTop: '40%'}}>
                         <p>낙서장</p>
                     </div>
                 </div>
+                </Link>
                 <div className={styles.vertical}></div>
                 <div className={styles.QR}>
                     <div>

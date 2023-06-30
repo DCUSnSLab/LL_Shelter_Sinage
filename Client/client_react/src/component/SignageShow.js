@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import styles from "../style/SignageShow.module.css";
 import Slider from "react-slick";
 import ModalBasic from "./Modal";
+import ReactModal from 'react-modal';
 import moment from "moment/moment";
 
 function SignageShow({id,title,des}) {
@@ -112,10 +113,6 @@ function SignageShow({id,title,des}) {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const showModal = () => {
-        setModalOpen(true);
-    };
-
     const descriptionModal = (image) => {
         // console.log("descriptionModal");
         console.log(image);
@@ -134,18 +131,45 @@ function SignageShow({id,title,des}) {
                 .then(res => {
                     // DB에 저장된 콘텐츠 파일의 경로가 잘못되어 있어서 수정하는 작업입니다.
                     // console.log(res.data);
+                    console.log("test");
+                    console.log(contentsdesc);
                     contentsdesc.contentFK.hits = contentsdesc.contentFK.hits + 1;
                 })
                 .catch((err) => console.log(err));
         }
 
+        console.log("test 2");
+        console.log(contentsdesc);
+
         setModalOpen(true);
     };
+
+    const modalcss = {}
 
     return (
         <div>
             <div className={styles.signageshow_container}>
-                {modalOpen && <ModalBasic setModalOpen={setModalOpen} currentContent={contentsdesc} likeupfunc={likeup}/>}
+                {/* Model with react-modal package, */}
+                {/*{modalOpen && <ReactModal*/}
+                {/*    isOpen={modalOpen}*/}
+                {/*    currentContent={contentsdesc}*/}
+                {/*    likeupfunc={likeup}*/}
+                {/*    ariaHideApp={false}*/}
+                {/*    shouldCloseOnOverlayClick={true}*/}
+                {/*>*/}
+                {/*    <button onClick={() => closeModal}>Test</button>*/}
+                {/*</ReactModal>*/}
+                {/*}*/}
+                {modalOpen && <ModalBasic
+                    setModalOpen={setModalOpen}
+                    className={styles.ReactModal__Overlay}
+                    currentContent={contentsdesc}
+                    likeupfunc={likeup}
+                    ariaHideApp={false}
+                    shouldCloseOnOverlayClick={true}
+                >
+                </ModalBasic>
+                }
                 <div className={styles.signageshow_title}>
                     Contents Gallery
                 </div>

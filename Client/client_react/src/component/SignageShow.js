@@ -139,13 +139,12 @@ function SignageShow({id,title,des}) {
                 .catch((err) => console.log(err));
         }
 
-
+        setModalOpen(true);
     };
 
     return (
         <div>
             <div className={styles.signageshow_container}>
-                <button onClick={showModal}>모달 띄우기</button>
                 {modalOpen && <ModalBasic setModalOpen={setModalOpen} currentContent={contentsdesc} likeupfunc={likeup}/>}
                 <div className={styles.signageshow_title}>
                     Contents Gallery

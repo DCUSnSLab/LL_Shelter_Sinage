@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from "react";
 import styles from "../style/modal.module.css";
 
 function ModalBasic({ setModalOpen, currentContent, likeupfunc }: PropsType) {

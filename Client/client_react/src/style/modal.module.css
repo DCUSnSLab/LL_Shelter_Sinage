@@ -1,7 +1,7 @@
 .container {
   /* 모달창 크기 */
   width: 90%;
-  height: 95%;
+  height: 90%;
 
   /* 최상단 위치 */
   z-index: 999;

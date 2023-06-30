@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import {Link} from "react-router-dom";
 import styles from "../style/SignageShow.module.css";
 import Slider from "react-slick";
+import ModalBasic from "./Modal";
 import moment from "moment/moment";
 
 function SignageShow({id,title,des}) {
@@ -75,11 +76,11 @@ function SignageShow({id,title,des}) {
 
     const settings_popular = {
         // className: "styles.popular_slider",
-        centerMode: true,
+        // centerMode: true,
         dots: false,
         infinite: true,
         speed: 500,
-        rows: 1,
+        rows: 2,
         slidesToShow: 5,
         slidesToScroll: 1,
         // centerPadding: "100px",
@@ -87,10 +88,11 @@ function SignageShow({id,title,des}) {
 
     const settings_latest = {
         // className: "styles.latest_slider",
-        centerMode: true,
+        // centerMode: true,
         dots: false,
         infinite: true,
         speed: 500,
+        rows: 2,
         slidesToShow: 5,
         slidesToScroll: 1,
         // centerPadding: "100px",
@@ -108,8 +110,15 @@ function SignageShow({id,title,des}) {
             .catch((err) => console.log(err));
     }
 
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const showModal = () => {
+        setModalOpen(true);
+    };
+
     const descriptionModal = (image) => {
         // console.log("descriptionModal");
+        console.log(image);
 
         // 조회수 확인을 위해 동일 컨텐츠 클릭 유무를 확인합니다.
         // contentsdesc가 null 또는 기존 content와 새 content의 id가 같은 경우 조회수를 올리지 않는다
@@ -129,11 +138,15 @@ function SignageShow({id,title,des}) {
                 })
                 .catch((err) => console.log(err));
         }
+
+
     };
 
     return (
         <div>
             <div className={styles.signageshow_container}>
+                <button onClick={showModal}>모달 띄우기</button>
+                {modalOpen && <ModalBasic setModalOpen={setModalOpen} currentContent={contentsdesc} likeupfunc={likeup}/>}
                 <div className={styles.signageshow_title}>
                     Contents Gallery
                 </div>
@@ -167,26 +180,26 @@ function SignageShow({id,title,des}) {
                         )}
                     </Slider>
                 </div>
-                <div className={styles.desctitle}>
-                    설명
-                </div>
-                <div className={styles.signageshow_desc}>
-                    <span>타입</span><span>{ contentsdesc && contentsdesc.contentFK.contentType }</span>
-                    <br/>
-                    <span>생성일</span><span>{ contentsdesc && contentsdesc.contentFK.createDate }</span>
-                    <br/>
-                    <span>사용자 메일</span><span>{ contentsdesc && contentsdesc.contentFK.email }</span>
-                    <br/>
-                    <span>조회수</span><span>{ contentsdesc && contentsdesc.contentFK.hits }</span>
-                    <br/>
-                    <span>추천(좋아요)</span><span>{ contentsdesc && contentsdesc.contentFK.likes }</span>
-                    <br/>
-                    <span>타이틀</span><span>{ contentsdesc && contentsdesc.contentFK.title }</span>
-                    <br/>
-                    <button onClick={() => likeup(contentsdesc.contentFK)}>
-                        좋아요
-                    </button>
-                </div>
+                {/*<div className={styles.desctitle}>*/}
+                {/*    설명*/}
+                {/*</div>*/}
+                {/*<div className={styles.signageshow_desc}>*/}
+                {/*    <span>타입</span><span>{ contentsdesc && contentsdesc.contentFK.contentType }</span>*/}
+                {/*    <br/>*/}
+                {/*    <span>생성일</span><span>{ contentsdesc && contentsdesc.contentFK.createDate }</span>*/}
+                {/*    <br/>*/}
+                {/*    <span>사용자 메일</span><span>{ contentsdesc && contentsdesc.contentFK.email }</span>*/}
+                {/*    <br/>*/}
+                {/*    <span>조회수</span><span>{ contentsdesc && contentsdesc.contentFK.hits }</span>*/}
+                {/*    <br/>*/}
+                {/*    <span>추천(좋아요)</span><span>{ contentsdesc && contentsdesc.contentFK.likes }</span>*/}
+                {/*    <br/>*/}
+                {/*    <span>타이틀</span><span>{ contentsdesc && contentsdesc.contentFK.title }</span>*/}
+                {/*    <br/>*/}
+                {/*    <button onClick={() => likeup(contentsdesc.contentFK)}>*/}
+                {/*        좋아요*/}
+                {/*    </button>*/}
+                {/*</div>*/}
             </div>
             <div className={styles.social}>
                 <Link to={'/'} style={{color : 'white', textDecoration: 'none'}}>

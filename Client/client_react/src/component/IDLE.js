@@ -215,7 +215,7 @@ export default function IDLE() {
                 )}
             </Slider>
             <div className={styles.social}>
-                <Link to={'/select'} style={{color : 'white', textDecoration: 'none'}}>
+                <Link to={'/select'} style={{color : 'white', textDecoration: 'none'}} onClick={() => ws.close()}>
                 <div>
                     <div>
                         <p>작품<br/>보기</p>

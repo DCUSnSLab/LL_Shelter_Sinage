@@ -10,7 +10,7 @@ from websockets.exceptions import ConnectionClosedOK
 #dbip = os.environ['SHELTER_DB']
 
 conn = psycopg2.connect(
-        host="cms-shelter-db",
+        host="127.0.0.1",
         port="5433",
         user="shelter",
         password="20121208",
@@ -54,10 +54,10 @@ class Advertiser:
 
         ftp_path = "/ftp/"
 
-        interval = 5
+        interval = 0.5
 
         for rst in cur:
-            advlist.append(ftp_path + rst[1])
+            advlist.append([ftp_path + rst[1], rst[3]])
 
         while True:
             if len(self.clients) > 0: # 최소 1개의 클라이언트가 있는 경우에 동작
@@ -73,19 +73,19 @@ class Advertiser:
                         self.printClients()
                         break
                 break
-            await asyncio.sleep(3) # 클라이언트가 하나도 ㅇ벗는 경우, 비동기적으로 대기합니다.
+            await asyncio.sleep(interval) # 클라이언트가 하나도 ㅇ벗는 경우, 비동기적으로 대기합니다.
 
         initclients = len(self.clients)
 
         while True:
-            print("runadv while loop, loop interval :", interval)
+            #print("runadv while loop, loop interval :", interval)
 
             new_advlist = []
 
             cur.execute(sql)
 
             for rst in cur:
-                new_advlist.append(ftp_path + rst[1])
+                new_advlist.append([ftp_path + rst[1], rst[3]])
 
             if (new_advlist != advlist) or (initclients != len(self.clients)):
                 initclients = len(self.clients)

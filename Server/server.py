@@ -3,6 +3,7 @@ import json
 import pickle
 import websockets  # 클라이언트 접속이 되면 호출된다.
 import socket
+import sysv_ipc
 
 from advertiser import Advertiser
 
@@ -15,27 +16,39 @@ async def accept(websocket, path):
             print("before")
             data = await websocket.recv()  # 클라이언트로부터 메시지를 대기한다.
             recvdata = json.loads(data)
-            recvMsg = int(recvdata['message'])
-            print("after")
-            print("Msg :", recvMsg)
+            recvMsg = str(recvdata['message'])
+            order = int(recvMsg[0])
+            try:
+                data = int(recvMsg[1:])
+            except:
+                data = order
+
+            print('data Check order=', order, 'data=',data)
 
             #if you receive '0' data from client once, add client socket into Advertiser client list
-            if recvMsg == 0: #advertise mode ready to client
+            if order == 0: #advertise mode ready to client
                 await adv.addClient(websocket)
                 await adv.printClients()
+            elif order == 1: #advertiser sync mode
+                print('sync mode data=',data)
+                adv_mq.send(str(data), True, type=1) #type String
+                pass
+            elif order == 2: #content request mode
+                pass
             else:
                 print("Wrong Messages",data)
     except Exception as e:
         print(e)
 
 adv = Advertiser()
+adv_mq = sysv_ipc.MessageQueue(3820, sysv_ipc.IPC_CREAT)
 
 async def main():
     await adv.init_adv()
     print("host ip")
     IP = socket.gethostbyname(socket.gethostname())
-    #IP = "127.0.0.1"
-    async with websockets.serve(accept, IP, 5000):
+    IP = "127.0.0.1"
+    async with websockets.serve(accept, IP, 5001):
         await asyncio.Future()
 
 

@@ -8,7 +8,7 @@ import moment from "moment";
 
 export default function IDLE() {
     const host_ip = `${process.env.REACT_APP_IP}`;
-    const addr = "ws://"+ host_ip + ":5000";
+    const addr = "ws://"+ host_ip + ":5001";
     const [outputs, setOutputs] = useState([]);
     const [imgs, setImg] = useState([]);
     const [socketConnected, setSocketConnected] = useState(false);
@@ -46,7 +46,8 @@ export default function IDLE() {
                 const data = JSON.parse(evt.data);
                 if(i===0){
                     setImg(data)
-                    console.log(imgs);
+                    console.log('recv data')
+                    console.log(data);
                     i++;
                 }
             };
@@ -129,11 +130,24 @@ export default function IDLE() {
         // console.log("afterchange");
         // console.log(itemsRef);
         // console.log(itemsRef.current[index]);
-        console.log("afterchange");
+        // console.log("afterchange");
         // console.log(index);
+
+        //Sync with Projector
+        console.log('player id = '+itemsRef.current[index].id);
+            console.log(itemsRef);
+            ws.current.send(
+                    JSON.stringify({
+                        message: "1"+itemsRef.current[index].id
+                    })
+                )
         if (sliderRef.current.props.children[index].type == 'video') {
             // Slider 컴포넌트가 영상인 경우 재생 수행
-            itemsRef.current[index].play();
+            setTimeout(function(){
+                console.log('play movie')
+                itemsRef.current[index].play();
+            }, 150)
+
         }
 
         else if (sliderRef.current.props.children[index].type == 'img') {
@@ -192,11 +206,11 @@ export default function IDLE() {
             <Slider {...settings} ref={sliderRef} id="list" className={styles.slide_css}>
                 {imgs.map((image, index) =>
                     // __image &&
-                    isImage(image) === true && (
-                        <img ref={el => itemsRef.current[index] = el} id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
+                    isImage(image[0]) === true && (
+                        <img ref={el => itemsRef.current[index] = el} id={image[1]} src={`${process.env.PUBLIC_URL}` + image[0]} />
                     ) ||
-                    isVideo(image) === true && (
-                        <video ref={el => itemsRef.current[index] = el} id="video_list" onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image}/>
+                    isVideo(image[0]) === true && (
+                        <video ref={el => itemsRef.current[index] = el} id={image[1]} onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image[0]}/>
                     )
                 )}
             </Slider>

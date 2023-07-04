@@ -12,7 +12,6 @@ body {
 .page3_header{
     display: inline-block;
     padding-top: 15rem;
-    padding-bottom: 5rem;
     background-color: black;
     color: white;
     height: 35rem;
@@ -42,21 +41,7 @@ body {
     font-size: 12rem;
 }
 
-/*맨 맽에 버튼을 포괄적으로 감싸고있는*/
-.social{
-    position: relative;
-    display: grid;
-    width: 2160px !important;
-    height: 25%;
-    font-family: 'yg-jalnan';
-    background-color: black;
-    color: white;
-    font-size: 9rem;
-    grid-template-columns: 1fr 1px 1fr 1px 1fr;
-    text-align: center;
-}
-
-.slide_css {
+.slick-slider {
     position: relative;
     display: block !important;
     justify-content: center;
@@ -75,24 +60,21 @@ body {
 }
 
 .slide_css > div > div {
-    background-color: black;
     position: relative;
-    /*top: 0;*/
-    /*left: 0;*/
     display: inline-block;
 }
 
-.slide_css > div > div > div {
-    width: 2160px;
-    height: 2250px;
-    justify-content: center;
-    align-items: center;
+.slide_css > div > div > div{
+    width: 2160px !important;
+    height: 2300px !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
-.slide_css > div > div > div > img {
+.slide_css > div > div > div > div > img {
     /*가로 세로 길이에 맞춰서 이미지 조정*/
-    width: 2160px !important;
-    height: 2250px !important;
+    width: 100% !important;
+    height: 100% !important;
     object-fit: contain;
     /*세로 길이에 맞춤*/
     /*width: auto !important;*/
@@ -104,7 +86,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.slide_css > div > div > div > video {
+.slide_css > div > div > div > div > video {
     width: 100% !important;
     height: 100% !important;
     display: block !important;
@@ -121,16 +103,35 @@ body {
     transition: 0.25s;
 }
 
-.vertical {
-    margin-top: 120px;
-    border-left: 2px solid darkgrey;
-    height: 70%;
+/*맨 맽에 버튼을 포괄적으로 감싸고있는*/
+.social{
+    position: fixed !important;
+    display: grid;
+    top: 195rem;
+    width: 2160px !important;
+    height: 720px;
+    font-family: 'yg-jalnan';
+    color: white;
+    font-size: 9rem;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    text-align: center;
 }
 
-.QR > img
-{
-    width: 70%;
-    height: 70%;
+#IDLE_PAGE{
+    background-color: black;
+    height: 3840px;
+}
+
+.QR > div > img{
+    height: 60%;
+    width: 60%;
+}
+
+.vertical {
+    border-left: 2px solid darkgrey;
+    border-right: 2px solid darkgrey;
+    height: 60%;
+    margin-top: 11rem;
 }
 
 @font-face {

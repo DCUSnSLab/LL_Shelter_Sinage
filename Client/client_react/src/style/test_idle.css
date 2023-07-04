@@ -18,7 +18,6 @@
 }
 
 /*slide_css > div*/
-
 .slick-list {
     position: relative;
     display: block !important;
@@ -27,7 +26,6 @@
 }
 
 /*slide_css > div > div*/
-
 .slick-track {
     background-color: black;
     position: relative;
@@ -36,8 +34,8 @@
     display: inline-block;
 }
 
-/*slide_css > div > div > div*/
 
+/*slide_css > div > div > div*/
 .slick-slide div {
     width: 2160px;
     height: 2250px;
@@ -45,8 +43,8 @@
     align-items: center;
 }
 
-/* slide_css > div > div > div > img */
 
+/* slide_css > div > div > div > img */
 #img_list{
     /*가로 세로 길이에 맞춰서 이미지 조정*/
     width: 2160px !important;

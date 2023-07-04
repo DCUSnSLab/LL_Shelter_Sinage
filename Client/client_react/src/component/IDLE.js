@@ -3,7 +3,7 @@ import React, {useRef, useState, useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from '../style/IDLE.module.css';
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import moment from "moment";
 
 export default function IDLE() {
@@ -45,8 +45,8 @@ export default function IDLE() {
                 // server에서 보낸 데이터
                 const data = JSON.parse(evt.data);
                 if(i===0){
-                    setImg(data)
-                    console.log('recv data')
+                    setImg(data);
+                    console.log('recv data');
                     console.log(data);
                     i++;
                 }
@@ -56,6 +56,7 @@ export default function IDLE() {
 
     // imgs에 값이 초기화되면 0.5초 후 Slider를 시작하는 useEffect
     useEffect(() => {
+        console.log(itemsRef.current[0]);
         if (imgs.length !== 0) {
             setTimeout(function() {
                 if (itemsRef.current[0].id === "video_list") {
@@ -127,11 +128,11 @@ export default function IDLE() {
 
     function afterchange(index) {
         // Slider 컴포넌트의 내용 변경 시 호출되는 함수입니다.
-        // console.log("afterchange");
-        // console.log(itemsRef);
-        // console.log(itemsRef.current[index]);
-        // console.log("afterchange");
-        // console.log(index);
+        console.log("afterchange");
+        console.log(itemsRef);
+        console.log(itemsRef.current[index]);
+        console.log("afterchange");
+        console.log(index);
 
         //Sync with Projector
         console.log('player id = '+itemsRef.current[index].id);
@@ -205,19 +206,18 @@ export default function IDLE() {
             </header>
             <Slider {...settings} ref={sliderRef} id="list" className={styles.slide_css}>
                 {imgs.map((image, index) =>
-                    // __image &&
-                    isImage(image[0]) === true && (
-                        <img ref={el => itemsRef.current[index] = el} id={image[1]} src={`${process.env.PUBLIC_URL}` + image[0]} />
+                    isImage(image) === true && (
+                        <img ref={el => itemsRef.current[index] = el} id="img_list" src={`${process.env.PUBLIC_URL}` + image} />
                     ) ||
-                    isVideo(image[0]) === true && (
-                        <video ref={el => itemsRef.current[index] = el} id={image[1]} onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image[0]}/>
+                    isVideo(image) === true && (
+                        <video ref={el => itemsRef.current[index] = el} id="video_list" onEnded={() => handleVideoEnd(index)} muted src={`${process.env.PUBLIC_URL}` + image}/>
                     )
                 )}
             </Slider>
             <div className={styles.social}>
                 <Link to={'/select'} style={{color : 'white', textDecoration: 'none'}}>
                 <div>
-                    <div>
+                    <div style={{height: '100%'}}>
                         <p>작품<br/>보기</p>
                     </div>
                 </div>
@@ -225,15 +225,15 @@ export default function IDLE() {
                 <div className={styles.vertical}></div>
                 <Link to={'/'} style={{color : 'white', textDecoration: 'none'}}>
                 <div>
-                    <div style={{marginTop: '40%'}}>
+                    <div style={{height: '100%', marginTop: '40%'}}>
                         <p>낙서장</p>
                     </div>
                 </div>
                 </Link>
                 <div className={styles.vertical}></div>
-                <div className={styles.QR}>
+                <div className={styles.QR} style={{marginTop: '25%'}}>
                     <div>
-                        <img style={{marginTop: '25%'}} key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
+                        <img key="shelter_num" src={`${process.env.PUBLIC_URL}` + '/ftp/ShelterQR/Content/Shelter_'+ shelter_num + '/contentQR.jpg'}/>
                     </div>
                 </div>
             </div>

@@ -203,11 +203,9 @@ function SignageShow({id,title,des}) {
                 {/*}*/}
                 {modalOpen && <ModalBasic
                     setModalOpen={setModalOpen}
-                    className={styles.ReactModal__Overlay}
                     currentContent={contentsdesc}
                     likeupfunc={likeup}
-                    ariaHideApp={false}
-                    shouldCloseOnOverlayClick={true}
+                    contentType={contentsdesc.type}
                 >
                 </ModalBasic>
                 }

@@ -13,7 +13,6 @@ async def accept(websocket, path):
 
     try:
         while True:
-            print("before")
             data = await websocket.recv()  # 클라이언트로부터 메시지를 대기한다.
             recvdata = json.loads(data)
             recvMsg = str(recvdata['message'])
@@ -39,6 +38,7 @@ async def accept(websocket, path):
             else:
                 print("Wrong Messages",data)
     except Exception as e:
+        print("------Disconnected socket----->>>",websocket.origin, websocket.id)
         print(e)
 
 adv = Advertiser()

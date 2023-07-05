@@ -59,6 +59,11 @@ export default function IDLE() {
         if (imgs.length !== 0) {
             setTimeout(function() {
                 console.log(itemsRef);
+                ws.current.send(
+                    JSON.stringify({
+                        message: "1"+itemsRef.current[0].id
+                    })
+                )
                 // console.log(itemsRef.current[0].localName);
                 if (itemsRef.current[0].localName === "video") {
                     // console.log("play");

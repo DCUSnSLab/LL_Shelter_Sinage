@@ -16,7 +16,7 @@
   -webkit-animation: fadein 1s; /* Safari and Chrome */
   -o-animation: fadein 1s; /* Opera */
   /* 모달창 크기 */
-  width: 90%;
+  width: 85%;
   height: 90%;
 
   /* 최상단 위치 */
@@ -36,6 +36,43 @@
   border-radius: 50px;
 }
 
+/* 모달창 내부 X버튼 */
+.close {
+  font-size: 6rem;
+
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 150px;
+  height: 150px;
+}
+
+.like {
+  font-size: 6rem;
+
+  width: 150px;
+  height: 150px;
+}
+
+.like:hover {
+
+}
+
+.container_content {
+  padding: 5%;
+  text-align: left;
+}
+
+.container_img {
+  display: block;
+  width: 1300px;
+  /*height: 600px;*/
+}
+
+.container_title {
+  padding-top: 0;
+  font-size: 10rem;
+}
 /* fade-in animation for each browser */
 
 @keyframes fadein {
@@ -71,9 +108,3 @@
   }
 }
 
-/* 모달창 내부 X버튼 */
-.close {
-  position: absolute;
-  right: 10%;
-  top: 10px;
-}

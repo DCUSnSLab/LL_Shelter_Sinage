@@ -34,6 +34,7 @@ async def accept(websocket, path):
                 adv_mq.send(str(data), True, type=1) #type String
                 pass
             elif order == 2: #content request mode
+                cont_mq.send(str(data), True, type=1) #type String
                 pass
             else:
                 print("Wrong Messages",data)
@@ -41,7 +42,8 @@ async def accept(websocket, path):
         print(e)
 
 adv = Advertiser()
-adv_mq = sysv_ipc.MessageQueue(3820, sysv_ipc.IPC_CREAT)
+adv_mq = sysv_ipc.MessageQueue(3820, mode=0o660, flags=sysv_ipc.IPC_CREAT)
+cont_mq = sysv_ipc.MessageQueue(3880, mode=0o660, flags=sysv_ipc.IPC_CREAT)
 
 async def main():
     await adv.init_adv()

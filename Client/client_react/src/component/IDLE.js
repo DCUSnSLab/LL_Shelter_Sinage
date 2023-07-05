@@ -59,6 +59,11 @@ export default function IDLE() {
         if (imgs.length !== 0) {
             setTimeout(function() {
                 console.log(itemsRef);
+                ws.current.send(
+                    JSON.stringify({
+                        message: "1"+itemsRef.current[0].id
+                    })
+                )
                 // console.log(itemsRef.current[0].localName);
                 if (itemsRef.current[0].localName === "video") {
                     // console.log("play");
@@ -217,7 +222,7 @@ export default function IDLE() {
                 )}
             </Slider>
             <div className={styles.social}>
-                <Link to={'/select'} style={{color : 'white', textDecoration: 'none'}}>
+                <Link to={'/select'} style={{color : 'white', textDecoration: 'none'}} onClick={() => ws.close()}>
                 <div>
                     <div>
                         <p>작품<br/>보기</p>

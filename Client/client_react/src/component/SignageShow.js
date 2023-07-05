@@ -22,6 +22,42 @@ function SignageShow({id,title,des}) {
     const port = "8000";
     const backend_url = "http://" + host_ip + ":" + port;
 
+    // for websocket
+    const addr = "ws://"+ host_ip + ":5000";
+    const [outputs, setOutputs] = useState([]);
+    const [socketConnected, setSocketConnected] = useState(false);
+    let ws = useRef(null);
+
+    useEffect(() => {
+        if(!ws.current) {
+            ws.current = new WebSocket(addr);
+            ws.current.onopen = () => {
+                console.log("connected to " + addr);
+                setOutputs("connected to " + addr);
+                setSocketConnected(true);
+                // ws.current.send(
+                //     JSON.stringify({
+                //         message: 0
+                //     })
+                // )
+            };
+            ws.current.onclose = (error) => {
+                console.log("disconnect from " + addr);
+                setOutputs("disconnect from " + addr)
+                console.log(error);
+            };
+            ws.current.onerror = (error) => {
+                console.log("connection error " + addr);
+                setOutputs("connection error " + addr)
+                console.log(error);
+            };
+            ws.current.onmessage = (evt) => {
+                // server에서 보낸 데이터
+                console.log(evt.data)
+            };
+        }
+    }, []);
+
     useEffect(() => {
         const GetContentbylikes = () => {
             axios
@@ -116,7 +152,11 @@ function SignageShow({id,title,des}) {
     const descriptionModal = (image) => {
         // console.log("descriptionModal");
         console.log(image);
-
+        ws.current.send(
+            JSON.stringify({
+                message: "2"+image.id
+            })
+        )
         // 조회수 확인을 위해 동일 컨텐츠 클릭 유무를 확인합니다.
         // contentsdesc가 null 또는 기존 content와 새 content의 id가 같은 경우 조회수를 올리지 않는다
         if (contentsdesc != null && contentsdesc.id == image.id) {
@@ -125,6 +165,7 @@ function SignageShow({id,title,des}) {
         // 다른 경우 contentsdesc를 갱신하고 조회수를 1 올린다.
         else {
             setDesc(image);
+
             // console.log(content);
             axios
                 .get(backend_url + "/Service/ContentHits/" + image.id)
@@ -225,7 +266,7 @@ function SignageShow({id,title,des}) {
                 {/*</div>*/}
             </div>
             <div className={styles.social}>
-                <Link to={'/'} style={{color : 'white', textDecoration: 'none'}}>
+                <Link to={'/'} style={{color : 'white', textDecoration: 'none'}} onClick={() => ws.close()}>
                 <div>
                     <div style={{marginTop: '40%'}}>
                         <p>이전으로</p>

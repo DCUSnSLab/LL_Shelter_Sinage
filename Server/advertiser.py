@@ -58,13 +58,12 @@ class Advertiser:
 
         for rst in cur:
             advlist.append([ftp_path + rst[1], rst[3]])
-
+        random.shuffle(advlist)
         while True:
             if len(self.clients) > 0: # 최소 1개의 클라이언트가 있는 경우에 동작
                 for idx, cli in enumerate(self.clients.values()):
                     adv_string = json.dumps(advlist)
                     try:
-                        print("send?")
                         await cli.send(adv_string)
                     # await cli.send(data_string)
                     except ConnectionClosedOK:
@@ -86,6 +85,8 @@ class Advertiser:
 
             for rst in cur:
                 new_advlist.append([ftp_path + rst[1], rst[3]])
+
+            random.shuffle(new_advlist)
 
             if (new_advlist != advlist) or (initclients != len(self.clients)):
                 initclients = len(self.clients)

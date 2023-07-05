@@ -44,10 +44,10 @@ export default function IDLE() {
             ws.current.onmessage = (evt) => {
                 // server에서 보낸 데이터
                 const data = JSON.parse(evt.data);
-                if(i===0){
+                if(i === 0){
                     setImg(data)
                     console.log('recv data')
-                    console.log(data);
+                    // console.log(data);
                     i++;
                 }
             };
@@ -58,12 +58,14 @@ export default function IDLE() {
     useEffect(() => {
         if (imgs.length !== 0) {
             setTimeout(function() {
-                if (itemsRef.current[0].id === "video_list") {
-                    console.log("play");
+                console.log(itemsRef);
+                // console.log(itemsRef.current[0].localName);
+                if (itemsRef.current[0].localName === "video") {
+                    // console.log("play");
                     itemsRef.current[0].play();
                 }
                 else {
-                    console.log("slickNext");
+                    // console.log("slickNext");
                     sliderRef.current.slickNext();
                 }
             }, 500);
@@ -134,17 +136,17 @@ export default function IDLE() {
         // console.log(index);
 
         //Sync with Projector
-        console.log('player id = '+itemsRef.current[index].id);
-            console.log(itemsRef);
-            ws.current.send(
-                    JSON.stringify({
-                        message: "1"+itemsRef.current[index].id
-                    })
-                )
+        // console.log('player id = '+itemsRef.current[index].id);
+        // console.log(itemsRef);
+        ws.current.send(
+            JSON.stringify({
+                message: "1"+itemsRef.current[index].id
+            })
+        )
         if (sliderRef.current.props.children[index].type == 'video') {
             // Slider 컴포넌트가 영상인 경우 재생 수행
             setTimeout(function(){
-                console.log('play movie')
+                // console.log('play movie')
                 itemsRef.current[index].play();
             }, 150)
 

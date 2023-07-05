@@ -62,8 +62,8 @@ function SignageShow({id,title,des}) {
                             data.thumbnailPath = "ftp/" + data.thumbnailPath
                         }
                     })
-                    // console.log("latestContent");
-                    // console.log(res.data);
+                    console.log("latestContent");
+                    console.log(res.data);
                     setlatestContent(res.data);
                 })
                 .catch((err) => console.log(err));

@@ -42,8 +42,8 @@ async def accept(websocket, path):
         print(e)
 
 adv = Advertiser()
-adv_mq = sysv_ipc.MessageQueue(3820, mode=0o660, flags=sysv_ipc.IPC_CREAT)
-cont_mq = sysv_ipc.MessageQueue(3880, mode=0o660, flags=sysv_ipc.IPC_CREAT)
+adv_mq = sysv_ipc.MessageQueue(3820, mode=0o666, flags=sysv_ipc.IPC_CREAT)
+cont_mq = sysv_ipc.MessageQueue(3880, mode=0o666, flags=sysv_ipc.IPC_CREAT)
 
 async def main():
     await adv.init_adv()
